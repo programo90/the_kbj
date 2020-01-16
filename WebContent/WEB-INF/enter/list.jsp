@@ -40,7 +40,7 @@
 				</div>
 				<div class="board_box">
 					<!--내용작성 start -->
-					<div>내용작성</div>
+					<div></div>
 					<!--내용작성 end -->
 				</div>
 			</div>
