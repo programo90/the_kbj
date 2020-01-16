@@ -1,0 +1,9 @@
+@charset "UTF-8";
+.con_box{
+    display: inline-block;
+}
+.con_board{
+    width: 400px;
+    height: 200px;
+    border: 1px solid #dadada;
+}
