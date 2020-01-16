@@ -28,7 +28,7 @@
 				</div>
 			</div>
 			<div class="content">
-				<h2 class="con_title">연예</h2><!-- 각자카테고리명 텍스트만 바꿔주세요 -->
+				<h2 class="con_title">한줄 게시판</h2><!-- 각자카테고리명 텍스트만 바꿔주세요 -->
 				<div class="board_menu_box">
 					<ul class="board_menu">
 						<li class="board_menu_li"><a href="">최신순</a></li>
@@ -40,7 +40,7 @@
 				</div>
 				<div class="board_box">
 					<!--내용작성 start -->
-					<div></div>
+					<div>내용작성</div>
 					<!--내용작성 end -->
 				</div>
 			</div>
