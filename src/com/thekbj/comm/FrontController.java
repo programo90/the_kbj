@@ -1,6 +1,8 @@
 package com.thekbj.comm;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,6 +41,8 @@ public class FrontController extends HttpServlet {
 	}
 	
 	protected void doReq(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/comm/index.jsp");
+		dispatcher.forward(request, response);
 		
 	}
 
