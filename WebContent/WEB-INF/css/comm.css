@@ -1,0 +1,128 @@
+@charset "UTF-8";
+*{
+    margin: 0 auto;
+}
+a{
+    text-decoration: none;
+    color: #2a6496;
+}
+a:hover, a:focus{
+    text-decoration: underline;
+}
+ul li{
+    list-style: none;
+}
+body{ 
+    background-color: #f8f8f8;
+}
+/* 왼쪽메뉴 부분*/
+.left{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: block;
+    overflow: hidden;
+    background-color: #7DA8B3;
+    width: 210px;
+    height: auto;
+}
+.logo{
+    color: white;
+    font-weight: 700;
+}
+.right{
+    position: relative;
+    width: 1027px;
+    margin: 20px 0px 0px 210px;
+    padding-left: 30px;
+}
+.menuTop{
+    border-top:1px solid #6aa2b1; 
+    border-bottom:1px solid #6aa2b1; 
+    padding: 10px;
+    margin: 20px 0;
+}
+.menuTop_btn{
+    display: inline-block;
+}
+.menuTop_btn_a{
+    text-decoration: none;
+    padding: 5px;
+}
+.menuTop_btn_a:hover, .menuTop_btn_a:focus{
+    text-decoration: none;
+}
+.content_top{
+    width: 997px;
+    height: 32px;
+    margin-bottom: 30px;    
+}
+.sponsor{
+    float: left;
+    width: 75px;
+    margin: 5px 0px;
+}
+.searchbox{
+    float: right;
+    width: 250px;
+}
+.search{
+    width: 250px;
+    border: 1px solid #d0d0d0;
+    padding: 5px;
+}
+.content{
+    clear: both;
+}
+
+/* sub 부분 */
+.con_title{
+    margin-bottom: 20px;
+}
+.board_menu_box{
+    width: 997px;
+    height: 47px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #dadada;
+        padding-bottom: 20px;
+}
+.board_menu{
+    float: left;
+    width: 252px;
+    padding: 0px;
+}
+.btn_write{
+    float: right;
+    width: 100px;
+}
+.board_menu_li{
+    display: inline-block;
+    width: 60px;
+    text-align: center;
+}
+.board_box{
+    
+}
+/* footer 부분*/
+footer{
+    position: relative;
+    width: 997px;
+    margin: 60px 0px 0px 240px;
+    border-top: 1px solid #dadada;
+    padding-top: 20px;
+    padding-left: 30px;
+}
+.foot_logo{
+    color:#7DA8B3;
+    font-size: 20px;
+}
+address{
+    color: #9c9c9c;;
+    margin-bottom: 0px !important;
+}
+.foot_copy{
+    color: #9c9c9c;
+    font-size: 12px;
+}
