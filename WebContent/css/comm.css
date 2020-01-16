@@ -109,10 +109,10 @@ body{
 footer{
     position: relative;
     width: 997px;
-    margin: 60px 0px 0px 240px;
     border-top: 1px solid #dadada;
     padding-top: 20px;
     padding-left: 30px;
+    margin: 0 0 0px 240px;
 }
 .foot_logo{
     color:#7DA8B3;
