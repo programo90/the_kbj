@@ -1,0 +1,69 @@
+.joinBox{
+    width: 400px;
+    margin: 100px auto 100px;
+}
+.loginLogo{
+    text-align: center;
+
+}
+.loginLogoImg{
+    width: 350px;
+}
+.join_inputBox{
+    width: 400px;
+    margin: 6% auto 0;
+}
+.join_inputInner{
+    width: 400px;
+}
+.join_input{
+    width: 347px;
+    height: 29px;
+    margin: 4px 0 14px 0px;
+    padding: 10px 35px 10px 15px;
+    border: solid 1px #dadada;
+    background: #fff;
+}
+.join_select{
+    width: 400px;
+    height: 51px;
+    padding: 10px 35px 10px 15px;
+    margin: 4px 0 14px 0px;
+    border: solid 1px #dadada;
+    background: #fff;
+}
+.join_input_1{
+    display: inline-block;
+    width: 30%;
+    height: 29px;
+    margin: 4px 0 14px 0px;
+    padding: 10px 35px 10px 15px;
+    border: solid 1px #dadada;
+    background: #fff;
+}
+.join_select_1{
+    display: inline-block;
+    height: 51px;
+    width: 27%;
+    padding: 10px 35px 10px 15px;
+    margin: 4px 0 14px 0px;
+    border: solid 1px #dadada;
+    background: #fff;
+}
+.join_btn1{
+    width: 400px;
+    margin: 0 0 14px;
+    padding: 17px 35px 17px 35px;
+    border: solid 1px #dadada;
+    background: #232323;
+    cursor: pointer;
+    color: white;
+}
+.join_inputBox li:nth-last-child(1){
+    margin-top: 20px;
+}
+.join_birth_div{
+    width: 400px;
+}
+
+
