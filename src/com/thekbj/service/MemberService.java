@@ -1,4 +1,4 @@
-package com.thekbj.member.service;
+package com.thekbj.service;
 
 public class MemberService {
 	
