@@ -63,6 +63,7 @@ public class FrontController extends HttpServlet {
 				Class c=Class.forName(value);
 				
 				Action obj=(Action)c.newInstance();
+				System.out.println(key+", "+value);
 				ht.put(key, obj);
 			}
 			
