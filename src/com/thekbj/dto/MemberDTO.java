@@ -8,7 +8,7 @@ public class MemberDTO {
 	private String mbdate;
 	private String memail;
 	private String mnick;
-	private int mscore;
+	private int mscore; 
 	private String mjoindate;
 	private String mimg;
 	public int getMno() {
