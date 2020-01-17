@@ -9,7 +9,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
-@WebFilter(".do")
+@WebFilter("*.do")
 public class BoardFilter implements Filter{
 
 	@Override
