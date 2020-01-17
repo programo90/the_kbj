@@ -13,14 +13,15 @@ public class MemberService {
 	public static MemberService getMemberservice() {
 		return memberservice;
 	}
-	
-	public int getCount(String search, String txtsearch) {
-		// TODO @일진 수정 중입니다. 
+
+
+	public int getTotalCount(String search, String txtsearch) {
+		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public List<MemberDTO> getList(int startrow, int endrow, String search, String txtsearch) {
-		// TODO @일진 수정 중입니다.
+	public List<MemberDTO> boardList(int startrow, int endrow, String search, String txtsearch) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

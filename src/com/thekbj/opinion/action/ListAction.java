@@ -31,7 +31,7 @@ public class ListAction implements Action {
 			txtsearch = "";
 		
 		MemberService service = MemberService.getMemberservice();
-		int totalcount = service.getCount(search, txtsearch);
+		int totalcount = service.getTotalCount(search, txtsearch);
 		int pagepercount = 10;
 		int totalpage = (int) Math.ceil((float)totalcount / pagepercount);
 		int startrow = (currpage - 1) * pagepercount +1;
