@@ -1,11 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 		<header class="left">
             <h1 class="logo">THE KBJ</h1>
             <div class="menuTop">
-                <p class="menuTop_btn"><a href="#" class="menuTop_btn_a"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></p>
+                
+            <c:if test="${sessionScope.sessionID==null}">
+				<p class="menuTop_btn"><a href="#" class="menuTop_btn_a"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></p>
                 <p class="menuTop_btn"><a href="#" class="menuTop_btn_a"><span class="glyphicon glyphicon-user"></span> 회원가입</a></p>
+			</c:if>
+			<c:if test="${sessionScope.sessionID!=null}">
+				<p class="menuTop_btn"><a href="#" class="menuTop_btn_a"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></p>
+                <p class="menuTop_btn"><a href="#" class="menuTop_btn_a"><span class="glyphicon glyphicon-user"></span> 내정보</a></p>
+			</c:if>
             </div>
             <nav>
                 <ul>
