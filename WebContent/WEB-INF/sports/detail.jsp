@@ -40,20 +40,15 @@
 				</div>
 				<div class="board_box">
 					<!--내용작성 start -->
-				<c:set var="list" value="${requestScope.list}"></c:set>
+				<c:set var="dto" value="${requestScope.dto}"></c:set>
 				<table>
-				<thead>
-					<tr><td>글번호</td><td>글제목</td></tr>
-				</thead>
-				<tbody>
-				<c:forEach var="item" items="${list}">
-				<tr>
-				<td>${item.bno}</td>
-				<td><a href="sportsDetail.do?num=${item.bno}">${item.btitle}</a></td>
-				</tr>
-				</c:forEach>
-				</tbody>
+				<tr><td>번호</td><td>${dto.bno}</td></tr>
+				<tr><td>태그</td><td>${dto.bctg}</td></tr>
+				<tr><td>제목</td><td>${dto.btitle}</td></tr>
 				</table>
+				<a href="sportsList.do">목록</a>
+				<a href="sportsDel.do?no=${dto.bno}">삭제</a>
+				<a href="sportsModifY.do?no=${dto.bno}">수정</a>
 					<!--내용작성 end -->
 				</div>
 			</div>

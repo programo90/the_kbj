@@ -51,4 +51,35 @@ public class BoardDAO {
 			if(pstmt!=null)try {pstmt.close();}catch(SQLException e) {}
 		}
 	}
+	public TableDTO boardDetailData(Connection conn, int boardnum) throws SQLException {
+		StringBuilder sql = new StringBuilder();
+		ResultSet rs=null;
+		sql.append(" select bno ,bctg     ");
+		sql.append("       ,btitle  ");
+		sql.append(" from   sp_board       ");
+		sql.append(" where  bno=?      ");
+		TableDTO dto=new TableDTO(); //자료가 하나일때 dto
+		try (PreparedStatement pstmt=conn.prepareStatement(sql.toString());){
+			pstmt.setInt(1, boardnum);
+			rs=pstmt.executeQuery();
+			if(rs.next())
+			{
+				dto.setBno(rs.getInt("bno"));
+				dto.setBctg(rs.getString("bctg"));
+				dto.setBtitle(rs.getString("btitle"));
+			}
+		}finally {
+		if(rs!=null)try {rs.close();}catch(SQLException e) {}
+		}
+		return dto;
+	}
+	public void boardRemoveData(Connection conn, int bno) throws SQLException {
+		StringBuilder sql=new StringBuilder();
+		sql.append("  delete from sp_board   ");
+		sql.append("  where bno=?    ");
+		try (PreparedStatement pstmt=conn.prepareStatement(sql.toString());){
+			pstmt.setInt(1, bno);
+			pstmt.executeUpdate();
+		}
+	}
 }

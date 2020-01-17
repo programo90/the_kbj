@@ -56,4 +56,41 @@ public class SportsService {
 			if(conn!=null)try {conn.close();}catch(SQLException e) {}
 		}
 	}
+	public TableDTO boardDetail(int boardnum) {
+		System.out.println(service);
+		DBConnection db=DBConnection.getinstance();
+		Connection conn=null;
+		TableDTO dto=null;
+		try {
+			conn=db.getConnection();
+			conn.setAutoCommit(false);
+			BoardDAO dao=BoardDAO.getDAO();
+			dto=dao.boardDetailData(conn, boardnum);
+			conn.commit();
+		}catch(NamingException | SQLException e)
+		{
+			System.out.println(e);
+			try {conn.rollback();}catch(Exception e2) {}
+		}finally {
+			if(conn!=null)try {conn.close();}catch(SQLException e) {}
+		}
+		return dto;
+	}
+	public void boardRemove(int bno) {
+		Connection conn=null;
+		int result=0;
+		try {
+			DBConnection db=DBConnection.getinstance();
+			conn = db.getConnection();
+			conn.setAutoCommit(false);
+			BoardDAO dao=BoardDAO.getDAO();
+			dao.boardRemoveData(conn, bno);
+			conn.commit();
+		}catch(NamingException|SQLException e) {
+			System.out.println(e);
+			try{conn.rollback();}catch(Exception e2) {}
+		}finally {
+			if(conn!=null)try {conn.close();}catch(SQLException e) {}
+		}
+	}
 }
