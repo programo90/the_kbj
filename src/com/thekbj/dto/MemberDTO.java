@@ -3,7 +3,7 @@ package com.thekbj.dto;
 public class MemberDTO {
 	private int mno;
 	private String mid;
-	private int mpw;
+	private String mpw;
 	private String mname;
 	private String mbdate;
 	private String memail;
@@ -23,10 +23,10 @@ public class MemberDTO {
 	public void setMid(String mid) {
 		this.mid = mid;
 	}
-	public int getMpw() {
+	public String getMpw() {
 		return mpw;
 	}
-	public void setMpw(int mpw) {
+	public void setMpw(String mpw) {
 		this.mpw = mpw;
 	}
 	public String getMname() {

@@ -8,6 +8,7 @@ import javax.naming.NamingException;
 
 import com.thekbj.comm.DBConnection;
 import com.thekbj.dto.MemberDTO;
+import com.thekbj.member.dao.MemberDAO;
 
 public class MemberService {
 	
@@ -19,24 +20,25 @@ public class MemberService {
 		return memberservice;
 	}
 
-	public boolean MemberLogin(String mid, String newmpw) {
+	public MemberDTO LoginComfirm(String mid, String newmpw) {
 		// TODO Auto-generated method stub
 		Connection conn = null;
 		
-		
+		MemberDTO dto = null;
 		try {
 			DBConnection dbconn = DBConnection.getinstance();
 			conn = dbconn.getConnection();
 			conn.setAutoCommit(false);
 			
-			
+			MemberDAO dao = MemberDAO.getDao();
+			dto = dao.LoginComfirmData(conn, mid, newmpw);
 			
 			conn.commit();
 		}catch(SQLException | NamingException e) {
 			System.out.println(e);
 		}
 		
-		return false;
+		return dto;
 	}
 	
 	
