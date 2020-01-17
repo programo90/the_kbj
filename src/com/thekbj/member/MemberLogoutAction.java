@@ -14,8 +14,11 @@ public class MemberLogoutAction implements Action {
 	@Override
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		return null;
+		ForwardAction forward = new ForwardAction();
+		forward.setForward(true);
+		forward.setUrl("/WEB-INF/comm/join.html");
+		
+		return forward;
 	}
 
 }
