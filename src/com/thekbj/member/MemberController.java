@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.thekbj.member.service.MemberService;
+import com.thekbj.service.MemberService;
 
 /**
  * Servlet implementation class MemberController
