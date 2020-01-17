@@ -1,0 +1,43 @@
+* {
+     margin: 0px;
+     padding: 0px;
+}
+#wrap {
+     width: 100%;
+     margin: 0 auto;
+}
+ul li {
+     list-style: none;
+ }
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+}
+section{
+    width: 100%;
+    margin: 15% 0%;
+}
+.mainIcon{
+    text-align: center;
+}
+.mainIcon_box{
+    clear: both;
+    margin: 0 auto;
+    padding: 20px;
+}
+.mainIcon_li{
+    display: inline-block;
+    margin: 0 10px;
+}
+.mainIcon_li >a {
+    color: #232323;
+}
+
+
+
+
+
+
+
