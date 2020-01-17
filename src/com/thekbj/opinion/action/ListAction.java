@@ -30,7 +30,7 @@ public class ListAction implements Action {
 		if(txtsearch == null)
 			txtsearch = "";
 		
-		MemberService service = MemberService.getMemberservice()
+		MemberService service = MemberService.getMemberservice();
 		int totalcount = service.getCount(search, txtsearch);
 		int pagepercount = 10;
 		int totalpage = (int) Math.ceil((float)totalcount / pagepercount);
