@@ -42,6 +42,28 @@ public class MemberService {
 		
 		return dto;
 	}
+
+	public int memberJoin(MemberDTO dto) {
+		System.out.println("MemberJoinResultAction : 회원가입 서비스 요청");
+		Connection conn = null;
+		int result = 0;
+		
+		try {
+			DBConnection dbconn = DBConnection.getinstance();
+			conn = dbconn.getConnection();
+			conn.setAutoCommit(false);
+			
+			MemberDAO dao = MemberDAO.getDao();
+			 result = dao.MemberJoinData(conn, dto);
+			
+			conn.commit();
+		}catch(SQLException | NamingException e) {
+			if(conn!=null) try {conn.close();}catch(Exception e2) {}
+			System.out.println("MemberJoinResultAction Exception : "+e);
+		}
+			
+		return result;
+	}
 	
 	
 	

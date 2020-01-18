@@ -3,14 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 		<header class="left">
-            <h1 class="logo">THE KBJ</h1>
+            <h1 class="logo"><a href="main.do">THE KBJ</a></h1>
             <div class="menuTop">
             <c:if test="${sessionScope.dto == null}">
 				<p class="menuTop_btn"><a href="memberLogin.do" class="menuTop_btn_a"><span class="glyphicon glyphicon-log-out"></span> 로그인</a></p>
                 <p class="menuTop_btn"><a href="memberJoin.do" class="menuTop_btn_a"><span class="glyphicon glyphicon-user"></span> 회원가입</a></p>
 			</c:if> 
             <c:if test="${sessionScope.dto != null}">
-				<p class="menuTop_btn"><a href="#" class="menuTop_btn_a"><span class="glyphicon glyphicon-log-in"></span> 로그아웃</a></p>
+				<p class="menuTop_btn"><a href="memberLogout.do" class="menuTop_btn_a"><span class="glyphicon glyphicon-log-in"></span> 로그아웃</a></p>
                 <p class="menuTop_btn"><a href="#" class="menuTop_btn_a"><span class="glyphicon glyphicon-user"></span> ${sessionScope.dto.mid} </a></p>
 			</c:if>
             </div>
