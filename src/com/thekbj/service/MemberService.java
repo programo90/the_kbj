@@ -22,7 +22,7 @@ public class MemberService {
 
 	public MemberDTO LoginComfirm(String mid, String newmpw) {
 		// TODO Auto-generated method stub
-		System.out.println("MemberLoginSessionAction : 로그인 서비스 요청");
+		System.out.println("MemberLoginSessionAction LoginComfirm : 로그인 Service 요청");
 		Connection conn = null;
 		
 		MemberDTO dto = null;
@@ -38,13 +38,15 @@ public class MemberService {
 		}catch(SQLException | NamingException e) {
 			if(conn!=null) try {conn.close();}catch(Exception e2) {}
 			System.out.println(e);
+		}finally {
+			System.out.println("MemberLoginSessionAction LoginComfirm : 로그인 Service 요청 정상 종료");
 		}
 		
 		return dto;
 	}
 
 	public int memberJoin(MemberDTO dto) {
-		System.out.println("MemberJoinResultAction : 회원가입 서비스 요청");
+		System.out.println("MemberJoinResultAction memberJoin : 회원가입 Service 요청");
 		Connection conn = null;
 		int result = 0;
 		
@@ -60,6 +62,8 @@ public class MemberService {
 		}catch(SQLException | NamingException e) {
 			if(conn!=null) try {conn.close();}catch(Exception e2) {}
 			System.out.println("MemberJoinResultAction Exception : "+e);
+		}finally {
+			System.out.println("MemberJoinResultAction memberJoin : 회원가입 Service 요청 정상 종료");
 		}
 			
 		return result;

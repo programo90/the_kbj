@@ -1,11 +1,10 @@
-/*ì „ì²´ë¶€ë¶„*/
+/*ÀüÃ¼ºÎºÐ*/
 .board_box
 {
     border-bottom: 1px solid silver;
     padding-bottom: 30px;
 }
-
-/*top ë¶€ë¶„*/
+/*top ºÎºÐ*/
 .board_top
 {
     margin: 0px;
@@ -45,7 +44,7 @@
     padding-left: 10px;
 }
 
-/*bottom ë¶€ë¶„*/
+/*bottom ºÎºÐ*/
 .bottom_left1
 {
     float: left;    
@@ -89,6 +88,7 @@
 {
     margin-left: 70px;
     margin-top: 20px;
+    display : none;
 }
 
 .reply_profile
