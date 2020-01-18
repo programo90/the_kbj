@@ -18,7 +18,7 @@ public class MemberDAO {
 
 	public MemberDTO LoginComfirmData(Connection conn, String id, String newmpw) throws SQLException{
 		// TODO Auto-generated method stub
-
+		System.out.println("MemberLoginSessionAction : 로그인 DAO 요청");
 		StringBuilder sql = new StringBuilder();
 		sql.append(" select * from member 	 ");
 		sql.append(" where mid = ?			 ");
@@ -63,6 +63,40 @@ public class MemberDAO {
 		}
 		
 		return dto;
+	}
+
+	public int MemberJoinData(Connection conn, MemberDTO dto) throws SQLException{
+		System.out.println("MemberJoinResultAction : 회원가입 DAO 요청");
+		StringBuilder sql = new StringBuilder();
+		sql.append(" insert into member ");
+		sql.append(" values(null		");
+		sql.append("		,?  		");
+		sql.append("		,?  		");
+		sql.append("		,?  		");
+		sql.append("		,?  		");
+		sql.append("		,?  		");
+		sql.append("		,?  		");
+		sql.append("		,?  		");
+		sql.append("		,?  		");
+		sql.append("		,?)  		");
+		
+		int result = 0;
+		
+		try( PreparedStatement pstmt = conn.prepareStatement(sql.toString()); )
+		{
+			pstmt.setString(1, dto.getMid());
+			pstmt.setString(2, dto.getMpw());
+			pstmt.setString(3, dto.getMname());
+			pstmt.setString(4, dto.getMbdate());
+			pstmt.setString(5, dto.getMemail());
+			pstmt.setString(6, dto.getMnick());
+			pstmt.setInt(7, dto.getMscore());
+			pstmt.setString(8, dto.getMjoindate());
+			pstmt.setString(9, dto.getMimg());
+			
+			result = pstmt.executeUpdate();
+		}
+		return result;
 	}
 
 		
