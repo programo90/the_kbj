@@ -21,6 +21,10 @@ public class BoardListAction implements Action {
 		
 		ItService service = ItService.getInstance();
 		String bctg = "it";
+		String btag = request.getParameter("btag");
+		if(btag==null) {
+			btag="";
+		}
 		
 		//search
 		String searchType = request.getParameter("searchType");
@@ -58,7 +62,7 @@ public class BoardListAction implements Action {
 		}
 		
 		//get list
-		List<TableDTO> list = service.boardList(bctg,startRow, endRow, searchType, searchtxt);
+		List<TableDTO> list = service.boardList(bctg,btag,startRow, endRow, searchType, searchtxt);
 	
 		request.setAttribute("list", list);
 		request.setAttribute("startPage", startPage);
@@ -67,6 +71,8 @@ public class BoardListAction implements Action {
 		request.setAttribute("curr", currPage);
 		request.setAttribute("searchType", searchType);
 		request.setAttribute("searchtxt", searchtxt);
+		request.setAttribute("btag", btag);
+		
 		
 		//forward
 		ForwardAction forward = new ForwardAction();

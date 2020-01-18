@@ -15,7 +15,7 @@ public class BoardDAO {
 		return dao;
 	}
 	
-	public List<TableDTO> boardListData(Connection conn, String bctg,int startRow, int endRow, String searchType, String searchtxt) throws SQLException{
+	public List<TableDTO> boardListData(Connection conn, String bctg,String btag,int startRow, int endRow, String searchType, String searchtxt) throws SQLException{
 		// TODO Auto-generated method stub
 		List<TableDTO> list = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
@@ -24,6 +24,11 @@ public class BoardDAO {
 		sql.append(" from it_board b inner join it_member m												");
 		sql.append(" on	b.mno = m.mno																	");
 		sql.append(" where bctg = ?																		");
+		
+		if(!btag.equals("")) {
+			sql.append("			and btag = ? 														");
+		}
+		
 		if((!searchType.equals(""))&&(!searchtxt.equals(""))) {
 			if(searchType.equals("btitle")) {
 				sql.append("		and btitle like ? 													");
@@ -42,12 +47,23 @@ public class BoardDAO {
 			
 			pstmt.setString(1, bctg);
 			
-			if((!searchType.equals(""))&&(!searchtxt.equals(""))) {
-				pstmt.setString(2, "%"+searchtxt+"%");
-				pstmt.setInt(3, startRow-1);
+			if(!btag.equals("")) {
+				pstmt.setString(2, btag);
+				if((!searchType.equals(""))&&(!searchtxt.equals(""))) {
+					pstmt.setString(3, "%"+searchtxt+"%");
+					pstmt.setInt(4, startRow-1);
+				} else {
+					pstmt.setInt(3, startRow-1);
+				}
 			} else {
-				pstmt.setInt(2, startRow-1);
+				if((!searchType.equals(""))&&(!searchtxt.equals(""))) {
+					pstmt.setString(2, "%"+searchtxt+"%");
+					pstmt.setInt(3, startRow-1);
+				} else {
+					pstmt.setInt(2, startRow-1);
+				}
 			}
+			
 
 			
 			rs = pstmt.executeQuery();

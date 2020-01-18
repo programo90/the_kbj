@@ -18,6 +18,15 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 </head>
 <body>
+	<c:set var="startPage" value="${requestScope.startPage }" />
+	<c:set var="endPage" value="${requestScope.endPage }" />
+	<c:set var="totalPage" value="${requestScope.totalPage }" />
+	<c:set var="curr" value="${requestScope.curr }" />
+	<c:set var="searchType" value="${requestScope.searchType }" />
+	<c:set var="searchtxt" value="${requestScope.searchtxt }" />
+	<c:set var="btag" value="${requestScope.btag }" />
+
+
 	<jsp:include page="../comm/header.jsp"></jsp:include>
 	<div class="right">
 		<section class="content_box">
@@ -34,12 +43,12 @@
 				<!-- 각자카테고리명 텍스트만 바꿔주세요 -->
 				<div class="board_menu_box">
 					<ul class="board_menu">
-						<li class="board_menu_li"><a href="">PC</a></li>
-						<li class="board_menu_li"><a href="">Mobile</a></li>
-						<li class="board_menu_li"><a href="">It etc.</a></li>
-						<li class="board_menu_li"><a href="">과학 일반</a></li>
+						<li class="board_menu_li"><a href="itList.do">전체보기</a></li>
+						<li class="board_menu_li"><a href="itList.do?btag=pc">PC</a></li>
+						<li class="board_menu_li"><a href="itList.do?btag=mobile">Mobile</a></li>
+						<li class="board_menu_li"><a href="itList.do?btag=etc">It etc.</a></li>
 					</ul>
-					<input type="button" value="글쓰기" class="btn_write">
+					<input type="button" value="글쓰기" class="btn_write" id="btn_write">
 				</div>
 				<div class="board_box">
 					<!--내용작성 start -->
@@ -50,7 +59,6 @@
 									<div class="col-md-12">
 										<div class="itdrow">
 											<div class="col-md-12">
-											
 												<c:forEach var="item" items="${requestScope.list }">
 													<div class="drow">
 														<div class="col-md-3">
@@ -66,53 +74,41 @@
 														</div>
 													</div>
 												</c:forEach>
-
-												<div class="drow">
-													<div class="col-md-3">
-														<img alt="sample-img" src="exhibition18.jpg" />
-														<div class="like-count">like 1</div>
-														<div class="reple-count">reply 1</div>
-													</div>
-													<div class="col-md-9">
-														<p>#1</p>
-														<h3>제목입니다 제목은 두줄까지만 출력하도록 합니다.</h3>
-														<p>작성자</p>
-														<p>2020.01.16</p>
-													</div>
+												<!------------------------- paging ------------------------->
+												<div style="text-align: center;">
+													<nav class="pagination-sm" style="float: none">
+														<ul class="pagination ">
+															<c:if test="${startPage!=1 }">
+																<li class="page-item"><a class="page-link"
+																	href="itList.do?curr=${curr-1}&searchType=${searchType}&searchtxt=${searchtxt}&btag=${btag}">이전</a></li>
+															</c:if>
+															<c:forEach var="i" begin="${startPage }"
+																end="${endPage }">
+																<li class="page-item"><a class="page-link"
+																	href="itList.do?curr=${i}&searchType=${searchType}&searchtxt=${searchtxt}&btag=${btag}">${i}</a></li>
+															</c:forEach>
+															<c:if test="${endPage!=totalPage }">
+																<li class="page-item"><a class="page-link"
+																	href="itList.do?curr=${curr+1}&searchType=${searchType}&searchtxt=${searchtxt}&btag=${btag}">다음</a>
+																</li>
+															</c:if>
+														</ul>
+													</nav>
 												</div>
-												<div class="drow">
-													<div class="col-md-3">
-														<img alt="sample-img" src="exhibition18.jpg" />
-														<div class="like-count">like 1</div>
-														<div class="reple-count">reply 1</div>
-													</div>
-													<div class="col-md-9">
-														<p>#1</p>
-														<h3>제목입니다 제목은 두줄까지만 출력하도록 합니다.</h3>
-														<p>작성자</p>
-														<p>2020.01.16</p>
-													</div>
+
+												<!------------------------- search ------------------------->
+												<div style="text-align: center;">
+													<form action="itList.do" method="post">
+														<select name="searchType" class="searchSel">
+															<option value="btitle">제목</option>
+															<option value="mnick">작성자</option>
+															<option value="bcontent">내용</option>
+														</select> <input type="text" name="searchtxt"> <input
+															type="submit" value="검색">
+													</form>
 												</div>
 											</div>
 										</div>
-										<nav class="pagination-sm">
-											<ul class="pagination">
-												<li class="page-item"><a class="page-link" href="#">이전</a>
-												</li>
-												<li class="page-item"><a class="page-link" href="#">1</a>
-												</li>
-												<li class="page-item"><a class="page-link" href="#">2</a>
-												</li>
-												<li class="page-item"><a class="page-link" href="#">3</a>
-												</li>
-												<li class="page-item"><a class="page-link" href="#">4</a>
-												</li>
-												<li class="page-item"><a class="page-link" href="#">5</a>
-												</li>
-												<li class="page-item"><a class="page-link" href="#">다음</a>
-												</li>
-											</ul>
-										</nav>
 									</div>
 								</div>
 							</div>
@@ -124,5 +120,11 @@
 		</section>
 	</div>
 	<jsp:include page="../comm/footer.jsp"></jsp:include>
+	<script>
+		$(document).ready(function(){
+			$('#btn_write').click(function(){
+			});
+		});
+	</script>
 </body>
 </html>

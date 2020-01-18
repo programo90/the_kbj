@@ -15,7 +15,7 @@ public class ItService {
 	public static ItService getInstance() {
 		return service;
 	}
-	public List<TableDTO> boardList(String bctg,int startRow, int endRow, String searchType, String searchtxt) {
+	public List<TableDTO> boardList(String bctg,String btag,int startRow, int endRow, String searchType, String searchtxt) {
 		// TODO Auto-generated method stub
 		List<TableDTO> list = null;
 		DBConnection db = DBConnection.getinstance();
@@ -25,7 +25,7 @@ public class ItService {
 			conn = db.getConnection();
 			BoardDAO dao = BoardDAO.getInstance();
 			
-			list = dao.boardListData(conn,bctg,startRow,endRow,searchType,searchtxt);
+			list = dao.boardListData(conn,bctg,btag,startRow,endRow,searchType,searchtxt);
 			
 			
 		} catch (SQLException | NamingException e) {
