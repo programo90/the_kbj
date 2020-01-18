@@ -16,7 +16,7 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="#"><span class="glyphicon glyphicon-random"></span> 한줄게시판</a></li>
+                    <li><a href="oneLineList.do"><span class="glyphicon glyphicon-random"></span> 한줄게시판</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-random"></span> 경제</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-random"></span> 연예</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-random"></span> 스포츠</a></li>
