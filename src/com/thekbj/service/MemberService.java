@@ -22,6 +22,7 @@ public class MemberService {
 
 	public MemberDTO LoginComfirm(String mid, String newmpw) {
 		// TODO Auto-generated method stub
+		System.out.println("MemberLoginSessionAction : 로그인 서비스 요청");
 		Connection conn = null;
 		
 		MemberDTO dto = null;
@@ -35,6 +36,7 @@ public class MemberService {
 			
 			conn.commit();
 		}catch(SQLException | NamingException e) {
+			if(conn!=null) try {conn.close();}catch(Exception e2) {}
 			System.out.println(e);
 		}
 		

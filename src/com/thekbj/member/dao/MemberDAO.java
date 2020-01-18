@@ -18,7 +18,7 @@ public class MemberDAO {
 
 	public MemberDTO LoginComfirmData(Connection conn, String id, String newmpw) throws SQLException{
 		// TODO Auto-generated method stub
-
+		System.out.println("MemberLoginSessionAction : 로그인 DAO 요청");
 		StringBuilder sql = new StringBuilder();
 		sql.append(" select * from member 	 ");
 		sql.append(" where mid = ?			 ");

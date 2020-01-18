@@ -14,9 +14,8 @@ public class MemberLogoutAction implements Action {
 	@Override
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		ForwardAction forward = new ForwardAction();
-		forward.setForward(true);
-		forward.setUrl("/WEB-INF/comm/join.html");
 		
 		return forward;
 	}
