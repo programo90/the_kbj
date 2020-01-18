@@ -15,7 +15,7 @@ public class ItService {
 	public static ItService getInstance() {
 		return service;
 	}
-	public List<TableDTO> boardList(int startRow, int endRow, String searchTag, String searchtxt) {
+	public List<TableDTO> boardList(String bctg,int startRow, int endRow, String searchType, String searchtxt) {
 		// TODO Auto-generated method stub
 		List<TableDTO> list = null;
 		DBConnection db = DBConnection.getinstance();
@@ -25,13 +25,35 @@ public class ItService {
 			conn = db.getConnection();
 			BoardDAO dao = BoardDAO.getInstance();
 			
-			list = dao.boardListData(conn,startRow,endRow,searchTag,searchtxt);
+			list = dao.boardListData(conn,bctg,startRow,endRow,searchType,searchtxt);
 			
 			
 		} catch (SQLException | NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {e.printStackTrace();}
 		}
 		return list;
+	}//end boardlist
+	
+	
+	public int getTotalCount() {
+		// TODO Auto-generated method stub
+		DBConnection db = DBConnection.getinstance();
+		Connection conn = null;
+		int totalCount = 0;
+		try {
+			conn = db.getConnection();
+			BoardDAO dao = BoardDAO.getInstance();
+			
+			totalCount = dao.getTotalCountData(conn);
+			
+		} catch (SQLException | NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return totalCount;
 	} 
 }

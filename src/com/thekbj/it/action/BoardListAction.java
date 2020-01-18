@@ -19,12 +19,15 @@ public class BoardListAction implements Action {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		ItService service = ItService.getInstance();
+		String bctg = "it";
+		
 		//search
-		String searchTag = request.getParameter("searchTag");
+		String searchType = request.getParameter("searchType");
 		String searchtxt= request.getParameter("searchtxt");
 		
-		if(searchTag==null) {
-			searchTag="";
+		if(searchType==null) {
+			searchType="";
 		}
 		if(searchtxt==null) {
 			searchtxt = "";
@@ -38,24 +41,32 @@ public class BoardListAction implements Action {
 			currPage = Integer.parseInt(curr);
 		}
 		
-		int totalRow = 1;
-		int startRow = 1;
-		int endRow = 1;
+		int rowPerPage = 10;
+		int totalRow = service.getTotalCount();
+		int startRow = (currPage-1)*rowPerPage+1;
+		int endRow = startRow+rowPerPage-1;
 		if(endRow>totalRow) {
 			endRow = totalRow;
 		}
 		
-		int totalPage = 6;
-		int startPage = 1;
-		int endPage = 5;
-		
+		int pagePerBlock = 10;
+		int totalPage = (int)Math.ceil((double)totalRow/pagePerBlock);
+		int startPage = ((currPage-1)/pagePerBlock)*pagePerBlock+1;
+		int endPage = startPage+pagePerBlock-1;
 		if( endPage > totalPage) {
 			endPage = totalPage;
 		}
 		
 		//get list
-		ItService service = ItService.getInstance();
-		List<TableDTO> list = service.boardList(startRow, endRow, searchTag, searchtxt);
+		List<TableDTO> list = service.boardList(bctg,startRow, endRow, searchType, searchtxt);
+	
+		request.setAttribute("list", list);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("totalPage", totalPage);
+		request.setAttribute("curr", currPage);
+		request.setAttribute("searchType", searchType);
+		request.setAttribute("searchtxt", searchtxt);
 		
 		//forward
 		ForwardAction forward = new ForwardAction();

@@ -14,19 +14,44 @@ public class BoardDAO {
 	public static BoardDAO getInstance() {
 		return dao;
 	}
-	public List<TableDTO> boardListData(Connection conn, int startRow, int endRow, String searchTag, String searchtxt) throws SQLException{
+	
+	public List<TableDTO> boardListData(Connection conn, String bctg,int startRow, int endRow, String searchType, String searchtxt) throws SQLException{
 		// TODO Auto-generated method stub
 		List<TableDTO> list = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
+		
 		sql.append(" select bno, btitle, bwrdate, bviewcount, btag, brecount, blikecount, bimg, mnick	");
 		sql.append(" from it_board b inner join it_member m												");
 		sql.append(" on	b.mno = m.mno																	");
-		sql.append(" where bno = ?																		");
+		sql.append(" where bctg = ?																		");
+		if((!searchType.equals(""))&&(!searchtxt.equals(""))) {
+			if(searchType.equals("btitle")) {
+				sql.append("		and btitle like ? 													");
+			} else if(searchType.equals("bcontent")) {
+				sql.append("		and bcontent like ?													");
+			} else if(searchType.equals("mnick")) {
+				sql.append("			and mnick like ?												");
+			} 
+		}
+		sql.append(" order by bno desc																	");
+		sql.append(" limit ?,10;																		");
+
 		
 		ResultSet rs = null;
 		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
 			
+			pstmt.setString(1, bctg);
+			
+			if((!searchType.equals(""))&&(!searchtxt.equals(""))) {
+				pstmt.setString(2, "%"+searchtxt+"%");
+				pstmt.setInt(3, startRow-1);
+			} else {
+				pstmt.setInt(2, startRow-1);
+			}
+
+			
 			rs = pstmt.executeQuery();
+			
 			while(rs.next()) {
 				TableDTO dto = new TableDTO();
 				dto.setBno(rs.getInt("bno"));
@@ -45,6 +70,22 @@ public class BoardDAO {
 		}
 		
 		return list;
+	}
+
+	public int getTotalCountData(Connection conn) throws SQLException{
+		// TODO Auto-generated method stub
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select count(*)	");
+		sql.append(" from it_board		");
+		
+		int totalCount = 0;
+		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString()); 
+			ResultSet rs = pstmt.executeQuery();	) {
+			if(rs.next()) {
+				totalCount = rs.getInt(1);
+			}
+		}
+		return totalCount;
 	}
 	
 	
