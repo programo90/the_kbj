@@ -26,8 +26,9 @@
 		}
 	};
 	function select_tag_sel(ele) {
+			//아래 [] 안에 btag로 지정할 값들을 나열해 주세요.
 		  var it_option = ["pc", "mobile", "etc"];
-		  var one_option = [];
+		  var one_option = [];					
 		  var eco_option = [];
 		  var ent_option = [];
 		  var spo_option = [];
