@@ -29,7 +29,10 @@ p{
     padding: 10px;
     text-align: center;
 }
-
+#modify-box{
+    padding: 10px;
+    text-align: center;
+}
 #content-row {
     border-bottom: 1px solid silver;
 }

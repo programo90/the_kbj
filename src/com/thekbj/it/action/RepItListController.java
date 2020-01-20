@@ -20,13 +20,13 @@ import com.thekbj.service.ItService;
  * Servlet implementation class RepListController
  */
 @WebServlet("/replyList.do")
-public class RepListController extends HttpServlet {
+public class RepItListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public RepListController() {
+	public RepItListController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

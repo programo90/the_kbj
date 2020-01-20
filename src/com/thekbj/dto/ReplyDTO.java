@@ -5,6 +5,7 @@ public class ReplyDTO {
 	private int bno;
 	private String rcontent;
 	private String rwrdate;
+	
 	private String mnick;
 	private int mno;
 	

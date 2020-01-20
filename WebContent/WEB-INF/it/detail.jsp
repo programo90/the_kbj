@@ -143,8 +143,13 @@ $(document).ready(function(){
 													</div>
 												</div>
 												<div class="row">
+													<div class="col-md-12" id="modify-box">
+														<a href="itModify.do?bno=${dto.bno}"><span class="glyphicon glyphicon-refresh"> Modify</span></a>
+													</div>
+												</div>
+												<div class="row">
 													<div class="col-md-12" id="delete-box">
-														<a href="itDel.do?bno=${dto.bno}"><span class="glyphicon glyphicon-trash"> delete</span></a>
+														<a href="itDel.do?bno=${dto.bno}"><span class="glyphicon glyphicon-trash"> Delete</span></a>
 													</div>
 												</div>
 											</div>

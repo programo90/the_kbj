@@ -217,4 +217,51 @@ public class ItService {
 		}
 		
 	}
+	public TableDTO boardModify(int bno) {
+		// TODO Auto-generated method stub
+		DBConnection db = DBConnection.getinstance();
+		Connection conn = null;
+		TableDTO dto = null;
+		try {
+			 conn = db.getConnection();
+			 
+			BoardDAO dao = BoardDAO.getInstance();
+			
+			dto = dao.boardModifyData(conn,bno);
+			
+		} catch (SQLException | NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {e.printStackTrace();}
+		}
+		
+		return dto;
+	}
+	public void boardModifyResult(TableDTO dto) {
+		// TODO Auto-generated method stub
+		DBConnection db = DBConnection.getinstance();
+		Connection conn = null;
+		try {
+			 conn = db.getConnection();
+			 conn.setAutoCommit(false);
+			 
+			BoardDAO dao = BoardDAO.getInstance();
+			dao.boardModifyResultData(conn,dto);
+
+			conn.commit();
+		} catch (SQLException | NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {e.printStackTrace();}
+		}
+		
+	}
 }

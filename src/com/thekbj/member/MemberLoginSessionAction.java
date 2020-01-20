@@ -18,16 +18,16 @@ public class MemberLoginSessionAction implements Action {
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("MemberLoginSessionAction Load"); 
-		//id ¹ÞÀ½
+		//id ï¿½ï¿½ï¿½ï¿½
 		String mid = request.getParameter("login_id");
-		//pw ¹ÞÀ½
+		//pw ï¿½ï¿½ï¿½ï¿½
 		String mpw = request.getParameter("login_pw");
 		
-		//¼ÖÆ® »ý¼º
+		//ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 		String salt = SHA.generateSalt();
 		
-		//³ªÁß¿¡ ÁÖ¼® Ç®²¨ÀÓ
-		//ºñ¹Ð¹øÈ£+¼ÖÆ® => ÇØ½Ã°ªÀ¸·Î º¯È¯
+		//ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½Ö¼ï¿½ Ç®ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½Ð¹ï¿½È£+ï¿½ï¿½Æ® => ï¿½Ø½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
 		//String newmpw = SHA.getEncrypt(mpw, salt);
 		
 		MemberService service = MemberService.getMemberservice();
@@ -35,15 +35,17 @@ public class MemberLoginSessionAction implements Action {
 		
 		String sql_mid = dto.getMid();
 		String sql_mpw = dto.getMpw();
-		System.out.println("MemberLoginSessionAction : id°¡ °°Àº°ª ÀÖ´ÂÁö È®ÀÎ => "+"sql_mid : "+sql_mid + ", sql_mpw : "+ sql_mpw);
+		System.out.println(sql_mid);
+		System.out.println(sql_mpw);
+		System.out.println("MemberLoginSessionAction : idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ È®ï¿½ï¿½ => "+"sql_mid : "+sql_mid + ", sql_mpw : "+ sql_mpw);
 		
-		//¾ÆÀÌµð ºñ¹Ð¹øÈ£ È®ÀÎ
+		//ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½Ð¹ï¿½È£ È®ï¿½ï¿½
 		if(mid.equals(sql_mid) && mpw.equals(sql_mpw))
 		{
 			HttpSession session = request.getSession();
 			session.setAttribute("dto", dto);
 
-			//2½Ã°£ ¼¼¼ÇÀ¯Áö
+			//2ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			session.setMaxInactiveInterval(60*60*2);
 		}
 		
