@@ -36,7 +36,7 @@
 						<li class="board_menu_li"><a href="">조회순</a></li>
 						<li class="board_menu_li"><a href="">추천순</a></li>
 					</ul>
-					<a href="insert.jsp">글쓰기</a>
+					<a href="sportsInsert.do">글쓰기</a>
 				</div>
 				<div class="board_box">
 					<!--내용작성 start -->
@@ -48,7 +48,18 @@
 				</table>
 				<a href="sportsList.do">목록</a>
 				<a href="sportsDel.do?no=${dto.bno}">삭제</a>
-				<a href="sportsModifY.do?no=${dto.bno}">수정</a>
+				<a href="sportsModify.do?num=${dto.bno}">수정</a>
+				<form method="post" action="sportsRepList.do" name="frm">
+					<input type="hidden" name="bno" value="${dto.bno}">
+					<textarea rows="2" cols="20" name="rcontent"></textarea><br>
+					<input type="datetime" name="rwdate"><br>
+					
+					
+					
+					
+					<input type="button" onclick="send()" value="추가">
+				</form>
+<table id="result">
 					<!--내용작성 end -->
 				</div>
 			</div>

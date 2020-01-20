@@ -22,6 +22,7 @@ public class BoardDetailAction implements Action {
 		{
 			boardnum=Integer.parseInt(n);
 		}
+		System.out.println(boardnum);
 		SportsService service=SportsService.getService();
 		TableDTO dto= service.boardDetail(boardnum);
 		request.setAttribute("dto", dto);

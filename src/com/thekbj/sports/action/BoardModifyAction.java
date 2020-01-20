@@ -11,23 +11,24 @@ import com.thekbj.comm.ForwardAction;
 import com.thekbj.dto.TableDTO;
 import com.thekbj.service.SportsService;
 
-public class BoardInsertResultAction implements Action {
+public class BoardModifyAction implements Action {
 
 	@Override
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String btitle=request.getParameter("bctg");
-		String bctg=request.getParameter("btitle");
-		TableDTO dto=new TableDTO();
-		dto.setBctg(bctg);
-		dto.setBtitle(btitle);
+		String n=request.getParameter("num");
+		int boardnum=1;
+		if(n!=null && !n.equals(""))
+		{
+			boardnum=Integer.parseInt(n);
+		}
 		SportsService service=SportsService.getService();
-		service.IsertData(dto);
+		TableDTO dto= service.boardDetail(boardnum);
+		request.setAttribute("dto", dto);
 		ForwardAction forward=new ForwardAction();
-		forward.setForward(false);
-		forward.setUrl("sportsList.do");
-		System.out.println(btitle);
-		System.out.println(bctg);
+		forward.setForward(true);
+		forward.setUrl("/WEB-INF/sports/modify.jsp");
+		System.out.println(forward.isForward()+"!!! for");
 		return forward;
 	}
 }

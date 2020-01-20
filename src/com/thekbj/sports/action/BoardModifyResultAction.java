@@ -11,23 +11,26 @@ import com.thekbj.comm.ForwardAction;
 import com.thekbj.dto.TableDTO;
 import com.thekbj.service.SportsService;
 
-public class BoardInsertResultAction implements Action {
+public class BoardModifyResultAction implements Action {
 
 	@Override
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String btitle=request.getParameter("bctg");
-		String bctg=request.getParameter("btitle");
+		int bno=Integer.parseInt(request.getParameter("bno"));
+		String bctg=request.getParameter("bctg");
+		String btitle=request.getParameter("btitle");
+		
 		TableDTO dto=new TableDTO();
+		dto.setBno(bno);
 		dto.setBctg(bctg);
 		dto.setBtitle(btitle);
+		
 		SportsService service=SportsService.getService();
-		service.IsertData(dto);
+		service.boardModifyResultData(dto);
+		
 		ForwardAction forward=new ForwardAction();
 		forward.setForward(false);
 		forward.setUrl("sportsList.do");
-		System.out.println(btitle);
-		System.out.println(bctg);
 		return forward;
 	}
 }

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.thekbj.dto.ReplyDTO;
 import com.thekbj.dto.TableDTO;
 
 public class BoardDAO {
@@ -39,7 +40,7 @@ public class BoardDAO {
 	}
 	public void boardInsertData(Connection conn, TableDTO dto) throws SQLException{
 		StringBuilder sql=new StringBuilder();
-		sql.append(" insert into sp_board  (bno,bctg, btitle   )    ");
+		sql.append(" insert into sp_board  (bno, bctg, btitle   )    ");
 		sql.append(" values (null,?,?)                              ");
 		PreparedStatement pstmt=null;
 		try{
@@ -58,7 +59,7 @@ public class BoardDAO {
 		sql.append("       ,btitle  ");
 		sql.append(" from   sp_board       ");
 		sql.append(" where  bno=?      ");
-		TableDTO dto=new TableDTO(); //자료가 하나일때 dto
+		TableDTO dto=new TableDTO(); 
 		try (PreparedStatement pstmt=conn.prepareStatement(sql.toString());){
 			pstmt.setInt(1, boardnum);
 			rs=pstmt.executeQuery();
@@ -81,5 +82,48 @@ public class BoardDAO {
 			pstmt.setInt(1, bno);
 			pstmt.executeUpdate();
 		}
+	}
+	public void boardModifyResultData(Connection conn, TableDTO dto) throws SQLException {
+		StringBuilder sql=new StringBuilder();
+		sql.append("update sp_board  ");
+		sql.append("   set           ");
+		sql.append("    bctg=?       ");
+		sql.append("   ,btitle=?     ");
+		sql.append("   where         ");
+		sql.append("   bno=?         ");
+		int result=0;
+		try(PreparedStatement pstmt=conn.prepareStatement(sql.toString());) {
+			pstmt.setString(1, dto.getBctg());
+			pstmt.setString(2, dto.getBtitle());
+			pstmt.setInt(3, dto.getBno());
+			result=pstmt.executeUpdate();
+		}
+	}
+	public List<ReplyDTO> repListData(Connection conn, int bno) throws SQLException {
+		StringBuilder sql=new StringBuilder();
+		sql.append(" select sp_reply      ");
+		sql.append("        ,rno  ");
+		sql.append("        ,rcontent ");
+		sql.append("        ,rwdate   ");
+		sql.append(" from   repboard   ");
+		sql.append(" where  bno=?  ");
+		ResultSet rs=null;
+		ArrayList<ReplyDTO> arr=new ArrayList<>();
+		try(PreparedStatement pstmt=conn.prepareStatement(sql.toString());) {
+			pstmt.setInt(1, bno);
+			rs=pstmt.executeQuery();
+			while(rs.next())
+			{
+				ReplyDTO dto=new ReplyDTO();
+				dto.setRno(rs.getInt("rno"));
+				dto.setRcontent(rs.getString("rcontent"));
+				dto.setRwdate(rs.getString("rwdate"));
+				dto.setBno(rs.getInt("bno"));
+				arr.add(dto);
+			}
+		}finally {
+			if(rs!=null)try {rs.close();}catch(SQLException e) {}
+		}
+		return arr;
 	}
 }
