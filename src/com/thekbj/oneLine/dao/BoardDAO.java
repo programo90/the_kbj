@@ -77,7 +77,7 @@ public class BoardDAO {
 			pstmt.setInt(2, endrow);
 			rs = pstmt.executeQuery();
 			
-			if(rs.next())
+			while(rs.next())
 			{ 			
 				TableDTO dto = new TableDTO();
 				int bno = rs.getInt("bno");
@@ -135,7 +135,7 @@ public class BoardDAO {
 			
 			rs = pstmt.executeQuery();
 			
-			if(rs.next())
+			while(rs.next())
 			{ 			
 				ReplyDTO dto = new ReplyDTO();
 				
@@ -148,7 +148,7 @@ public class BoardDAO {
 				dto.setBno(rno);       
 				dto.setBno(bno);      
 				dto.setRcontent(rcontent);  
-				dto.setRwrdate(rwrdate);
+				dto.setRwdate(rwrdate);
 				dto.setMnick(mnick);
 				
 			    list.add(dto);
