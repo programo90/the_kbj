@@ -18,16 +18,17 @@ public class MemberLoginSessionAction implements Action {
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("MemberLoginSessionAction Load"); 
-		//id ����
+		
+		//login id 
 		String mid = request.getParameter("login_id");
-		//pw ����
+		//login pw 
 		String mpw = request.getParameter("login_pw");
 		
-		//��Ʈ ����
+		//create salt
 		String salt = SHA.generateSalt();
 		
-		//���߿� �ּ� Ǯ����
-		//��й�ȣ+��Ʈ => �ؽð����� ��ȯ
+		//comming soon
+		//salt + pw => HashCode
 		//String newmpw = SHA.getEncrypt(mpw, salt);
 		
 		MemberService service = MemberService.getMemberservice();
@@ -37,15 +38,15 @@ public class MemberLoginSessionAction implements Action {
 		String sql_mpw = dto.getMpw();
 		System.out.println(sql_mid);
 		System.out.println(sql_mpw);
-		System.out.println("MemberLoginSessionAction : id�� ������ �ִ��� Ȯ�� => "+"sql_mid : "+sql_mid + ", sql_mpw : "+ sql_mpw);
+		System.out.println("MemberLoginSessionAction : id,pw equals => "+"sql_mid : "+sql_mid + ", sql_mpw : "+ sql_mpw);
 		
-		//���̵� ��й�ȣ Ȯ��
+		//original id, pw <=> select id, pw
 		if(mid.equals(sql_mid) && mpw.equals(sql_mpw))
 		{
 			HttpSession session = request.getSession();
 			session.setAttribute("dto", dto);
 
-			//2�ð� ��������
+			//2 hour session
 			session.setMaxInactiveInterval(60*60*2);
 		}
 		

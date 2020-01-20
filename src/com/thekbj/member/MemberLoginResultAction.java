@@ -27,13 +27,13 @@ public class MemberLoginResultAction implements Action {
 		
 		if(dto == null)
 		{
-			//로그인 실패시
+			//Login fail
 			forward.setForward(false);
 			forward.setUrl("memberLogin.do");
 		}
 		else
 		{
-			//로그인 성공시
+			//Login success
 			forward.setForward(true);
 			forward.setUrl("/WEB-INF/comm/index.jsp");
 		}
