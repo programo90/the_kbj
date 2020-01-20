@@ -22,7 +22,7 @@ public class BoardDAO {
 
 
 	public int getTotalCountData(Connection conn) throws SQLException{
-		System.out.println("BoardDAO getTotalCountData : °Ô½Ã±Û °¹¼ö DAO ¿äÃ»");
+		System.out.println("BoardDAO getTotalCountData : ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ DAO ï¿½ï¿½Ã»");
 		
 		StringBuilder sql = new StringBuilder();
 		
@@ -44,14 +44,14 @@ public class BoardDAO {
 			
 		}finally {
 			if(rs!=null) try {rs.close();}catch(SQLException e) {}
-			System.out.println("BoardDAO getTotalCountData : °Ô½Ã±Û °¹¼ö DAO ¿äÃ» Á¤»ó Á¾·á");
+			System.out.println("BoardDAO getTotalCountData : ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ DAO ï¿½ï¿½Ã» ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		}
 		
 		return totalcount;
 	}
 
 	public List<TableDTO> boardListData(Connection conn, int startrow, int endrow) throws SQLException{
-		System.out.println("BoardDAO boardListData : °Ô½Ã±Û °¹¼ö DAO ¿äÃ»");
+		System.out.println("BoardDAO boardListData : ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ DAO ï¿½ï¿½Ã»");
 		StringBuilder sql = new StringBuilder();	
 		sql.append("	select R1.* FROM(					  		 ");
 		sql.append(" 		select 	bno, bctg, btitle,  	 	 	 ");
@@ -110,7 +110,7 @@ public class BoardDAO {
 			
 		}finally {
 			try { if(rs != null) rs.close(); }catch(SQLException e){}
-			System.out.println("BoardDAO boardListData : °Ô½Ã±Û °¹¼ö DAO ¿äÃ» Á¤»ó Á¾·á");
+			System.out.println("BoardDAO boardListData : ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ DAO ï¿½ï¿½Ã» ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		}
 		
 		return list;
@@ -118,7 +118,7 @@ public class BoardDAO {
 
 	public List<ReplyDTO> repListData(Connection conn) throws SQLException {
 		// TODO Auto-generated method stub
-		System.out.println("BoardDAO repListData : °Ô½Ã±Û °¹¼ö DAO ¿äÃ»");
+		System.out.println("BoardDAO repListData : ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ DAO ï¿½ï¿½Ã»");
 		StringBuilder sql = new StringBuilder();	
 		sql.append(" 		select 	rno, bno, rcontent, rwrdate, mnick 	 	 ");
 		sql.append(" 		from 	oneLine_reply as ore	 			 	 ");
@@ -148,7 +148,7 @@ public class BoardDAO {
 				dto.setBno(rno);       
 				dto.setBno(bno);      
 				dto.setRcontent(rcontent);  
-				dto.setRwdate(rwrdate);
+				dto.setRwrdate(rwrdate);
 				dto.setMnick(mnick);
 				
 			    list.add(dto);
@@ -157,7 +157,7 @@ public class BoardDAO {
 			
 		}finally {
 			try { if(rs != null) rs.close(); }catch(SQLException e){}
-			System.out.println("BoardDAO repListData : °Ô½Ã±Û °¹¼ö DAO ¿äÃ» Á¤»ó Á¾·á");
+			System.out.println("BoardDAO repListData : ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ DAO ï¿½ï¿½Ã» ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		}
 		
 		return list;
