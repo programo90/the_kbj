@@ -8,6 +8,7 @@ import java.util.List;
 import javax.naming.NamingException;
 
 import com.thekbj.comm.DBConnection;
+import com.thekbj.dto.ReplyDTO;
 import com.thekbj.dto.TableDTO;
 import com.thekbj.sports.dao.BoardDAO;
 
@@ -92,5 +93,40 @@ public class SportsService {
 		}finally {
 			if(conn!=null)try {conn.close();}catch(SQLException e) {}
 		}
+	}
+	public void boardModifyResultData(TableDTO dto) {
+		// TODO Auto-generated method stub
+		DBConnection dbconn=DBConnection.getinstance();
+		Connection conn=null;
+		try {
+			conn=dbconn.getConnection();
+			conn.setAutoCommit(false);
+			BoardDAO dao= BoardDAO.getDAO();
+			dao.boardModifyResultData(conn, dto);
+			conn.commit();
+		}catch(NamingException|SQLException e)
+		{
+			System.out.println(e);
+			try {conn.rollback();}catch(SQLException e2) {}
+		}finally {
+			if(conn!=null)try {conn.close();} catch(SQLException e) {System.out.println(e);}
+		}
+		
+	}
+	public List<ReplyDTO> repList(int bno) {
+		DBConnection db=DBConnection.getinstance();
+		Connection conn=null;
+		List<ReplyDTO> list=null;
+		try {
+			conn=db.getConnection();
+			BoardDAO dao=BoardDAO.getDAO();
+			list = dao.repListData(conn,bno);
+		}catch(NamingException|SQLException e)
+		{
+			System.out.println(e);
+		}finally {
+			if(conn!=null)try {conn.close();}catch(SQLException e) {}
+		}
+		return list;
 	}
 }

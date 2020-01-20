@@ -40,20 +40,27 @@
 				</div>
 				<div class="board_box">
 					<!--내용작성 start -->
-				<c:set var="list" value="${requestScope.list}"></c:set>
-				<table>
-				<thead>
-					<tr><td>글번호</td><td>글제목</td></tr>
-				</thead>
-				<tbody>
-				<c:forEach var="item" items="${list}">
-				<tr>
-				<td>${item.bno}</td>
-				<td><a href="sportsDetail.do?num=${item.bno}">${item.btitle}</a></td>
-				</tr>
-				</c:forEach>
-				</tbody>
-				</table>
+	<c:set var="dto" value="${requestScope.dto}"></c:set>
+	<form method="post" action="sportsModifyresult.do">
+	<ul>
+	<li>
+	<label for="bno">글번호</label>
+	<input type="text" name="bno" id="bno" value="${dto.bno}" readonly="readonly">
+	</li>
+	<li>
+	<label for="bctg">태그</label>
+	<input type="text" name="bctg" id="bctg" value="${dto.bctg}">
+	</li>
+	<li>
+	<label for="btitle">제목</label>
+	<input type="text" name="btitle" id="btitle" value="${dto.btitle}">
+	</li>
+	<li>
+	<input type="submit" value="전송">
+	<input type="reset" value="취소"> 
+	</li>
+	</ul>
+</form>
 					<!--내용작성 end -->
 				</div>
 			</div>

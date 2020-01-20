@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 </head>
 <body>
+	<c:set var="dto" value="${requestScope.dto}"></c:set>
 	<jsp:include page="../comm/header.jsp"></jsp:include>
 	<div class="right">
 		<section class="content_box">
@@ -28,35 +29,40 @@
 				</div>
 			</div>
 			<div class="content">
-				<h2 class="con_title">글쓰기</h2><!-- 각자카테고리명 텍스트만 바꿔주세요 -->
+				<h2 class="con_title">글상세</h2><!-- 각자카테고리명 텍스트만 바꿔주세요 -->
 				<div class="board_box">
 					<!--내용작성 start -->
-					<div>
-						<form method="post" action="enterInsertresult.do">
-							<ul>	
-								<li>
-									<%-- <input type="hidden" name="mno" id="mno" value="${sessionScope.id}"> --%>
-									<input type="hidden" name="mno" id="mno" value="2">
-								</li>
-								<li>
-									<label for="btitle">글제목</label>
-									<input type="text" name="btitle" id="btitle" required="required">
-								</li>
-								<li>
-									<label for="bctg">카테고리</label>
-									<input type="text" name="bctg" id="bctg" required="required">
-								</li>
-								<li>
-									<label for="bcontent">내용</label>
-									<textarea rows="2" cols="10" name="bcontent" id="bcontent" required="required"></textarea>
-								</li>
-								<li>
-									<input type="submit" value="전송">
-									<input type="reset" value="취소">
-								</li>
-							</ul>
-						</form>
+					<div class="btns">
+						<a href="enterList.do">목록으로</a>
+						<a href="enterModify.do?bno=${dto.bno}">수정</a>
+						<a href="enterDel.do?bno=${dto.bno}">삭제</a>
 					</div>
+					<div>
+						<ul>
+							<li>
+								<label>글번호</label>
+								<c:out value="${dto.bno}"></c:out>
+								<input type="hidden" name="bno" id="bno" value="${dto.bno}"> 
+							</li>
+							<li>
+								<label>카테고리</label>
+								<c:out value="${dto.bctg}"></c:out>
+							</li>
+							<li>
+								<label>제목</label>
+								<c:out value="${dto.btitle}"></c:out>
+							</li>
+							<li>
+								<label>내용</label>
+								<c:out value="${dto.bcontent}"></c:out>
+							</li>
+							<li>
+								<label>조회수</label>
+								<c:out value="${dto.bviewcount}"></c:out>
+							</li>
+						</ul>
+					</div>
+					<div class="reply" id="replyResult"></div>
 					<!--내용작성 end -->
 				</div>
 			</div>
