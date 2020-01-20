@@ -9,7 +9,6 @@ public class TableDTO {
 	private String bwrdate;
 	private int bviewcount;
 	private String btag;
-	private String bapi;
 	private int brecount;
 	private int blikecount;
 	private String bimg;
@@ -76,12 +75,6 @@ public class TableDTO {
 	public void setBtag(String btag) {
 		this.btag = btag;
 	}
-	public String getBapi() {
-		return bapi;
-	}
-	public void setBapi(String bapi) {
-		this.bapi = bapi;
-	}
 	public int getBrecount() {
 		return brecount;
 	}
@@ -103,8 +96,9 @@ public class TableDTO {
 	@Override
 	public String toString() {
 		return "TableDTO [bno=" + bno + ", mno=" + mno + ", bctg=" + bctg + ", btitle=" + btitle + ", bcontent="
-				+ bcontent + ", bwrdate=" + bwrdate + ", bviewcount=" + bviewcount + ", btag=" + btag + ", bapi=" + bapi
-				+ ", brecount=" + brecount + ", blikecount=" + blikecount + ", bimg=" + bimg + "]";
+				+ bcontent + ", bwrdate=" + bwrdate + ", bviewcount=" + bviewcount + ", btag=" + btag + ", brecount="
+				+ brecount + ", blikecount=" + blikecount + ", bimg=" + bimg + ", mnick=" + mnick + "]";
 	}
+
 	
 }

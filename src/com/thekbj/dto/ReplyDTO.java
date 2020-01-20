@@ -5,10 +5,8 @@ public class ReplyDTO {
 	private int bno;
 	private String rcontent;
 	private String rwrdate;
-	
 	private String mnick;
 	private int mno;
-	
 	
 	public int getMno() {
 		return mno;
@@ -48,7 +46,10 @@ public class ReplyDTO {
 	}
 	@Override
 	public String toString() {
-		return "ReplyDTO [rno=" + rno + ", bno=" + bno + ", rcontent=" + rcontent + ", rwrdate=" + rwrdate + "]";
+		return "ReplyDTO [rno=" + rno + ", bno=" + bno + ", rcontent=" + rcontent + ", rwrdate=" + rwrdate + ", mnick="
+				+ mnick + ", mno=" + mno + "]";
 	}
+	
+	
 	
 }

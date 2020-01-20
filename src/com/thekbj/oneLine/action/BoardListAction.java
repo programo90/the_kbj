@@ -47,10 +47,9 @@ public class BoardListAction implements Action {
 		//메인글 담기
 		List<TableDTO> list= service.boardList(startrow,endrow);
 		
-		
 		//리플글 담기
 		List<ReplyDTO> replist = service.replyList();
-		
+				
 		//request 객체에 모두 담기
 		request.setAttribute("list", list);
 		request.setAttribute("replist", replist);
