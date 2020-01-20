@@ -20,6 +20,9 @@
 		function insertBoard() {
 			location.href="itInsert.do";
 		};
+		function loginBoard() {
+			location.href="memberLogin.do";
+		};
 	</script>
 </head>
 <body>
@@ -53,7 +56,14 @@
 						<li class="board_menu_li"><a href="itList.do?btag=mobile">Mobile</a></li>
 						<li class="board_menu_li"><a href="itList.do?btag=etc">It etc.</a></li>
 					</ul>
-					<input type="button" value="글쓰기" class="btn_write" id="btn_write" onclick="insertBoard()">
+					<c:choose>
+						<c:when test="${sessionScope.dto.mnick != null }">
+							<input type="button" value="글쓰기" class="btn_write" id="btn_write" onclick="insertBoard()">
+						</c:when>
+						<c:when test="${sessionScope.dto.mnick == null }">
+							<input type="button" value="글쓰기" class="btn_write" id="btn_write" onclick="loginBoard()">
+						</c:when>
+					</c:choose>
 				</div>
 				<div class="board_box">
 					<!--내용작성 start -->

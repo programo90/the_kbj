@@ -19,7 +19,7 @@ import com.thekbj.service.ItService;
 /**
  * Servlet implementation class RepListController
  */
-@WebServlet("/replyList.do")
+@WebServlet("/itReplyList.do")
 public class RepItListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

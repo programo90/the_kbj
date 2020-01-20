@@ -19,11 +19,37 @@
 <script>
 	function cancel() {
 		history.back();
-	}
+	};
 	function send() {
-		if(document.frm.checkrobot.check!='checked'){
+		if (document.frm.checkrobot.check != 'checked') {
 			document.frm.submit();
 		}
+	};
+	function select_tag_sel(ele) {
+		  var it_option = ["pc", "mobile", "etc"];
+		  var one_option = [];
+		  var eco_option = [];
+		  var ent_option = [];
+		  var spo_option = [];
+		  var op_option = [];
+		  
+		  var target = document.getElementById("tag-sel");
+		 
+		  if(ele.value == "it") var option_list = it_option;
+		  else if(ele.value == "one") var option_list = one_option;
+		  else if(ele.value == "eco") var option_list = eco_option;
+		  else if(ele.value == "ent") var option_list = ent_option;
+		  else if(ele.value == "spo") var option_list = spo_option;
+		  else if(ele.value == "op") var option_list = op_option;
+		 
+		  target.options.length = 0;
+		 
+		  for (i in option_list) {
+		    var opt = document.createElement("option");
+		    opt.value = option_list[i];
+		    opt.innerHTML = option_list[i];
+		    target.appendChild(opt);
+		  } 
 	};
 </script>
 </head>
@@ -32,84 +58,86 @@
 	<div class="right">
 		<br>
 		<section class="content_box">
-		<div class="content">
-			<h2 class="con_title" style="margin: 30px">글쓰기</h2>
-			<!-- 각자카테고리명 텍스트만 바꿔주세요 -->
-			<div class="board_box">
-				<!--내용작성 start -->
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-md-12" id="con-row">
-							<div class="row">
-								<div class="col-md-12">
-									<form role="form" action="itInsertresult.do" method="post" name="frm">
-										<input type="hidden"
-												class="form-control" id="mno" name="mno" value="2" />
-										<div class="form-group" id="mnick-box">
-											<label for="mnick"> login mnick </label> <input type="hidden"
-												class="form-control" id="mnick" name="mnick" value="park2" />
-										</div>
-										<div class="form-group">
-											<label for="mscore"> mscore </label> <input type="hidden"
-												class="form-control" id="mscore" name="${sessionScope.mscore }"
-												value="mscore" />
-										</div>
-										<hr>
-										<div class="form-group">
-											<label for="ctg-sel">카테고리</label> <br> <select
-												id="ctg-sel" name="ctg-sel">
-												<option value="it" selected="selected">IT/과학</option>
-												<option value="one">한줄게시판</option>
-												<option value="eco">경제</option>
-												<option value="ent">연예</option>
-												<option value="spo">스포츠</option>
-												<option value="op">오피니언</option>
-											</select>
-										</div>
-										<div class="form-group">
-											<label for="tag-sel">태그</label> <br> <select
-												id="tag-sel" name="tag-sel">
-												<option value="pc" selected="selected">PC</option>
-												<option value="mobile">Mobile</option>
-												<option value="etc">IT etc</option>
-											</select>
-										</div>
-										<div class="form-group">
-											<label for="btitle"> 제목 </label> 
-											<input type="text"
-												class="form-control" id="btitle" name="btitle" required/>
-										</div>
-										<div class="form-group">
-
-											<label for="bcontent"> 내용 </label>
-											<textarea class="form-control" id="bcontent" name="bcontent"
-												cols="50" rows="15" required></textarea>
-										</div>
-										<div class="form-group">
-											<label for="bimg"> 사진첨부 </label> <input type="file"
-												class="form-control-file" id="bimg" name="bimg"/>
-										</div>
-										<div style="text-align: center;">
-											<div class="checkbox" id="robot">
-												<label> <input type="checkbox" name="checkrobot"/>로봇이 아닙니다.
-												</label>
+			<div class="content">
+				<h2 class="con_title" style="margin: 30px">글쓰기</h2>
+				<!-- 각자카테고리명 텍스트만 바꿔주세요 -->
+				<div class="board_box">
+					<!--내용작성 start -->
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-12" id="con-row">
+								<div class="row">
+									<div class="col-md-12">
+										<form role="form" action="itInsertresult.do" method="post"
+											name="frm">
+											<input type="hidden" class="form-control" id="mno" name="mno"
+												value="2" />
+											<div class="form-group" id="mnick-box">
+												<label for="mnick"> ${sessionScope.dto.mnick} </label> <input
+													type="hidden" class="form-control" id="mnick" name="mnick"
+													value="${sessionScope.dto.mnick}" />
 											</div>
-										</div>
-										<div style="text-align: center;" id="insert-button-box">
-											<button type="button" class="btn btn-primary" id="submit-but" onclick="send()">
-												저장</button>
-											<button type="button" class="btn btn-primary" id="cancle-but"
-												onclick="cancel()">돌아가기</button>
-										</div>
-									</form>
+											<div class="form-group">
+												<label for="mscore"> ${sessionScope.dto.mscore } </label> <input
+													type="hidden" class="form-control" id="mscore"
+													name="${sessionScope.dto.mscore }" value="mscore" />
+											</div>
+											<hr>
+											<div class="form-group">
+												<label for="ctg-sel">카테고리</label> <br>
+												 <select id="ctg-sel" name="ctg-sel" onchange="select_tag_sel(this)">
+													<option value="it" selected="selected">IT/과학</option>
+													<option value="one">한줄게시판</option>
+													<option value="eco">경제</option>
+													<option value="ent">연예</option>
+													<option value="spo">스포츠</option>
+													<option value="op">오피니언</option>
+												</select>
+											</div>
+											<div class="form-group">
+												<label for="tag-sel">태그</label> <br> 
+												<select id="tag-sel" name="tag-sel">
+													<option value="pc" selected="selected">PC</option>
+													<option value="mobile">Mobile</option>
+													<option value="etc">IT etc</option>
+												</select>
+											</div>
+											<div class="form-group">
+												<label for="btitle"> 제목 </label> <input type="text"
+													class="form-control" id="btitle" name="btitle" required />
+											</div>
+											<div class="form-group">
+
+												<label for="bcontent"> 내용 </label>
+												<textarea class="form-control" id="bcontent" name="bcontent"
+													cols="50" rows="15" required></textarea>
+											</div>
+											<div class="form-group">
+												<label for="bimg"> 사진첨부 </label> <input type="file"
+													class="form-control-file" id="bimg" name="bimg" />
+											</div>
+											<div style="text-align: center;">
+												<div class="checkbox" id="robot">
+													<label> <input type="checkbox" name="checkrobot" />로봇이
+														아닙니다.
+													</label>
+												</div>
+											</div>
+											<div style="text-align: center;" id="insert-button-box">
+												<button type="button" class="btn btn-primary"
+													id="submit-but" onclick="send()">저장</button>
+												<button type="button" class="btn btn-primary"
+													id="cancle-but" onclick="cancel()">돌아가기</button>
+											</div>
+										</form>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+					<!--내용작성 end -->
 				</div>
-				<!--내용작성 end -->
 			</div>
-		</div>
 		</section>
 	</div>
 	<jsp:include page="../comm/footer.jsp"></jsp:include>

@@ -29,7 +29,7 @@ public class BoardDetailAction implements Action {
 		
 		TableDTO dto = null;
 		dto = service.boardDetail(bno);
-		request.setAttribute("dto", dto);
+		request.setAttribute("bdto", dto);
 		
 		
 		ForwardAction forward = new ForwardAction();

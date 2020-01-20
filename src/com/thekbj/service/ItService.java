@@ -120,6 +120,7 @@ public class ItService {
 			conn.setAutoCommit(false);
 			
 			BoardDAO dao = BoardDAO.getInstance();
+			dao.boardRecountIncrease(conn, dto);
 			dao.repInsertData(conn, dto);
 			
 			conn.commit();
@@ -137,7 +138,7 @@ public class ItService {
 		}
 		
 	}
-	public void repRemove(int rno) {
+	public void repRemove(int rno,int bno) {
 		// TODO Auto-generated method stub
 		DBConnection db = DBConnection.getinstance();
 		Connection conn = null;
@@ -147,6 +148,7 @@ public class ItService {
 			conn.setAutoCommit(false);
 			
 			BoardDAO dao = BoardDAO.getInstance();
+			dao.boardRecountDecrease(conn,bno);
 			dao.repRemoveData(conn, rno);
 			
 			conn.commit();

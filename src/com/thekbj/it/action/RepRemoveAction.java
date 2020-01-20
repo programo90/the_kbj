@@ -21,7 +21,7 @@ public class RepRemoveAction implements Action {
 		
 		
 		ItService service = ItService.getInstance();
-		service.repRemove(rno);
+		service.repRemove(rno,bno);
 		
 		ForwardAction forward = new ForwardAction();
 		forward.setForward(false);

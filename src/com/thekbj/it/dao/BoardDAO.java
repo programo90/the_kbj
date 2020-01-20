@@ -207,6 +207,20 @@ public class BoardDAO {
 			pstmt.executeUpdate();
 		}
 	}
+	public void boardRecountIncrease(Connection conn, ReplyDTO dto) throws SQLException{
+		// TODO Auto-generated method stub
+		StringBuilder sql = new StringBuilder();
+		sql.append(" update it_board					");
+		sql.append(" set brecount = brecount+1		");
+		sql.append(" where bno = ?						");
+
+		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+				) {
+			pstmt.setInt(1, dto.getBno());
+			pstmt.executeUpdate();
+		}
+	}
+
 
 	public void repRemoveData(Connection conn, int rno) throws SQLException{
 		// TODO Auto-generated method stub
@@ -221,6 +235,20 @@ public class BoardDAO {
 			pstmt.executeUpdate();
 		}
 
+	}
+	
+	public void boardRecountDecrease(Connection conn, int bno) throws SQLException{
+		// TODO Auto-generated method stub
+		StringBuilder sql = new StringBuilder();
+		sql.append(" update it_board					");
+		sql.append(" set brecount = brecount-1		");
+		sql.append(" where bno = ?						");
+
+		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+				) {
+			pstmt.setInt(1, bno);
+			pstmt.executeUpdate();
+		}
 	}
 
 	public void boardInsertData(Connection conn, TableDTO dto) throws SQLException{
@@ -309,6 +337,5 @@ public class BoardDAO {
 			pstmt.executeUpdate();
 		}
 	}
-
 
 }
