@@ -1,0 +1,22 @@
+@charset "utf-8";
+#mnick-box {
+    font-size: 20px;
+    
+}
+#con-row {
+    border: 1px solid silver;
+    padding: 15px;
+    
+}
+select {
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid silver;
+}
+
+#robot{
+    margin: 20px;
+}
+#insert-button-box{
+    margin: 20px;
+}

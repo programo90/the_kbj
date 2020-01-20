@@ -8,33 +8,25 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.thekbj.comm.Action;
 import com.thekbj.comm.ForwardAction;
-import com.thekbj.dto.TableDTO;
 import com.thekbj.service.ItService;
 
-public class BoardDetailAction implements Action {
+public class RepRemoveAction implements Action {
 
 	@Override
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("utf-8");
-		String bnum = request.getParameter("bno");
-		int bno = 1;
-		if(bnum!=null && !bnum.equals("")) {
-			bno = Integer.parseInt(bnum);
-		}
+		int rno = Integer.parseInt(request.getParameter("rno"));
+		int bno = Integer.parseInt(request.getParameter("bno"));
+		
 		
 		ItService service = ItService.getInstance();
-		//incre view count
-		
-		TableDTO dto = null;
-		dto = service.boardDetail(bno);
-		request.setAttribute("dto", dto);
-		
+		service.repRemove(rno);
 		
 		ForwardAction forward = new ForwardAction();
-		forward.setForward(true);
-		forward.setUrl("/WEB-INF/it/detail.jsp");
+		forward.setForward(false);
+		forward.setUrl("itDetail.do?bno="+bno);
+		
 		return forward;
 	}
 

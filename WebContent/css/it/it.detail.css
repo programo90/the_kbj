@@ -1,0 +1,87 @@
+@charset "utf-8";
+div {
+/*    border: 1px solid silver;*/
+}
+
+p{
+    font-size: 15px;
+}
+
+.container-fluid{
+    border: 1px solid silver;
+    margin: 5px;
+}
+#detail-header{
+    border-bottom: 1px solid silver;
+    padding: 10px ;
+}
+    
+#detail-title {
+     border-bottom: 1px solid silver;
+    padding: 10px 20px;
+}
+#like-box{
+    border-top: 1px solid silver;
+    padding: 20px;
+    text-align: center;
+}
+#delete-box{
+    padding: 10px;
+    text-align: center;
+}
+
+#content-row {
+    border-bottom: 1px solid silver;
+}
+
+
+.reply-con {
+    margin: 10px 0;
+    border: 1px solid silver;
+}
+.reply-con>div:nth-child(1) {
+    padding: 10px;
+    width: 100%;
+    background-color: lightgray;
+}
+.reply-con-box>div{
+    margin: 0px;    
+}
+.reply-con-box>div>div:nth-child(1){
+    padding: 5px 15px;
+}
+.reply-con-box>div>div:nth-child(2){
+    padding: 5px 15px;
+    border-top: 1px solid silver;
+    border-bottom: 2px solid lightgray;
+    font-size: 15px;
+}
+
+
+.reply-con .reply-login {
+    width: 100%;
+    margin: 10px;
+}
+
+.reply-frm {
+    margin: 10px;
+}
+.reply-frm div{
+    display: inline-block;
+}
+
+.reply-frm div:nth-child(1) {
+    width: 90%;
+}
+.reply-frm textarea {
+    width: 100%;
+}
+.reply-frm div:nth-child(2) {
+    position: relative;
+    width: 5%;
+    padding: 5px auto;
+    bottom: 15px;
+}
+.check-rno{
+	display:none;
+}

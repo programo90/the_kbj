@@ -13,6 +13,21 @@ public class TableDTO {
 	private int brecount;
 	private int blikecount;
 	private String bimg;
+	private String mnick;
+	private int mscore;
+	
+	public String getMnick() {
+		return mnick;
+	}
+	public void setMnick(String mnick) {
+		this.mnick = mnick;
+	}
+	public int getMscore() {
+		return mscore;
+	}
+	public void setMscore(int msore) {
+		this.mscore = msore;
+	}	
 	public int getBno() {
 		return bno;
 	}

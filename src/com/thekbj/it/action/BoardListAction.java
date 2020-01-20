@@ -18,7 +18,7 @@ public class BoardListAction implements Action {
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		request.setCharacterEncoding("utf-8");
 		ItService service = ItService.getInstance();
 		String bctg = "it";
 		String btag = request.getParameter("btag");

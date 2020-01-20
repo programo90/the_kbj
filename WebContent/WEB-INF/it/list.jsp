@@ -9,13 +9,18 @@
 <!-- 공통 css 입니다. -->
 <link rel="stylesheet" href="css/comm.css">
 <!-- 각자 css는 여기다 추가해주시면 됩니다. -->
-<link rel="stylesheet" href="css/it.list.css">
+<link rel="stylesheet" href="css/it/it.list.css">
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- 부가적인 테마 -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	<script>
+		function insertBoard() {
+			location.href="itInsert.do";
+		};
+	</script>
 </head>
 <body>
 	<c:set var="startPage" value="${requestScope.startPage }" />
@@ -48,7 +53,7 @@
 						<li class="board_menu_li"><a href="itList.do?btag=mobile">Mobile</a></li>
 						<li class="board_menu_li"><a href="itList.do?btag=etc">It etc.</a></li>
 					</ul>
-					<input type="button" value="글쓰기" class="btn_write" id="btn_write">
+					<input type="button" value="글쓰기" class="btn_write" id="btn_write" onclick="insertBoard()">
 				</div>
 				<div class="board_box">
 					<!--내용작성 start -->
@@ -68,13 +73,14 @@
 														</div>
 														<div class="col-md-9">
 															<p>#${item.bno }</p>
-															<h3>${item.btitle }</h3>
+															<h3><a href="itDetail.do?bno=${item.bno}">${item.btitle }</a></h3>
 															<p>작성자</p>
 															<p>${item.bwrdate }</p>
 														</div>
 													</div>
 												</c:forEach>
-												<!------------------------- paging ------------------------->
+											</div>
+											<!------------------------- paging ------------------------->
 												<div style="text-align: center;">
 													<nav class="pagination-sm" style="float: none">
 														<ul class="pagination ">
@@ -107,7 +113,6 @@
 															type="submit" value="검색">
 													</form>
 												</div>
-											</div>
 										</div>
 									</div>
 								</div>
@@ -120,11 +125,5 @@
 		</section>
 	</div>
 	<jsp:include page="../comm/footer.jsp"></jsp:include>
-	<script>
-		$(document).ready(function(){
-			$('#btn_write').click(function(){
-			});
-		});
-	</script>
 </body>
 </html>

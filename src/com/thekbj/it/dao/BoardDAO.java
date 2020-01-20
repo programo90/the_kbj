@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.thekbj.dto.ReplyDTO;
 import com.thekbj.dto.TableDTO;
 
 public class BoardDAO {
@@ -102,6 +103,156 @@ public class BoardDAO {
 			}
 		}
 		return totalCount;
+	}
+
+	public TableDTO boardDetailData(Connection conn, int bno) throws SQLException{
+		// TODO Auto-generated method stub
+		StringBuilder sql = new StringBuilder();
+		
+		sql.append(" select bno, btitle, bcontent, bwrdate, btag, bviewcount, brecount, blikecount, bimg, mnick, mscore, m.mno  ");
+		sql.append(" from it_board b inner join it_member m																		");
+		sql.append(" on b.mno = m.mno																							");
+		sql.append(" where bno = ?																								");
+		
+		TableDTO dto = new TableDTO();
+		ResultSet rs = null;
+		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+				) {
+			pstmt.setInt(1, bno);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				dto.setBno(rs.getInt("bno"));
+				dto.setBtitle(rs.getString("btitle"));
+				dto.setBcontent(rs.getString("bcontent"));
+				dto.setBwrdate(rs.getString("bwrdate"));
+				dto.setBtag(rs.getString("btag"));
+				dto.setBviewcount(rs.getInt("bviewcount"));
+				dto.setBrecount(rs.getInt("brecount"));
+				dto.setBlikecount(rs.getInt("blikecount"));
+				dto.setBimg(rs.getString("bimg"));
+				dto.setMnick(rs.getString("mnick"));
+				dto.setMscore(rs.getInt("mscore"));
+				dto.setMno(rs.getInt("m.mno"));
+			}
+		} finally {
+			if(rs!=null) try {rs.close();} catch(SQLException e) {e.printStackTrace();}
+		}
+		return dto;
+	}
+
+	public List<ReplyDTO> repListData(Connection conn, int bno) throws SQLException{
+		// TODO Auto-generated method stub
+		List<ReplyDTO> list = new ArrayList<>();
+		StringBuilder sql = new StringBuilder();
+
+		sql.append(" select rno, bno, rcontent, rwrdate, m.mnick	");
+		sql.append(" from it_reply r inner join it_member m			");
+		sql.append(" on r.mno = m.mno								");
+		sql.append(" where bno = ?									");
+		
+		
+		ResultSet rs = null;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+				) {
+			pstmt.setInt(1, bno);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ReplyDTO dto = new ReplyDTO();
+				dto.setBno(rs.getInt("bno"));
+				dto.setRno(rs.getInt("rno"));
+				dto.setRwrdate(rs.getString("rwrdate"));
+				dto.setRcontent(rs.getString("rcontent"));
+				dto.setMnick(rs.getString("mnick"));
+				
+				list.add(dto);
+			}
+		} finally {
+			if(rs!=null) try {rs.close();} catch(SQLException e) {e.printStackTrace();}
+		}
+		
+		return list;
+	}
+
+	public void updateViewcountData(Connection conn, int bno) throws SQLException{
+		// TODO Auto-generated method stub
+		StringBuilder sql = new StringBuilder();
+		sql.append(" update it_board					");
+		sql.append(" set bviewcount = bviewcount+1		");
+		sql.append(" where bno = ?						");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+				) {
+			pstmt.setInt(1, bno);
+			pstmt.executeUpdate();
+		}
+		
+	}
+
+	public void repInsertData(Connection conn, ReplyDTO dto) throws SQLException{
+		// TODO Auto-generated method stub
+		StringBuilder sql = new StringBuilder();
+		sql.append(" insert into it_reply( bno, rcontent, rwrdate, mno)		");
+		sql.append(" value( ?, ?, now(), ?);								");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString()); 
+				) {
+			pstmt.setInt(1, dto.getBno());
+			pstmt.setString(2, dto.getRcontent());
+			pstmt.setInt(3, dto.getMno());
+			
+			pstmt.executeUpdate();
+		}
+	}
+
+	public void repRemoveData(Connection conn, int rno) throws SQLException{
+		// TODO Auto-generated method stub
+		StringBuilder sql = new StringBuilder();
+		sql.append(" delete from it_reply		");
+		sql.append(" where rno = ?				");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString()); 
+				) {
+			pstmt.setInt(1, rno);
+			
+			pstmt.executeUpdate();
+		}
+		
+	}
+
+	public void boardInsertData(Connection conn, TableDTO dto) throws SQLException{
+		// TODO Auto-generated method stub
+		StringBuilder sql = new StringBuilder();
+		sql.append(" insert into it_board(bctg, btitle, bcontent, bwrdate, bviewcount, btag, brecount, blikecount, bimg, mno)	");
+		sql.append(" values( ?, ?, ?, now(), 0, ?, 0, 0, ?, ?) 																	");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString()); 
+				) {
+			
+			pstmt.setString(1, dto.getBctg());
+			pstmt.setString(2, dto.getBtitle());
+			pstmt.setString(3, dto.getBcontent());
+			pstmt.setString(4, dto.getBtag());
+			pstmt.setString(5, dto.getBimg());
+			pstmt.setInt(6, dto.getMno());
+			
+			pstmt.executeUpdate();
+		}
+	}
+
+	public void boardRemoveData(Connection conn, int bno) throws SQLException{
+		// TODO Auto-generated method stub
+		StringBuilder sql = new StringBuilder();
+		sql.append(" delete from it_board		");
+		sql.append(" where bno = ?				");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString()); 
+				) {
+			pstmt.setInt(1, bno);
+			
+			pstmt.executeUpdate();
+		}
 	}
 	
 	

@@ -4,7 +4,23 @@ public class ReplyDTO {
 	private int rno;
 	private int bno;
 	private String rcontent;
-	private String rwdate;
+	private String rwrdate;
+	private String mnick;
+	private int mno;
+	
+	
+	public int getMno() {
+		return mno;
+	}
+	public void setMno(int mno) {
+		this.mno = mno;
+	}
+	public String getMnick() {
+		return mnick;
+	}
+	public void setMnick(String mnick) {
+		this.mnick = mnick;
+	}
 	public int getRno() {
 		return rno;
 	}
@@ -23,15 +39,15 @@ public class ReplyDTO {
 	public void setRcontent(String rcontent) {
 		this.rcontent = rcontent;
 	}
-	public String getRwdate() {
-		return rwdate;
+	public String getRwrdate() {
+		return rwrdate;
 	}
-	public void setRwdate(String rwdate) {
-		this.rwdate = rwdate;
+	public void setRwrdate(String rwdate) {
+		this.rwrdate = rwdate;
 	}
 	@Override
 	public String toString() {
-		return "ReplyDTO [rno=" + rno + ", bno=" + bno + ", rcontent=" + rcontent + ", rwdate=" + rwdate + "]";
+		return "ReplyDTO [rno=" + rno + ", bno=" + bno + ", rcontent=" + rcontent + ", rwrdate=" + rwrdate + "]";
 	}
 	
 }
