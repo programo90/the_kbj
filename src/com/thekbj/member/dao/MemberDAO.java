@@ -18,7 +18,7 @@ public class MemberDAO {
 
 	public MemberDTO LoginComfirmData(Connection conn, String id, String newmpw) throws SQLException{
 		// TODO Auto-generated method stub
-		System.out.println("MemberLoginSessionAction LoginComfirmData : 로그인 DAO 요청");
+		System.out.println("MemberLoginSessionAction LoginComfirmData dao start");
 		StringBuilder sql = new StringBuilder();
 		sql.append(" select * from member 	 ");
 		sql.append(" where mid = ?			 ");
@@ -60,14 +60,14 @@ public class MemberDAO {
 			
 		}finally {
 			try { if(rs != null) rs.close(); }catch(SQLException e){}
-			System.out.println("MemberLoginSessionAction LoginComfirmData : 로그인 DAO 요청 정상 종료");
+			System.out.println("MemberLoginSessionAction LoginComfirmData dao end");
 		}
 		
 		return dto;
 	}
 
 	public int MemberJoinData(Connection conn, MemberDTO dto) throws SQLException{
-		System.out.println("MemberJoinResultAction MemberJoinData : 회원가입 DAO 요청");
+		System.out.println("MemberJoinResultAction MemberJoinData dao start");
 		StringBuilder sql = new StringBuilder();
 		sql.append(" insert into member ");
 		sql.append(" values(null		");
@@ -97,7 +97,7 @@ public class MemberDAO {
 			
 			result = pstmt.executeUpdate();
 		}finally {
-			System.out.println("MemberJoinResultAction MemberJoinData : 회원가입 DAO 요청 정상 종료");
+			System.out.println("MemberJoinResultAction MemberJoinData dao end");
 		}
 		return result;
 	}
