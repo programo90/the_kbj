@@ -110,12 +110,12 @@
 													cols="50" rows="15" required style="display:none"></textarea>
 											</div>
 											<div class="form-group">
-												<label for="bimg"> 사진첨부 </label> <input type="file"
-													class="form-control-file" id="bimg" name="bimg" />
+												<label for="bimg"></label> <input type="hidden"
+													class="form-control-file" id="bimg" name="bimg" value="" />
 											</div>
 											<div style="text-align: center;">
 												<div class="checkbox" id="robot">
-													<label> <input type="checkbox" name="checkrobot" />로봇이
+													<label> <input type="checkbox" name="checkrobot" id="checkrobot" />로봇이
 														아닙니다.
 													</label>
 												</div>
@@ -167,19 +167,22 @@ nhn.husky.EZCreator.createInIFrame({
 
 function pasteHTML(filepath) {
 	var sHTML = "<span><img style='width:100%' src='http://localhost:8080/thekbj/upLoadFolder/"+filepath+"' alt='imgurl'><\/span>";
+	var bimg = "http://localhost:8080/thekbj/upLoadFolder/"+filepath;
+	document.getElementById('bimg').value = bimg;
+
+	출처: https://jdkblog.tistory.com/39 [JDK's blog]
 	oEditors.getById["bcontent"].exec("PASTE_HTML", [sHTML]);
 }
 	
 function submitContents(elClickedObj) {
-	oEditors.getById["bcontent"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
-		/* if (document.frm.checkrobot.check != 'checked') {
-			document.frm.submit();
-		} */
-		// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
-	
-	try {
-		elClickedObj.form.submit();
-	} catch(e) {}
+	if (document.getElementById('checkrobot').checked) {
+		oEditors.getById["bcontent"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
+			try {
+			elClickedObj.form.submit();
+		} catch(e) {}
+	} else {
+		alert("로봇이신가요?");
+	}
 }
 
 </script>

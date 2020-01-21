@@ -151,11 +151,11 @@
 										<hr>
 										<div class="row">
 											<div class="col-md-12">
-												<div class="row">
+												<%-- <div class="row">
 													<div class="col-md-12">
 														<img alt="${bdto.bimg }" src="${bdto.bimg }" />
 													</div>
-												</div>
+												</div> --%>
 												<p>${bdto.bcontent }</p>
 												<div class="row">
 													<div class="col-md-12" id="like-box">
