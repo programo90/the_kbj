@@ -43,6 +43,7 @@ public class MemberLoginSessionAction implements Action {
 		if(mid.equals(sql_mid) && mpw.equals(sql_mpw))
 		{
 			HttpSession session = request.getSession();
+			session.setAttribute("dto", dto);
 			session.setAttribute("mno", dto.getMno());
 			session.setAttribute("mnick", dto.getMnick());
 

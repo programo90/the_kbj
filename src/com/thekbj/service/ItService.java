@@ -266,4 +266,35 @@ public class ItService {
 		}
 		
 	}
+	public int boardLike(int bno) {
+		// TODO Auto-generated method stub
+		DBConnection db = DBConnection.getinstance();
+		Connection conn = null;
+		int blikecount = 0;
+		try {
+			 conn = db.getConnection();
+			 conn.setAutoCommit(false);
+			 
+			BoardDAO dao = BoardDAO.getInstance();
+			dao.increseLikecount(conn,bno);
+			blikecount = dao.getLikecount(conn,bno);
+			
+
+			conn.commit();
+		} catch (SQLException | NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {e.printStackTrace();}
+		}
+		
+		
+		return blikecount;
+	}
 }

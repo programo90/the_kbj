@@ -23,17 +23,18 @@
 		}
 	};
 	
-	function like() {
+	function blike(like_bno, like_mno) {
 		$.ajax({
 			url:'itLikeCount.do'
-			,data : {}
+			,data : {'bno':like_bno,'mno':like_mno}
 			,dataType: 'json'
 			,method : 'post'
 			,success : function(data) {
-				
+				alert("like!");
+				$('#like_result').html(data.blikecount);
 			}
 			,error : function(data) {
-				console.log(data)
+				console.log(data);
 			}
 		});
 	};
@@ -153,8 +154,16 @@
 												<p>${bdto.bcontent }</p>
 												<div class="row">
 													<div class="col-md-12" id="like-box">
-														<span class="glyphicon glyphicon-heart-empty" onclick="like()">
-															${bdto.blikecount }</span>
+														<c:if test="${sessionScope.dto.mnick != null }">
+															<form action="updateLike.do" method="post" id="ftm_like" onclick="blike(${bdto.bno },${sessionScope.dto.mno })">
+																<input type="hidden" name="bno" id="like_bno" value="${bdto.bno }">
+																<input type="hidden" name="mno" id='like_mno' value="${sessionScope.dto.mno }">
+																<span class="glyphicon glyphicon-heart-empty" id="like_result">${bdto.blikecount}</span>
+															</form>
+														</c:if>
+														<c:if test="${sessionScope.dto.mnick == null }">
+															<span class="glyphicon glyphicon-heart-empty" id="like_result">${bdto.blikecount}</span>
+														</c:if>
 													</div>
 												</div>
 												<c:if test="${sessionScope.dto.mnick == requestScope.bdto.mnick}">
