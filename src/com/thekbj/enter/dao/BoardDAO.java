@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.thekbj.dto.ReplyDTO;
 import com.thekbj.dto.TableDTO;
 
 public class BoardDAO {
@@ -24,10 +25,8 @@ public class BoardDAO {
 		
 //		sql.append(" select @rownum:=@rownum+1 as rnum, b.*			");
 //		sql.append(" from (											");
-		sql.append(" 		select bno, bctg, btitle, bcontent, bviewcount		");
+		sql.append(" 		select bno, bctg, btitle, bcontent, bviewcount,btag, brecount, blikecount, bimg, mnick		");
 		sql.append("		from ent_board							");
-		System.out.println("ddddd"+search);
-		System.out.println("ddddd"+txtsearch);
 		
 		if(!search.equals("") && !txtsearch.equals("")) {
 			if(search.equals("title")) {
@@ -44,7 +43,6 @@ public class BoardDAO {
 		
 		List<TableDTO> list = new ArrayList<>();
 		ResultSet rs=null;
-		System.out.println(sql);
 		try (PreparedStatement psmt=conn.prepareStatement(sql.toString())
 			){
 				if(!search.equals("") && !txtsearch.equals("")) {
@@ -66,7 +64,11 @@ public class BoardDAO {
 					dto.setBtitle(rs.getString("btitle"));
 					dto.setBcontent(rs.getString("bcontent"));
 					dto.setBviewcount(rs.getInt("bviewcount"));
-					System.out.println("여기기기"+dto.getBno());
+					dto.setBtag(rs.getString("btag"));
+					dto.setBrecount(rs.getInt("brecount"));
+					dto.setBlikecount(rs.getInt("blikecount"));
+					dto.setBimg(rs.getString("bimg"));
+					dto.setMnick(rs.getString("mnick"));
 					list.add(dto);
 				}
 		}catch(Exception e) {
@@ -80,14 +82,20 @@ public class BoardDAO {
 	public void boardInsertData(Connection conn, TableDTO dto) throws SQLException {
 		StringBuilder sql=new StringBuilder();
 		sql.append(" insert into ent_board(	");
-		sql.append(" bctg, btitle, bcontent)	");
-		sql.append(" values(?,?,?)	");
+		sql.append(" bctg, btitle, bcontent, bwrdate, bviewcount, btag, brecount, blikecount, bimg, mno, mnick) ");
+		sql.append(" values( ?, ?, ?, sysdate(), 0, ?, 0, 0, ?, ?,?) 		");
+		
 		try (
 				PreparedStatement psmt=conn.prepareStatement(sql.toString());
 			){
 			psmt.setString(1, dto.getBctg());
 			psmt.setString(2, dto.getBtitle());
 			psmt.setString(3, dto.getBcontent());
+			psmt.setString(4, dto.getBtag());
+			psmt.setString(5, dto.getBimg());
+			psmt.setInt(6, dto.getMno());
+			psmt.setString(7, dto.getMnick());
+			
 			psmt.executeUpdate();
 
 		}catch (Exception e) {
@@ -96,13 +104,13 @@ public class BoardDAO {
 	}
 	public TableDTO boardDetailData(Connection conn, int boardnum) throws SQLException {
 		StringBuilder sql=new StringBuilder();
-		sql.append(" select bno, bctg, btitle, bcontent, bviewcount	");
+		sql.append(" select bno, bctg, btitle, bcontent, bwrdate, bviewcount, mnick, btag, brecount,bimg	");
 		sql.append(" from ent_board						");
 		sql.append(" where bno=?						");
 		
 		ResultSet rs=null;
 		TableDTO dto=new TableDTO();
-		
+	
 		try(PreparedStatement psmt=conn.prepareStatement(sql.toString());){
 			psmt.setInt(1, boardnum);
 			rs=psmt.executeQuery();
@@ -110,9 +118,15 @@ public class BoardDAO {
 				dto.setBno(rs.getInt("bno"));
 				dto.setBctg(rs.getString("bctg"));
 				dto.setBtitle(rs.getString("btitle"));
-				dto.setBviewcount(rs.getInt("bviewcount"));
 				dto.setBcontent(rs.getString("bcontent"));
+				dto.setBwrdate(rs.getString("bwrdate"));
+				dto.setBviewcount(rs.getInt("bviewcount"));
+				dto.setMnick(rs.getString("mnick"));
+				dto.setBtag(rs.getString("btag"));
+				dto.setBrecount(rs.getInt("brecount"));
+				dto.setBimg(rs.getString("bimg"));
 			}
+			
 		}finally {
 			if(rs!=null) try {rs.close();} catch(SQLException e) {}
 		}
@@ -122,7 +136,7 @@ public class BoardDAO {
 		// TODO Auto-generated method stub
 		StringBuilder sql=new StringBuilder();
 		sql.append(" update ent_board 					");
-		sql.append(" set bctg=?, btitle=?, 	bcontent=?	");
+		sql.append(" set bctg=?, btitle=?, 	bcontent=?, btag=?	");
 		sql.append(" where bno=?						");
 		
 		int modifyresult=0;
@@ -130,7 +144,8 @@ public class BoardDAO {
 			psmt.setString(1, dto.getBctg());
 			psmt.setString(2, dto.getBtitle());
 			psmt.setString(3, dto.getBcontent());
-			psmt.setInt(4, dto.getBno());
+			psmt.setString(4, dto.getBtag());
+			psmt.setInt(5, dto.getBno());
 			modifyresult=psmt.executeUpdate();
 		}
 		return modifyresult;
@@ -194,6 +209,63 @@ public class BoardDAO {
 				psmt.executeUpdate();
 		}catch(Exception e) {
 			System.out.println(e);
+		}
+	}
+	public void repInsertData(Connection conn, ReplyDTO dto) throws SQLException{
+		StringBuilder sql = new StringBuilder();
+		sql.append(" insert into ent_reply 		");
+		sql.append(" (rno, bno, rcontent, rwrdate, mno) 	");
+		sql.append(" values( null,?,?,sysdate(),? )	");
+		try(
+				PreparedStatement psmt=conn.prepareStatement(sql.toString());
+			){
+				psmt.setInt(1, dto.getBno());
+				psmt.setString(2, dto.getRcontent());
+				psmt.setInt(3, dto.getMno());
+				psmt.executeUpdate();
+		}
+	}
+	public List<ReplyDTO> repListData(Connection conn, int bno) throws SQLException{
+		StringBuilder sql=new StringBuilder();
+		sql.append(" select rno, ent_reply.bno, rcontent, rwrdate, member.mnick, member.mno ");
+		sql.append(" from ent_reply join member						");
+		sql.append(" on ent_reply.mno=member.mno					");
+		sql.append(" where bno=? 									");
+		sql.append(" order by rwrdate desc							");
+		
+		ArrayList<ReplyDTO> arr=new ArrayList<>();
+		ResultSet rs=null;
+		try (
+				PreparedStatement psmt=conn.prepareStatement(sql.toString());
+			){
+			psmt.setInt(1, bno);
+			rs=psmt.executeQuery();
+			while(rs.next()) {
+				ReplyDTO repdto=new ReplyDTO();
+				repdto.setBno(rs.getInt("bno"));
+				repdto.setRno(rs.getInt("rno"));
+				repdto.setRcontent(rs.getString("rcontent"));
+				repdto.setRwrdate(rs.getString("rwrdate"));
+				repdto.setMnick(rs.getString("mnick"));
+				repdto.setMno(rs.getInt("mno"));
+				arr.add(repdto);
+			}
+		}finally {
+			if(rs!=null) try{rs.close();} catch(SQLException e) {}
+		}
+		return arr;
+	}
+	public void repRemoveData(Connection conn, int rno, int mno)throws SQLException {
+		// TODO Auto-generated method stub
+		StringBuilder sql=new StringBuilder();
+		sql.append(" delete from ent_reply	");
+		sql.append(" where rno=?	 		");
+		
+		try(
+				PreparedStatement psmt=conn.prepareStatement(sql.toString());
+			){
+				psmt.setInt(1, rno);
+				psmt.executeUpdate();
 		}
 	}
 

@@ -8,28 +8,28 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.thekbj.comm.Action;
 import com.thekbj.comm.ForwardAction;
-import com.thekbj.dto.TableDTO;
 import com.thekbj.service.EnterService;
 
-public class BoardDetailAction implements Action{
+public class RepRemoveAction implements Action {
 
 	@Override
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String bno=request.getParameter("bno");
-	      int boardnum=1;
-	      if(bno!=null && !bno.equals(""))
-	      {
-	         boardnum=Integer.parseInt(bno);
-	         System.out.println("bno"+bno);
-	      }
+		
+		int rno=Integer.parseInt(request.getParameter("rno"));
+		int mno=Integer.parseInt(request.getParameter("mno"));
+
 		EnterService service=EnterService.geEnterService();
-		TableDTO dto=service.boardDetail(boardnum);
-		request.setAttribute("dto", dto);
+
+		
+/*		if(mno==Membermno) {
+			
+		}*/
+		service.repRemove(rno,mno);
 		ForwardAction forward = new ForwardAction();
-		forward.setForward(true);
-		forward.setUrl("/WEB-INF/enter/detail.jsp");
+		forward.setForward(false);
+		forward.setUrl("enterDetail.do?rno="+rno);
 		
 		return forward;
 	}
