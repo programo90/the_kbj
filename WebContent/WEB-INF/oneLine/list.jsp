@@ -19,6 +19,12 @@
 
 </head>
 <body>
+	<c:set var="currpage" value="${requestScope.currpage }" />
+	<c:set var="totalcount" value="${requestScope.totalcount }" />
+	<c:set var="pageperSize" value="${requestScope.pageperSize }" />
+	<c:set var="list" value="${requestScope.list }" />
+	<c:set var="replist" value="${requestScope.replist }" />	
+	
 	<jsp:include page="../comm/header.jsp"></jsp:include>
 	<div class="right">
 		<section class="content_box">
@@ -44,7 +50,7 @@
 				<div class="board_box">
 					<!--내용작성 start -->
 					<c:forEach var="list" items="${requestScope.list}">
-					<div class="board_box">
+					<div class="board_content">
                         <div class="board_top">
                            <div class="top_left">
                                 <p><img src="img/oneLine/01.png" alt="#"></p>
@@ -104,7 +110,7 @@
 	                                <div class="reply_title">
 	                                   <div class="reply_left">
 	                                        <h5>${replist.mnick }</h5>
-	                                        <h6>${replist.rwdate }</h6>
+	                                        <h6>${replist.rwrdate }</h6>
 	                                        <div class="clear"></div>
 	                                   </div>
 	                                   
@@ -124,10 +130,12 @@
 	                    </c:forEach>    
                     </div>
 				</div>
+			</section>
         </div>
         <!--내용작성 end -->
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
 <script>
 	$(document).ready(function(){
 	  
@@ -136,38 +144,138 @@
 	    $(this).parent().next().slideToggle();
 	  });
 	  
-	  /* 게시글 가져오기 */
-		/* $.ajax({
-			url:"oneLineListResult.do"
-			,method:"post"
-			,dataType: "json"
-			,data:{'no':no}
-		,success:function(data)
-		{
-			$.each(data,function(index,item){
-				let result = "<tr><td>"+item.subno+"</td>";
-				result+= "<td>" + item.subtitle+"</td>";
-				result+= "<td>" + item.writer+"</td>";
-				result+="<td><input type='button' value='삭제' onclick=del("+item.subno+","+item.boardno+")>";
-				result+= "<td></tr>";
-				$('#result').append(result);
-			});
-		}
-		,error:function(data)
-		{
-			console.log('error',data);
-		}
-		}); */
-		
-		
+	  let mno = <%= session.getAttribute("mno") %>
+	  if(mno != null)
+	 {
+		console.log(mno);	 
+	 }else
+	 {
+		console.log("비었음!");	 
+	 }
+	  
+	  
+	  
+	  let currpage = ${currpage};
+	  let totalcount = ${totalcount};
+	  let pageperSize = ${pageperSize};
+	  
 	  $(document).scroll(function(){
 		  let a = $(document).height();
 		  let b =  $(window).height(); 
 		  let c = $(window).scrollTop();
-		  
+		  		  
 	  	  if(a == b+c)
 	  	  {
-	  		alert('스크롤 맨끝!');	  
+	  		alert('스크롤 "da" 맨끝!');	  
+	  		 /* 게시글 가져오기 */
+	  		 $.ajax({
+	  				url:"oneLineListResult.do"
+	  				,method:"post"
+	  				,dataType: "json"
+	  				,data:{'currpage':currpage+1,'totalcount':totalcount, 'pageperSize':pageperSize}
+	  			,success:function(data)
+	  			{
+	  				let bno_temp = 0;
+	  				let result;
+	  				$.each(data,function(index,item){
+	  					if( bno_temp != item.bno)
+	  					{
+	  					bno_temp = item.bno;
+	  					console.log("item.bno : " + item.bno);
+	  					console.log("item.bnick : " + item.bnick);
+	  					result+='<div class="board_content">                                                                                  ';
+                        result+='<div class="board_top">                                                                                          ';
+                        result+='   <div class="top_left">                                                                                        ';
+                        result+='        <p><img src="img/oneLine/01.png" alt="#"></p>                                                            ';
+                        result+='        <div class="profile">                                                                                    ';
+                        result+='            <h6>'+item.bnick+'</h6>                                                                              ';
+                        result+='            <h6>'+item.bwrdate+'</h6>                                                                            ';
+                        result+='        </div>                                                                                                   ';
+                        result+='        <div class="clear"></div>                                                                                ';
+                        result+='    </div>                                                                                                       ';
+                        result+='                                                                                                                 ';
+                        result+='    <div class="top_right">                                                                                      ';
+                        result+='        <div class="glyphicon glyphicon-pencil pen"></div>                                                       ';
+                        result+='        <div class="glyphicon glyphicon-trash trash"></div>                                                      ';
+                        result+='    </div>                                                                                                       ';
+                        result+='                                                                                                                 ';
+                        result+='    <div class="clear"></div>                                                                                    ';
+                        result+='</div>                                                                                                           ';
+                        result+='                                                                                                                 ';
+                        result+='<div class="board_middle">                                                                                       ';
+                        result+='    <h5>'+item.bcontent+'</h5>                                                                                   ';
+                        result+='</div>                                                                                                           ';
+                        result+='                                                                                                                 ';
+                        result+='<div class="board_bottom">                                                                                       ';
+                        result+='    <div class="bottom_left1">                                                                                   ';
+                        result+='        <div class="glyphicon glyphicon-thumbs-up"></div>                                                        ';
+                        result+='        <h6>'+item.blikecount+'</h6>                                                                             ';
+                        result+='    </div>                                                                                                       ';
+                        result+='                                                                                                                 ';
+                        result+='    <div class="bottom_right1">                                                                                  ';
+                        result+='        <h6>'+item.brecount+'</h6>                                                                               ';
+                        result+='    </div>                                                                                                       ';
+                        result+='                                                                                                                 ';
+                        result+='    <div class="clear"></div>                                                                                    ';
+                        result+='                                                                                                                 ';
+                        result+='    <div class="bottom_form">                                                                                    ';
+                        result+='        <form method="post" action="subadd.do" name="frm">                                                       ';
+                        result+='            <input type="hidden" name="no" value="1">                                                            ';
+                        result+='            <div class="row">                                                                                    ';
+                        result+='              <div class="no-padding col-md-11 row_area">                                                        ';
+                        result+='                  <textarea name="textarea" id="textarea" class="form-control form_area" rows="1" ></textarea>   ';
+                        result+='              </div>                                                                                             ';
+                        result+='              <div class="no-padding col-md-1 row_submit">                                                       ';
+                        result+='                  <button type="submit" class="btn btn-default form_submit" onclick="send()">제출</button>         ';
+                        result+='              </div>                                                                                             ';
+                        result+='            </div>                                                                                               ';
+                        result+='        </form>                                                                                                  ';
+                        result+='    </div>                                                                                                       ';
+                        result+='</div>                                                                                                           ';
+                        result+='                                                                                                                 ';
+	                    result+='  <div class="reply_content">                                                                                    ';
+	  					}
+	                    
+	  					if( item.rcontent != null && item.rwrdate != null && item.rnick != null)
+	  					{
+	  					console.log("item.reply : " + item.rnick);
+	                    result+='        <div class="reply_profile">                                                                              ';
+	                    result+='            <p><img src="img/oneLine/01.png" alt="#"></p>                                                        ';
+	                    result+='        </div>                                                                                                   ';
+	                    result+='        <div class="reply">                                                                                      ';
+	                    result+='            <div class="reply_title">                                                                            ';
+	                    result+='               <div class="reply_left">                                                                          ';
+	                    result+='                    <h5>'+item.rnick+'</h5>                                                                   ';
+	                    result+='                    <h6>'+item.rwrdate+'</h6>                                                                 ';
+	                    result+='                    <div class="clear"></div>                                                                    ';
+	                    result+='               </div>                                                                                            ';
+	                    result+='                                                                                                                 ';
+	                    result+='               <div class="reply_right">                                                                         ';
+	                    result+='               	   <div class="glyphicon glyphicon-pencil pen"></div>                                         ';
+	                    result+='                   <div class="glyphicon glyphicon-remove"></div>                                                ';
+	                    result+='               </div>                                                                                            ';
+	                    result+='               <div class="clear"></div>                                                                         ';
+	                    result+='            </div>                                                                                               ';
+	                    result+='            <p class="reply_write">'+item.rcontent+'</p>                                                      ';
+	                    result+='        </div>                                                                                                   ';
+	                    result+='        <div class="clear"></div>                                                                                ';
+	                    result+='   </div>                                                                                                        ';
+                        result+='</div>                                                                                                           ';
+	  					}
+	  					else
+	  					{
+	  						result+='</div>';	
+	  					}
+	  				});                                                                                                                           
+	  				
+	  				$('.board_content:last').append(result);
+	  				currpage=currpage+1;
+	  			}
+	  			,error:function(data)
+	  			{
+	  				console.log('error',data);
+	  			}
+	  		});
 	  	  }
 	  });
 	});
