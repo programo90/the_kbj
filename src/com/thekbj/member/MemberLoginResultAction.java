@@ -20,25 +20,28 @@ public class MemberLoginResultAction implements Action {
 		
 		HttpSession session = request.getSession();
 	
-		MemberDTO dto = (MemberDTO)session.getAttribute("dto");
-		System.out.println("MemberLoginResultAction : dto =>" + dto);
+		int mno = (int)session.getAttribute("mno");
+		String mnick = (String)session.getAttribute("mnick");
+		System.out.println("MemberLoginResultAction : mno =>" + mno);
+		System.out.println("MemberLoginResultAction : mnick =>" + mnick);
 				
 		ForwardAction forward = new ForwardAction();
 		
-		if(dto == null)
-		{
-			//Login fail
-			forward.setForward(false);
-			forward.setUrl("memberLogin.do");
-		}
-		else
+		if(mnick != null && mno > 0)
 		{
 			//Login success
 			forward.setForward(true);
 			forward.setUrl("/WEB-INF/comm/index.jsp");
+		}
+		else
+		{
+			//Login fail
+			forward.setForward(false);
+			forward.setUrl("memberLogin.do");
 		}
 		
 		return forward;
 	}
 
 }
+
