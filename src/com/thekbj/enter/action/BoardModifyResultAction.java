@@ -17,16 +17,20 @@ public class BoardModifyResultAction implements Action {
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("test");
+		
 		int bno=Integer.parseInt(request.getParameter("bno"));
 		String ctg=request.getParameter("bctg");
 		String title=request.getParameter("btitle");
 		String content=request.getParameter("bcontent");
+		String tag=request.getParameter("btag");
 		
 		TableDTO dto=new TableDTO();
 		dto.setBno(bno);
 		dto.setBctg(ctg);
 		dto.setBtitle(title);
 		dto.setBcontent(content);
+		dto.setBtag(tag);
 		
 		EnterService service = EnterService.geEnterService();
 		int modifyresult=service.boardModifyResult(dto);

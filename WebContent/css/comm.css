@@ -13,7 +13,7 @@ ul li{
     list-style: none;
 }
 body{ 
-    background-color: #f8f8f8;
+    background-color: #f8f8f8 !important;
 }
 /* 왼쪽메뉴 부분*/
 .left{
@@ -93,10 +93,7 @@ body{
     width: 252px;
     padding: 0px;
 }
-.btn_write{
-    float: right;
-    width: 100px;
-}
+
 .board_menu_li{
     display: inline-block;
     width: 60px;

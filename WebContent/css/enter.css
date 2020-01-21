@@ -1,4 +1,83 @@
 @charset "UTF-8";
+/*공통*/
+.mnick{
+	font-size: 20px;
+    font-weight: lighter;
+    color: #7da8b3;
+}
+.ent_tag{
+	
+}
+/*글리스트*/
+.btns_list{
+	float: right;
+	width:68px;
+}
 .list_one{
-	height:30px;
+	height: 80px;
+    line-height: 80px;
+}
+.listnumber{
+	width:20px;
+}
+.listtitle a{
+	font-size: 25px;
+	color:black;
+}
+.listtitle a:hover{
+	text-decoration:none;
+}
+.pageingBox{
+	text-align: center;
+	margin: 45px 0;
+}
+/* 글상세 */
+.titlehidden{
+	display:none;
+}
+.board{
+	border: 1px solid #ddd;
+	background-color:white;
+}
+.boardUl{
+	padding:20px;
+}
+.btns_detail{
+	float: right;
+	width:198px;
+}
+.board_title{
+	font-size: 30px;
+	color: #484848;
+}
+.detail_line{
+	border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    margin-top: -7px;
+    color: #afafaf;
+}
+/* 글쓰기 부분 */
+.enterboard_insert{
+	border: 1px solid #ddd;
+	background-color:white;
+	padding: 20px;
+}
+.enterboard_insertul{
+	padding:0px;
+}
+
+/*댓글부분*/
+.replyBox{
+	height: 135px;
+	border-bottom: 1px solid #eaeaea;
+	margin-bottom: 10px;
+}
+
+.replymnick{
+	font-weight:bold;
+}
+.replydate{
+	color: #ccc;
+    font-size: 12px;
 }

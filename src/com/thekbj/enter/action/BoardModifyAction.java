@@ -19,7 +19,6 @@ public class BoardModifyAction implements Action{
 		// TODO Auto-generated method stub
 		String bno=request.getParameter("bno");
 		
-		System.out.println("¸Õbno"+bno);
 	      int boardnum=1;
 	      if(bno!=null && !bno.equals(""))
 	      {

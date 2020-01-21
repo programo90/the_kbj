@@ -7,6 +7,7 @@ import java.util.List;
 import javax.naming.NamingException;
 
 import com.thekbj.comm.DBConnection;
+import com.thekbj.dto.ReplyDTO;
 import com.thekbj.dto.TableDTO;
 import com.thekbj.enter.dao.BoardDAO;
 
@@ -130,5 +131,63 @@ public class EnterService {
 			if(conn!=null) try {conn.close();} catch(SQLException e) {}
 		}
 		return count;
+	}
+	public void repInsert(ReplyDTO dto) {
+		// TODO Auto-generated method stub
+		Connection conn=null;
+		
+		try {
+			DBConnection db=DBConnection.getinstance();
+			conn=db.getConnection();
+			conn.setAutoCommit(false);
+			BoardDAO dao=BoardDAO.getBoardDAO();
+			dao.repInsertData(conn, dto);
+			
+			conn.commit();
+		}catch(NamingException | SQLException e) {
+			System.out.println(e);
+			try {conn.rollback();} catch(SQLException e2) {}
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+		
+	}
+	public List<ReplyDTO> repList(int bno) {
+		// TODO Auto-generated method stub
+		Connection conn=null;
+		List<ReplyDTO> repdto=null;
+		try {
+			DBConnection db=DBConnection.getinstance();
+			conn=db.getConnection();
+			conn.setAutoCommit(false);
+			BoardDAO dao=BoardDAO.getBoardDAO();
+			repdto=dao.repListData(conn, bno);
+			
+		}catch(NamingException|SQLException e) {
+			System.out.println(e);
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+		return repdto;
+	}
+	public void repRemove(int rno, int mno) {
+		// TODO Auto-generated method stub
+		Connection conn=null;
+		
+		try {
+			DBConnection db=DBConnection.getinstance();
+			conn=db.getConnection();
+			BoardDAO dao=BoardDAO.getBoardDAO();
+			dao.repRemoveData(conn, rno, mno);
+		}catch(NamingException | SQLException e) {
+			System.out.println(e);
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+		
+	}
+	public void repRemoveSel(int rno, int mno) {
+		// TODO Auto-generated method stub
+		
 	}
 }
