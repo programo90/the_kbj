@@ -338,4 +338,43 @@ public class BoardDAO {
 		}
 	}
 
+	public void increseLikecount(Connection conn, int bno) throws SQLException {
+		// TODO Auto-generated method stub
+		StringBuilder sql = new StringBuilder();
+		sql.append(" update it_board				 ");
+		sql.append(" set blikecount = blikecount+1	 ");
+		sql.append(" where bno = ?					 ");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+				) {
+			pstmt.setInt(1, bno);
+			pstmt.executeUpdate();
+		}
+	}
+
+	public int getLikecount(Connection conn, int bno) throws SQLException{
+		// TODO Auto-generated method stub
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select blikecount		");
+		sql.append(" from it_board			");
+		sql.append(" where bno = ?			");
+
+		int blikecount = 0;
+		ResultSet rs = null;
+		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString()); 
+					) {
+			
+			pstmt.setInt(1, bno);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				blikecount = rs.getInt(1);
+			}
+		}
+		
+		return blikecount;
+	}
+	
+	
+
 }

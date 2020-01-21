@@ -16,6 +16,7 @@
 <!-- 부가적인 테마 -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script type="text/javascript" src="./SE2.3.10.O11329/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script>
 	function cancel() {
 		history.back();
@@ -108,10 +109,9 @@
 													class="form-control" id="btitle" name="btitle" required />
 											</div>
 											<div class="form-group">
-
 												<label for="bcontent"> 내용 </label>
 												<textarea class="form-control" id="bcontent" name="bcontent"
-													cols="50" rows="15" required></textarea>
+													cols="50" rows="15" required ></textarea>
 											</div>
 											<div class="form-group">
 												<label for="bimg"> 사진첨부 </label> <input type="file"
