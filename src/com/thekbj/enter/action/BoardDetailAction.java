@@ -27,7 +27,6 @@ public class BoardDetailAction implements Action{
 		EnterService service=EnterService.geEnterService();
 		TableDTO dto=service.boardDetail(boardnum);
 		request.setAttribute("dto", dto);
-		
 		ForwardAction forward = new ForwardAction();
 		forward.setForward(true);
 		forward.setUrl("/WEB-INF/enter/detail.jsp");

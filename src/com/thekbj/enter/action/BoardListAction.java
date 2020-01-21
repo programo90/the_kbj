@@ -24,7 +24,7 @@ public class BoardListAction implements Action{
 			currpage=Integer.parseInt(curr);
 		}
 		
-		//°Ë»ö
+		//search
 		String search=request.getParameter("search");
 		String txtsearch=request.getParameter("txtsearch");
 		if(search==null) {
@@ -39,7 +39,7 @@ public class BoardListAction implements Action{
 		int totalcount=service.getTotalCount(search, txtsearch);
 		int pagepercount=5;
 		int totalpage=(int)Math.ceil((float)totalcount/pagepercount);
-		/*int startrow=(currpage-1)*pagepercount+1; ¿ø·¡*/
+		/*int startrow=(currpage-1)*pagepercount+1; ï¿½ï¿½ï¿½ï¿½*/
 		/*int startrow=(currpage-1)*pagepercount+1;
 		int endrow=startrow+pagepercount-1;
 		if(endrow>totalcount) endrow=totalcount;*/
