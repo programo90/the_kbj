@@ -21,7 +21,7 @@ public class OneLineService {
 	}
 
 	public List<TableDTO> boardList(int startrow, int endrow) {
-		System.out.println("OneLineService boardList: 게시글 전체 Service 요청");
+		System.out.println("OneLineService boardList oneLine Service start");
 		
 		Connection conn = null;
 		
@@ -42,13 +42,13 @@ public class OneLineService {
 		{
 			System.out.println("OneLineService boardList : "+ e);
 		}finally {
-			System.out.println("OneLineService boardList: 게시글 전체 Service 요청 정상 종료");
+			System.out.println("OneLineService boardList oneLine Service end");
 		}
 		return list;
 	}
 
 	public int totalcount() {
-		System.out.println("OneLineService totalcount: 게시글 갯수 Service 요청");
+		System.out.println("OneLineService totalcount oneLine Service start");
 		
 		Connection conn = null;
 		int totalcount = 0;
@@ -68,7 +68,7 @@ public class OneLineService {
 		{
 			System.out.println("OneLineService totalcount : "+ e);
 		}finally {
-			System.out.println("OneLineService totalcount: 게시글 갯수 Service 요청 정상 종료");
+			System.out.println("OneLineService totalcount oneLine Service end");
 		}
 		return totalcount;
 	}
@@ -76,7 +76,7 @@ public class OneLineService {
 	
 	
 	public List<ReplyDTO> replyList() {
-		System.out.println("OneLineService replyList: 리플 전체 Service 요청");
+		System.out.println("OneLineService replyList oneLine Service start");
 		
 		Connection conn = null;
 		
@@ -97,7 +97,7 @@ public class OneLineService {
 		{
 			System.out.println("OneLineService replyList : "+ e);
 		}finally {
-			System.out.println("OneLineService replyList: 리플 전체 Service 요청 정상 종료");
+			System.out.println("OneLineService replyList oneLine Service end");
 		}
 		return list;
 	}

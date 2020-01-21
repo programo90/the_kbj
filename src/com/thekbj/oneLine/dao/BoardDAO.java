@@ -22,7 +22,7 @@ public class BoardDAO {
 
 
 	public int getTotalCountData(Connection conn) throws SQLException{
-		System.out.println("BoardDAO getTotalCountData : �Խñ� ���� DAO ��û");
+		System.out.println("BoardDAO getTotalCountData oneLine DAO start");
 		
 		StringBuilder sql = new StringBuilder();
 		
@@ -44,14 +44,14 @@ public class BoardDAO {
 			
 		}finally {
 			if(rs!=null) try {rs.close();}catch(SQLException e) {}
-			System.out.println("BoardDAO getTotalCountData : �Խñ� ���� DAO ��û ���� ����");
+			System.out.println("BoardDAO getTotalCountData DAO end");
 		}
 		
 		return totalcount;
 	}
 
 	public List<TableDTO> boardListData(Connection conn, int startrow, int endrow) throws SQLException{
-		System.out.println("BoardDAO boardListData : �Խñ� ���� DAO ��û");
+		System.out.println("BoardDAO boardListData DAO start");
 		StringBuilder sql = new StringBuilder();	
 		sql.append("	select R1.* FROM(					  		 ");
 		sql.append(" 		select 	bno, bctg, btitle,  	 	 	 ");
@@ -110,7 +110,7 @@ public class BoardDAO {
 			
 		}finally {
 			try { if(rs != null) rs.close(); }catch(SQLException e){}
-			System.out.println("BoardDAO boardListData : �Խñ� ���� DAO ��û ���� ����");
+			System.out.println("BoardDAO boardListData DAO end");
 		}
 		
 		return list;
@@ -118,7 +118,7 @@ public class BoardDAO {
 
 	public List<ReplyDTO> repListData(Connection conn) throws SQLException {
 		// TODO Auto-generated method stub
-		System.out.println("BoardDAO repListData : �Խñ� ���� DAO ��û");
+		System.out.println("BoardDAO repListData DAO start");
 		StringBuilder sql = new StringBuilder();	
 		sql.append(" 		select 	rno, bno, rcontent, rwrdate, mnick 	 	 ");
 		sql.append(" 		from 	oneLine_reply as ore	 			 	 ");
@@ -157,7 +157,7 @@ public class BoardDAO {
 			
 		}finally {
 			try { if(rs != null) rs.close(); }catch(SQLException e){}
-			System.out.println("BoardDAO repListData : �Խñ� ���� DAO ��û ���� ����");
+			System.out.println("BoardDAO repListData DAO end");
 		}
 		
 		return list;
