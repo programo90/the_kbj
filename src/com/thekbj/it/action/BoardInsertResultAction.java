@@ -27,6 +27,8 @@ public class BoardInsertResultAction implements Action {
 		String bcontent = request.getParameter("bcontent");
 		String bimg = request.getParameter("bimg");
 		
+		System.out.println(bcontent);
+		
 		
 		TableDTO dto = new TableDTO();
 		dto.setMno(mno);

@@ -79,7 +79,7 @@ public class BoardDAO {
 				dto.setBrecount(rs.getInt("brecount"));
 				dto.setBlikecount(rs.getInt("blikecount"));
 				dto.setBimg(rs.getString("bimg"));
-				//dto.setBwriter(rs.getString("mnick"))
+				dto.setMnick(rs.getString("mnick"));
 				list.add(dto);
 			}
 		} finally {

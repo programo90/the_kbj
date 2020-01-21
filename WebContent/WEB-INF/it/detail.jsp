@@ -100,7 +100,7 @@
 											<div class="col-md-10">
 												<div class="col-md-12">
 													<p>
-														<a href="#">${bdto.mnick }</a> <span
+														<a href="#" style="font-size: 20px">${bdto.mnick }</a> <span
 															class="glyphicon glyphicon-leaf" style="font-size: 12px">${bdto.mscore }</span>
 													</p>
 												</div>
@@ -129,13 +129,18 @@
 										<div class="row">
 											<div class="col-md-12" id="detail-title">
 												<div class="row">
+													<div class="col-md-12" style="font-size: 15px">
+														<p># ${bdto.bno} <strong>${bdto.btag }</strong></p>
+													</div>
+												</div>
+												<%-- <div class="row">
 													<div class="col-md-2">
 														<p># ${bdto.bno }</p>
 													</div>
 													<div class="col-md-10">
 														<p>${bdto.btag }</p>
 													</div>
-												</div>
+												</div> --%>
 												<div class="row">
 													<div class="col-md-12" id="detail-btitle">
 														<h3>${bdto.btitle }</h3>
