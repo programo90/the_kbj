@@ -15,7 +15,7 @@
 	<div class="loginBox">
             <p class="loginLogo"><a href="main.do">THE KBJ</a></p>
             <div class="login_inputBox">
-                <form class="login_inputInner" method="post" action="memberLoginSession.do" name="login" >
+                <form class="login_inputInner" name="login" >
                    <ul>
                        <li>
                           <label for="login_id">아이디</label>
@@ -26,7 +26,7 @@
                            <input type="password" id="login_pw" class="login_input" name="login_pw" placeholder="비밀번호" required>
                        </li>
                        <li>
-                         <input type="submit" id="login_btn" class="login_btn1" name="login" value="로그인">
+                         <input type="button" id="login_btn" class="login_btn1" name="login" onclick="send()" value="로그인">
                        </li>
                        <li>
                           <input type="checkbox" name="login_keep" id="loginkeep">
@@ -44,5 +44,41 @@
             </div>
         </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+	function send()
+	{
+		if(document.login.login_id.value!="" && document.login.login_pw.value!="")
+		{
+			let login_id = $('#login_id').val();
+			let login_pw = $('#login_pw').val();
+			
+			$.ajax({
+				url:"MemberLoginResult.do"
+				,data:"login_id="+login_id+"&login_pw="+login_pw
+				,dataType:"text"
+				,success:function(data,textStatus,xhr){
+					if(data == "loginFail")
+					{
+						$('#login_pw').val('');
+						alert('로그인에 실패하였습니다.');
+					}
+					else
+					{
+						window.location.href = 'main.do';	
+					}
+				}
+				,error:function(request,status,error)
+				{
+					alert("code:"+request.status + "\n" + "error:"+error);
+				}
+			});
+		}
+		else
+		{
+			alert('아이디 혹은 비밀번호를 입력 해주세요.');
+		}
+	}
+</script>
 </body>
 </html>
