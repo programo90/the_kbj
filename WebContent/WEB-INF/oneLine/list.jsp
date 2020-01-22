@@ -25,6 +25,8 @@
 	<c:set var="list" value="${requestScope.list }" />
 	<c:set var="replist" value="${requestScope.replist }" />	
 	
+	<c:set var="session_mno" value="${sessionScope.mno}"/>
+	
 	<jsp:include page="../comm/header.jsp"></jsp:include>
 	<div class="right">
 		<section class="content_box">
@@ -62,8 +64,8 @@
                             </div>
                             
                             <div class="top_right">
-                                <div class="glyphicon glyphicon-pencil pen"></div>
-                                <div class="glyphicon glyphicon-trash trash"></div>
+                                <div class="glyphicon glyphicon-pencil pen" onclick="board_modify(${list.bno},${list.mno},${session_mno})"></div>
+                                <div class="glyphicon glyphicon-trash trash" onclick="board_delete(${list.bno},${list.mno},${session_mno})"></div>
                             </div>
                             
                             <div class="clear"></div>
@@ -90,10 +92,10 @@
                                     <input type="hidden" name="no" value="1">
                                     <div class="row">
                                       <div class="no-padding col-md-11 row_area">
-                                          <textarea name="textarea" id="textarea" class="form-control form_area" rows="1" ></textarea>
+                                          <textarea name="textarea" id="textarea" class="form-control form_area" rows="1"></textarea>
                                       </div>
                                       <div class="no-padding col-md-1 row_submit">
-                                          <button type="submit" class="btn btn-default form_submit" onclick="send()">제출</button>
+                                          <button type="button" class="btn btn-default form_submit" onclick="reply_send(this,${session_mno},${list.bno})">제출</button>
                                       </div>
                                     </div>
                                 </form>                                
@@ -115,8 +117,8 @@
 	                                   </div>
 	                                   
 	                                   <div class="reply_right">
-	                                   	   <div class="glyphicon glyphicon-pencil pen"></div>
-	                                       <div class="glyphicon glyphicon-remove"></div>
+	                                   	   <div class="glyphicon glyphicon-pencil pen" onclick="reply_modify(${replist.rno},${replist.mno},${session_mno})"></div>
+	                                       <div class="glyphicon glyphicon-remove" onclick="reply_delete(${replist.rno},${replist.mno},${session_mno})"></div>
 	                                   </div>
 	                                   <div class="clear"></div>
 	                                </div>
@@ -135,8 +137,39 @@
         <!--내용작성 end -->
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
+<script src="js/oneLine/list.js"></script>
 <script>
+let mno = <%= session.getAttribute("mno") %>
+
+function reply_send(th,mno,bno)
+{
+	  if(mno != null)
+	  {
+		 let content = $(th).parent().prev().children().val();
+		 $.ajax({
+			 url:"oneLineRepinsert.do"
+			 ,method:"post"
+			 ,dataType:"text"
+			 ,data:{'content':content,"mno":mno,"bno":bno}
+			 ,success:function(data)
+			 {
+				 alert("정상적으로 댓글을 작성 하였습니다!");
+				 console.log("reply_insert 성공");
+				location.href="oneLineList.do";
+			 }
+			 ,error:function(data)
+  			 {
+  				console.log('error',data);
+  			 }
+		 });
+	  }
+	  else
+	  {
+		alert("로그인 해주세요!");
+		location.href="memberLogin.do";
+	  }
+}
+
 	$(document).ready(function(){
 	  
 	  /* 댓글 토글 기능 */
@@ -144,17 +177,9 @@
 	    $(this).parent().next().slideToggle();
 	  });
 	  
-	  let mno = <%= session.getAttribute("mno") %>
-	  if(mno != null)
-	 {
-		console.log(mno);	 
-	 }else
-	 {
-		console.log("비었음!");	 
-	 }
-	  
-	  
-	  
+	  <%-- let mno = <%= session.getAttribute("mno") %> --%>
+	
+
 	  let currpage = ${currpage};
 	  let totalcount = ${totalcount};
 	  let pageperSize = ${pageperSize};
@@ -166,7 +191,7 @@
 		  		  
 	  	  if(a == b+c)
 	  	  {
-	  		alert('스크롤 "da" 맨끝!');	  
+	  		alert('게시글을 업데이트 하였습니다!');	  
 	  		 /* 게시글 가져오기 */
 	  		 $.ajax({
 	  				url:"oneLineListResult.do"
@@ -195,8 +220,8 @@
                         result+='    </div>                                                                                                       ';
                         result+='                                                                                                                 ';
                         result+='    <div class="top_right">                                                                                      ';
-                        result+='        <div class="glyphicon glyphicon-pencil pen"></div>                                                       ';
-                        result+='        <div class="glyphicon glyphicon-trash trash"></div>                                                      ';
+                        result+='        <div class="glyphicon glyphicon-pencil pen onclick="board_modify('+item.bno+','+item.mno+','+mno+')"></div>                                                       ';
+                        result+='        <div class="glyphicon glyphicon-trash trash onclick="board_delete('+item.bno+','+item.mno+','+mno+')"></div>                                                      ';
                         result+='    </div>                                                                                                       ';
                         result+='                                                                                                                 ';
                         result+='    <div class="clear"></div>                                                                                    ';

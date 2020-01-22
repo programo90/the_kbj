@@ -20,11 +20,14 @@ public class BoardRemoveAction implements Action {
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		
 		OneLineService service = OneLineService.getService();
-		//int result = service.boardRemove(bno);
+		int result = service.boardRemove(bno);
+		System.out.println("BoardRemoveAction bno : " + bno);
+		
+		request.setAttribute("result", result);
 		
 		ForwardAction forward = new ForwardAction();
 		forward.setForward(true);
-		forward.setUrl("/WEB-INF/oneLine/list.jsp");
+		forward.setUrl("/WEB-INF/oneLine/del.jsp");
 		 
 		return forward;
 	}
