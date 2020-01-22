@@ -10,6 +10,11 @@
 	width:68px;
 }
 
+.board_content
+{
+	margin-top:3px;
+}
+
 .board_modify:hover
 {
 	cursor:pointer;
@@ -81,6 +86,11 @@
 .bottom_right1
 {
     float: right;
+}
+
+.bottom_right3
+{
+	float: right;
 }
 
 .row_area

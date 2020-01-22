@@ -1,7 +1,35 @@
 /**
  * 	reply javascript jquery
  */
-
+function reply_send(th,bno,mno)
+{
+	  console.log("와우");
+	  if(mno != null)
+	  {
+		 let content = $(th).parent().prev().children().val();
+		 $.ajax({
+			 url:"oneLineRepinsert.do"
+			 ,method:"post"
+			 ,dataType:"text"
+			 ,data:{'content':content,"mno":mno,"bno":bno}
+			 ,success:function(data)
+			 {
+				 alert("정상적으로 댓글을 작성 하였습니다!");
+				 console.log("reply_insert 성공");
+				location.href="oneLineList.do";
+			 }
+			 ,error:function(data)
+  			 {
+  				console.log('error',data);
+  			 }
+		 });
+	  }
+	  else
+	  {
+		alert("로그인 해주세요!");
+		location.href="memberLogin.do";
+	  }
+}
 
 
 function board_modify(select_bno,select_mno,session_mno)
