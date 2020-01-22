@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <!-- 공통 css 입니다. -->
 <link rel="stylesheet" href="css/comm.css">
@@ -44,6 +46,7 @@
 				<!-- 각자카테고리명 텍스트만 바꿔주세요 -->
 				<div class="board_menu_box">
 					<ul class="board_menu">
+					
 						<li class="board_menu_li"><a href="opinionlist.do?btag=eco">최신순</a></li>
 						<li class="board_menu_li"><a href="">댓글순</a></li>
 						<li class="board_menu_li"><a href="">조회순</a></li>
@@ -64,6 +67,9 @@
 				<div class="board_box">
 					<!--내용작성 start -->
 					
+		<jsp:include page="../comm/carousel.jsp"></jsp:include>
+		
+				
 					<c:set var="startPage" value="${requestScope.startPage }" />
 					<c:set var="endPage" value="${requestScope.endPage }" />
 					<c:set var="totalPage" value="${requestScope.totalPage }" />
@@ -92,7 +98,7 @@
 										<p>
 											<a href="opiniondetail.do?bno=${item.bno}"><c:out value="${item.bcontent}" /></a>
 										</p>
-
+											
 									</div>
 								</c:forEach>
 
@@ -142,7 +148,13 @@
 				</div>
 			</div>
 		</section>
+		
+		
+		
+		
+		
 	</div>
 	<jsp:include page="../comm/footer.jsp"></jsp:include>
+	
 </body>
 </html>
