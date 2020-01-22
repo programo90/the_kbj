@@ -20,44 +20,44 @@ public class BoardListAction implements Action {
 			throws ServletException, IOException {
 		System.out.println("BoardListAction Load");
 		
-		/*페이징 필요한 변수*/
-		
-		//서비스 객체 생성
+		//service object create
 		OneLineService service = OneLineService.getService(); 
 		
-		//현재 페이지
+		//current page
 		int currpage=1;
 		String curr = request.getParameter("curr");
 		if(curr!=null) currpage=Integer.parseInt(curr);
 		
-		//total 게시글수 구하기
-		int totalcount = service.totalcount(); //총 글 갯수
+		//data total count
+		int totalcount = service.totalcount(); //all board count
 		
-		//한 페이지 글 갯수
+		//one page count
 		int pageperSize = 10;	
-		int totalpage = (int) Math.ceil((float)totalcount/pageperSize); //총 블럭(10개씩) 갯수
+		//int totalpage = (int) Math.ceil((float)totalcount/pageperSize); //one block count
 		
-		//전체 페이지
-		int startrow = ((currpage-1) * pageperSize)+1;
+		//first page ~ last page
+		int startrow = ((currpage-1) * pageperSize);
 		int endrow = startrow + pageperSize - 1;
 		if(endrow > totalcount) endrow = totalcount;
 		
-		/*보내기위한 객체 담기*/
+		/* data set */
 		
-		//메인글 담기
+		//board list
 		List<TableDTO> list= service.boardList(startrow,endrow);
 		
-		//리플글 담기
+		//reply list
 		List<ReplyDTO> replist = service.replyList();
 				
-		//request 객체에 모두 담기
+		//request setting
 		request.setAttribute("list", list);
 		request.setAttribute("replist", replist);
 		
 		request.setAttribute("currpage", currpage);
-		request.setAttribute("startrow", startrow);
-		request.setAttribute("endrow", endrow);
-		request.setAttribute("totalpage", totalpage);
+		request.setAttribute("totalcount", totalcount);
+		request.setAttribute("pageperSize", pageperSize);
+		
+		//request.setAttribute("startrow", startrow);
+		//request.setAttribute("endrow", endrow);
 		
 		ForwardAction forward = new ForwardAction();
 		forward.setForward(true);

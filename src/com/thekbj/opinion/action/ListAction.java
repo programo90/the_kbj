@@ -9,58 +9,77 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.thekbj.comm.Action;
 import com.thekbj.comm.ForwardAction;
-import com.thekbj.dto.MemberDTO;
-import com.thekbj.service.MemberService;
+import com.thekbj.dto.TableDTO;
+import com.thekbj.service.OpinionService;
 
 public class ListAction implements Action {
+
 
 	@Override
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int currpage = 1;
-		String curr = request.getParameter("curr");
-		if(curr!=null) {
-			currpage = Integer.parseInt(curr);
+		request.setCharacterEncoding("utf-8");
+		OpinionService service = OpinionService.getService();
+		String bctg = "op";
+		String btag = request.getParameter("btag");
+		if(btag==null) {
+			btag="";
 		}
-		String search = request.getParameter("search");
-		String txtsearch = request.getParameter("txtsearch");
-		if(search ==null)
-			search = "";
-		if(txtsearch == null)
-			txtsearch = "";
 		
-		MemberService service = MemberService.getMemberservice();
-		int totalcount = service.getTotalCount(search, txtsearch);
-		int pagepercount = 10;
-		int totalpage = (int) Math.ceil((float)totalcount / pagepercount);
-		int startrow = (currpage - 1) * pagepercount +1;
-		int endrow= startrow + pagepercount -1;
+		//search
+		String searchType = request.getParameter("searchType");
+		String searchtxt= request.getParameter("searchtxt");
 		
-		if(endrow > totalcount)
-			endrow = totalcount;
+		if(searchType==null) {
+			searchType="";
+		}
+		if(searchtxt==null) {
+			searchtxt = "";
+		}
 		
-		int blockcount = 5;
-		int startblock = (currpage -1) / blockcount * blockcount +1;
-		int endblock = startblock + blockcount -1;
-		if(endblock > totalpage)
-			endblock = totalpage;
+		//paging
+		String curr = request.getParameter("curr");
+		int currPage = 1;
 		
-		List<MemberDTO> list = service.getList(startrow, endrow, search, txtsearch);
+		if(curr!=null) {
+			currPage = Integer.parseInt(curr);
+		}
 		
+		int rowPerPage = 5;
+		int totalRow = service.getTotalCount();
+		int startRow = (currPage-1)*rowPerPage+1;
+		int endRow = startRow+rowPerPage-1;
+		if(endRow>totalRow) {
+			endRow = totalRow;
+		}
+		
+		int pagePerBlock = 5;
+		int totalPage = (int)Math.ceil((double)totalRow/pagePerBlock);
+		int startPage = ((currPage-1)/pagePerBlock)*pagePerBlock+1;
+		int endPage = startPage+pagePerBlock-1;
+		if( endPage > totalPage) {
+			endPage = totalPage;
+		}
+		
+		//get list
+		List<TableDTO> list = service.boardList(bctg,btag,startRow, endRow, searchType, searchtxt);
+	
 		request.setAttribute("list", list);
-		//list.size() 값 확인 할 것 
-		request.setAttribute("currpage", currpage);
-		request.setAttribute("startblock", startblock);
-		request.setAttribute("endblock", endblock);
-		request.setAttribute("totalpage", totalpage);
-		request.setAttribute("search", search);
-		request.setAttribute("txtsearch", txtsearch);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("totalPage", totalPage);
+		request.setAttribute("curr", currPage);
+		request.setAttribute("searchType", searchType);
+		request.setAttribute("searchtxt", searchtxt);
+		request.setAttribute("btag", btag);
+		System.out.println("list:"+list.get(0).getBno());	
 		
-		
+		//forward
 		ForwardAction forward = new ForwardAction();
 		forward.setForward(true);
-		forward.setUrl("list.jsp");
+		forward.setUrl("/WEB-INF/opinion/list.jsp");
+		
 		return forward;
 	}
 

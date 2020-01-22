@@ -1,4 +1,4 @@
-package com.thekbj.oneLine.action;
+package com.thekbj.opinion.action;
 
 import java.io.IOException;
 
@@ -8,28 +8,25 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.thekbj.comm.Action;
 import com.thekbj.comm.ForwardAction;
-import com.thekbj.service.OneLineService;
+import com.thekbj.service.OpinionService;
 
 public class BoardRemoveAction implements Action {
 
 	@Override
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("BoardRemoveAction load");
-		
+		// TODO Auto-generated method stub
+
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		
-		OneLineService service = OneLineService.getService();
-		int result = service.boardRemove(bno);
-		System.out.println("BoardRemoveAction bno : " + bno);
-		
-		request.setAttribute("result", result);
+		OpinionService service = OpinionService.getService();
+		service.boardRemove(bno);
 		
 		ForwardAction forward = new ForwardAction();
-		forward.setForward(true);
-		forward.setUrl("/WEB-INF/oneLine/del.jsp");
-		 
+		forward.setForward(false);
+		forward.setUrl("opinionlist.do");
 		return forward;
+
 	}
 
 }
