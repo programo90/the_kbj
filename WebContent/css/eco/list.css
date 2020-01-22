@@ -1,0 +1,36 @@
+.pagination-sm{
+	display:block;
+	text-align:center;
+}
+
+.pagination-sm> li > a{
+	float:none;
+	margin-left: -5px; 
+}
+
+.col-md-1 .bctg{
+	padding : 5px;
+}
+.row .imgstyle{
+	height: 30px;
+	width: 30px;
+}
+.row .listsize{
+	height:100px;
+}
+.board_menu_box{
+	width:1000px;
+}
+.writer{
+	width:1000px;
+}
+.board_menu_box{
+	width:1000px;
+}
+.row.listsize{
+	height:20%;
+}
+.img {
+	margin:20px auto;
+	padding: 0px;
+}

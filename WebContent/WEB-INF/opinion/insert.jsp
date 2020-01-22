@@ -80,11 +80,11 @@
 													type="hidden" class="form-control" id="mnick" name="mnick"
 													value="${sessionScope.dto.mnick}" />
 											</div>
-											<div class="form-group">
+											<%-- <div class="form-group">
 												<label for="mscore"> ${sessionScope.dto.mscore } </label> <input
 													type="hidden" class="form-control" id="mscore"
 													name="${sessionScope.dto.mscore }" value="mscore" />
-											</div>
+											</div> --%>
 											<hr>
 											<div class="form-group">
 												<label for="ctg-sel">카테고리</label> <br>

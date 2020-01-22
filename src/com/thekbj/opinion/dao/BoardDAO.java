@@ -27,7 +27,7 @@ public class BoardDAO {
 			List<TableDTO> list = new ArrayList<>();
 			StringBuilder sql = new StringBuilder();
 
-			sql.append(" select bno, btitle, bcontent, bwrdate, bviewcount, btag, brecount, blikecount, bimg, mnick	");
+			sql.append(" select bno, btitle, bcontent, bwrdate, bviewcount, btag, brecount, blikecount, bimg, b.mnick	");
 			sql.append(" from opi_board b inner join member m												");
 			sql.append(" on	b.mno = m.mno																	");
 			sql.append(" where bctg = ?																		");
@@ -138,7 +138,7 @@ public class BoardDAO {
 		// TODO Auto-generated method stub
 				StringBuilder sql = new StringBuilder();
 
-				sql.append(" select bno, btitle, bcontent, bwrdate, btag, bviewcount, brecount, blikecount, bimg, mnick, mscore, m.mno  ");
+				sql.append(" select bno, btitle, bcontent, bwrdate, btag, bviewcount, brecount, blikecount, bimg, b.mnick, mscore, m.mno  ");
 				sql.append(" from opi_board b inner join member m																		");
 				sql.append(" on b.mno = m.mno																							");
 				sql.append(" where bno = ?																								");
