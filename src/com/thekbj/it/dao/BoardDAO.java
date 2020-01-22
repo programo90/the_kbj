@@ -22,7 +22,7 @@ public class BoardDAO {
 		StringBuilder sql = new StringBuilder();
 
 		sql.append(" select bno, btitle, bwrdate, bviewcount, btag, brecount, blikecount, bimg, m.mnick	");
-		sql.append(" from it_board b inner join it_member m												");
+		sql.append(" from it_board b inner join member m												");
 		sql.append(" on	b.mno = m.mno																	");
 		sql.append(" where bctg = ?																		");
 
@@ -110,7 +110,7 @@ public class BoardDAO {
 		StringBuilder sql = new StringBuilder();
 
 		sql.append(" select bno, btitle, bcontent, bwrdate, btag, bviewcount, brecount, blikecount, bimg, m.mnick, mscore, m.mno  ");
-		sql.append(" from it_board b inner join it_member m																		");
+		sql.append(" from it_board b inner join member m																		");
 		sql.append(" on b.mno = m.mno																							");
 		sql.append(" where bno = ?																								");
 
@@ -147,7 +147,7 @@ public class BoardDAO {
 		StringBuilder sql = new StringBuilder();
 
 		sql.append(" select rno, bno, rcontent, rwrdate, m.mnick, m.mno	");
-		sql.append(" from it_reply r inner join it_member m				");
+		sql.append(" from it_reply r inner join member m				");
 		sql.append(" on r.mno = m.mno									");
 		sql.append(" where bno = ?										");
 
@@ -301,7 +301,7 @@ public class BoardDAO {
 		StringBuilder sql = new StringBuilder();
 
 		sql.append(" select bno, btitle, bcontent, bwrdate, btag, bviewcount, brecount, blikecount, bimg, m.mnick, mscore, m.mno  ");
-		sql.append(" from it_board b inner join it_member m																		");
+		sql.append(" from it_board b inner join member m																		");
 		sql.append(" on b.mno = m.mno																							");
 		sql.append(" where bno = ?																								");
 
@@ -431,7 +431,7 @@ public class BoardDAO {
 	public void increaseMscore(Connection conn, int mno) throws SQLException {
 		// TODO Auto-generated method stub
 		StringBuilder sql = new StringBuilder();
-		sql.append(" update it_member					");
+		sql.append(" update member					");
 		sql.append(" set mscore = mscore+1			");
 		sql.append(" where mno = ?						");
 
