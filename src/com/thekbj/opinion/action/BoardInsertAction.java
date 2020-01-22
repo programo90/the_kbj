@@ -18,8 +18,7 @@ public class BoardInsertAction implements Action {
 		System.out.println("2222");
 //		request.setCharacterEncoding("utf-8");
 		ForwardAction forward = new ForwardAction();
-		forward.setForward(true);
-		forward.setUrl("/WEB-INF/opinion/insert.jsp");
+		forward.setForward(true);nsert.jsp");
 		return forward;
 	}
 
