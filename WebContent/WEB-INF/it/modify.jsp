@@ -16,15 +16,11 @@
 <!-- 부가적인 테마 -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script type="text/javascript" src="./se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script>
 	function cancel() {
 		history.back();
 	}
-	function send() {
-		if (document.frm.checkrobot.check != 'checked') {
-			document.frm.submit();
-		}
-	};
 </script>
 </head>
 <body>
@@ -96,14 +92,19 @@
 													class="form-control" id="btitle" name="btitle" required value="${requestScope.dto.btitle }"/>
 											</div>
 											<div class="form-group">
+												<label for="bcontent"> 내용 </label>
+												<textarea class="form-control" id="bcontent" name="bcontent"
+													cols="50" rows="15" required style="display:none">${requestScope.dto.bcontent}</textarea>
+											</div>
+											<%-- <div class="form-group">
 
 												<label for="bcontent"> 내용 </label>
 												<textarea class="form-control" id="bcontent" name="bcontent"
 													cols="50" rows="15" required>${requestScope.dto.bcontent}</textarea>
-											</div>
+											</div> --%>
 											<div class="form-group">
-												<label for="bimg"> 사진첨부 </label> <input type="file"
-													class="form-control-file" id="bimg" name="bimg" />
+												<label for="bimg"> </label> <input type="hidden"
+													class="form-control-file" id="bimg" name="bimg" value="${requestScope.dto.bimg }" />
 											</div>
 											<div style="text-align: center;">
 												<div class="checkbox" id="robot">
@@ -114,7 +115,7 @@
 											</div>
 											<div style="text-align: center;" id="insert-button-box">
 												<button type="button" class="btn btn-primary"
-													id="submit-but" onclick="send()">저장</button>
+													id="submit-but" onclick="submitContents(this);">저장</button>
 												<button type="button" class="btn btn-primary"
 													id="cancle-but" onclick="cancel()">돌아가기</button>
 											</div>
@@ -130,5 +131,49 @@
 		</section>
 	</div>
 	<jsp:include page="../comm/footer.jsp"></jsp:include>
+	<script type="text/javascript">
+var oEditors = [];
+
+// 추가 글꼴 목록
+//var aAdditionalFontSet = [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]];
+
+nhn.husky.EZCreator.createInIFrame({
+	oAppRef: oEditors,
+	elPlaceHolder: "bcontent",
+	sSkinURI: "se2/SmartEditor2Skin.html",	
+	htParams : {
+		bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+		bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+		bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+		//aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+		fOnBeforeUnload : function(){
+			//alert("완료!");
+		}
+	}, //boolean
+	fOnAppLoad : function(){
+		//예제 코드
+		//oEditors.getById["ir1"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+	},
+	fCreator: "createSEditor2"
+});
+
+function pasteHTML(filepath) {
+	var sHTML = "<span><img style='width:100%' src='http://localhost:8080/thekbj/upLoadFolder/"+filepath+"' alt='imgurl'><\/span>";
+	oEditors.getById["bcontent"].exec("PASTE_HTML", [sHTML]);
+}
+	
+function submitContents(elClickedObj) {
+	if (document.getElementById('checkrobot').checked) {
+		oEditors.getById["bcontent"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
+			try {
+			elClickedObj.form.submit();
+		} catch(e) {}
+	} else {
+		alert("로봇이신가요?");
+	}
+	
+}
+
+</script>
 </body>
 </html>

@@ -84,7 +84,7 @@
 														<div class="col-md-9">
 															<p>#${item.bno }</p>
 															<h3><a href="itDetail.do?bno=${item.bno}">${item.btitle }</a></h3>
-															<p>작성자</p>
+															<p>${item.mnick }</p>
 															<p>${item.bwrdate }</p>
 														</div>
 													</div>
