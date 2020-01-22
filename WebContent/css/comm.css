@@ -36,6 +36,16 @@ body{
 .logoA{
 	color: white;
 }
+.menuli{
+    height: 45px;
+    line-height: 45px;
+}
+.menulia{
+	color:white;
+}
+.menulia:hover{
+	text-decoration:none;
+}
 .logoA:hover{
 	color:white;
 	text-decoration:none;
@@ -49,11 +59,12 @@ body{
 .menuTop{
     border-top:1px solid #6aa2b1; 
     border-bottom:1px solid #6aa2b1; 
-    padding: 10px;
+    padding: 17px 10px 10px 25px;
     margin: 20px 0;
 }
 .menuTop_btn{
     display: inline-block;
+    padding: 0px 0px 0px 0px;
 }
 .menuTop_btn_a{
     text-decoration: none;

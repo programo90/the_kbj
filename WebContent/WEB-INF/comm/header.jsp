@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 		<header class="left">
-            <h1 class="logo"><a href="main.do">THE KBJ</a></h1>
+            <h1 class="logo"><a href="main.do" class="logoA">THE KBJ</a></h1>
             <div class="menuTop">
             <c:if test="${sessionScope.mnick == null}">
 				<p class="menuTop_btn"><a href="memberLogin.do" class="menuTop_btn_a"><span class="glyphicon glyphicon-log-out"></span> 로그인</a></p>
@@ -16,12 +16,12 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="oneLineList.do"><span class="glyphicon glyphicon-random"></span> 한줄게시판</a></li>
-                    <li><a href="economyList.do"><span class="glyphicon glyphicon-random"></span> 경제</a></li>
-                    <li><a href="enterList.do"><span class="glyphicon glyphicon-random"></span> 연예</a></li>
-                    <li><a href="sportsList.do"><span class="glyphicon glyphicon-random"></span> 스포츠</a></li>
-                    <li><a href="itList.do"><span class="glyphicon glyphicon-random"></span> IT/과학</a></li>
-                    <li><a href="opinionlist.do"><span class="glyphicon glyphicon-random"></span> 오피니언</a></li>
+                    <li class="menuli"><a href="oneLineList.do" class="menulia"><span class="glyphicon glyphicon-random"></span> 한줄게시판</a></li>
+                    <li class="menuli"><a href="economyList.do" class="menulia"><span class="glyphicon glyphicon-random"></span> 경제</a></li>
+                    <li class="menuli"><a href="enterList.do" class="menulia"><span class="glyphicon glyphicon-random"></span> 연예</a></li>
+                    <li class="menuli"><a href="sportsList.do" class="menulia"><span class="glyphicon glyphicon-random"></span> 스포츠</a></li>
+                    <li class="menuli"><a href="itList.do" class="menulia"><span class="glyphicon glyphicon-random"></span> IT/과학</a></li>
+                    <li class="menuli"><a href="opinionlist.do" class="menulia"><span class="glyphicon glyphicon-random"></span> 오피니언</a></li>
                 </ul>
             </nav>
         </header>
