@@ -21,7 +21,7 @@
                     <li><a href="#"><span class="glyphicon glyphicon-random"></span> 연예</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-random"></span> 스포츠</a></li>
                     <li><a href="itList.do"><span class="glyphicon glyphicon-random"></span> IT/과학</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-random"></span> 오피니언</a></li>
+                    <li><a href="opinionlist.do"><span class="glyphicon glyphicon-random"></span> 오피니언</a></li>
                 </ul>
             </nav>
         </header>
