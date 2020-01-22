@@ -176,22 +176,22 @@ public class BoardDAO {
 		// TODO Auto-generated method stub
 		System.out.println("BoardDAO repListData DAO start");
 		StringBuilder sql = new StringBuilder();	
-		sql.append("		select R1.* FROM(																			");
-		sql.append(" 		select obo.bno as bno, obo.bctg as bctg, obo.btitle as btitle 								");
-		sql.append("               ,obo.bcontent as bcontent, obo.bwrdate as bwrdate 									");
-		sql.append("               ,obo.bviewcount as bviewcount, obo.btag as btag , obo.brecount as brecount			");
-		sql.append("			   ,obo.blikecount as blikecount , obo.bimg as bimg, mem.mnick as bnick, ore.rno as rno	");
-		sql.append("			   ,ore.rcontent as rcontent, ore.rwrdate as rwrdate, mem2.mnick as rnick				");
-		sql.append(" 		from oneLine_board as obo 	 																");
-		sql.append(" 		inner join member as mem																	");
-		sql.append(" 		on obo.mno = mem.mno	 																	");
-		sql.append(" 		left outer join oneLine_reply as ore										    			");
-		sql.append(" 		on ore.bno = obo.bno	 																	");
-		sql.append(" 		left outer join member as mem2	 															");
-		sql.append(" 		on mem2.mno = ore.mno	 																	");
-		sql.append(" 		order by obo.bno desc, obo.bwrdate desc, ore.rwrdate desc	 								");
-		sql.append(" 		) R1	 																					");
-		sql.append(" 		LIMIT ?, ?;	 																			");
+		sql.append("		select R1.* FROM(																							");
+		sql.append(" 		select obo.bno as bno, obo.bctg as bctg, obo.btitle as btitle 												");
+		sql.append("               ,obo.bcontent as bcontent, obo.bwrdate as bwrdate 													");
+		sql.append("               ,obo.bviewcount as bviewcount, obo.btag as btag , obo.brecount as brecount							");
+		sql.append("			   ,obo.blikecount as blikecount , obo.bimg as bimg, mem.mnick as bnick,mem.mno as mno, ore.rno as rno	");
+		sql.append("			   ,ore.rcontent as rcontent, ore.rwrdate as rwrdate, mem2.mnick as rnick								");
+		sql.append(" 		from oneLine_board as obo 	 																				");
+		sql.append(" 		inner join member as mem																					");
+		sql.append(" 		on obo.mno = mem.mno	 																					");
+		sql.append(" 		left outer join oneLine_reply as ore										    							");
+		sql.append(" 		on ore.bno = obo.bno	 																					");
+		sql.append(" 		left outer join member as mem2	 																			");
+		sql.append(" 		on mem2.mno = ore.mno	 																					");
+		sql.append(" 		order by obo.bno desc, obo.bwrdate desc, ore.rwrdate desc	 												");
+		sql.append(" 		) R1	 																									");
+		sql.append(" 		LIMIT ?, ?;	 																								");
 									
 		
 		ResultSet rs = null;
@@ -219,7 +219,8 @@ public class BoardDAO {
 				int brecount= rs.getInt("brecount");         
 				int blikecount= rs.getInt("blikecount");       
 				String bimg= rs.getString("bimg");          
-				String bnick= rs.getString("bnick");         
+				String bnick= rs.getString("bnick");
+				int mno = rs.getInt("mno");
 				int rno= rs.getInt("rno");              
 				String rcontent= rs.getString("rcontent");      
 				String rwrdate= rs.getString("rwrdate");       
@@ -235,7 +236,8 @@ public class BoardDAO {
 				dto.setBrecount(brecount);         
 				dto.setBlikecount(blikecount);       
 				dto.setBimg(bimg);          
-				dto.setBnick(bnick);         
+				dto.setBnick(bnick);
+				dto.setMno(mno);
 				dto.setRno(rno);              
 				dto.setRcontent(rcontent);      
 				dto.setRwrdate(rwrdate);       

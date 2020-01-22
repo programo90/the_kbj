@@ -9,13 +9,12 @@
 <!-- 공통 css 입니다. -->
 <link rel="stylesheet" href="css/comm.css">
 <!-- 각자 css는 여기다 추가해주시면 됩니다. -->
-
+<link rel="stylesheet" href="css/oneLine/list.css">
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
-<link rel="stylesheet" href="css/oneLine/list.css">
 
 </head>
 <body>
@@ -47,7 +46,16 @@
 						<li class="board_menu_li"><a href="">조회순</a></li>
 						<li class="board_menu_li"><a href="">추천순</a></li>
 					</ul>
-					<input type="button" value="글쓰기" class="btn_write" onclick="write_send()">
+					<div class="btns_list">
+						<c:choose>
+							<c:when test="${sessionScope.dto.mnick != null }">
+								<input type="button" value="글쓰기" class="btn btn-info btn_write" id="btn_write" onclick="write_send()">
+							</c:when>
+							<c:when test="${sessionScope.dto.mnick == null }">
+								<input type="button" value="글쓰기" class="btn btn-info btn_write" id="btn_write" onclick="memberLogin()">
+							</c:when>
+						</c:choose>
+					</div>
 				</div>
 				<div class="board_box">
 					<!--내용작성 start -->
@@ -56,7 +64,7 @@
                         <div class="board_top">
                            <div class="top_left">
                            		<c:set var="img" value="${list.mimg }"/>
-                                <p><img src="img/member/"+${img}+".png" alt=""></p>
+                                <p><img src="img/oneLine/01.png" alt=""></p>
                                 <div class="profile">
                                     <h6>${list.mnick }</h6>
                                     <h6>${list.bwrdate }</h6>
@@ -65,8 +73,8 @@
                             </div>
                             
                             <div class="top_right">
-                                <div class="glyphicon glyphicon-pencil pen" onclick="board_modify(${list.bno},${list.mno},${session_mno})"></div>
-                                <div class="glyphicon glyphicon-trash trash" onclick="board_delete(${list.bno},${list.mno},${session_mno})"></div>
+                                <div class="glyphicon glyphicon-pencil pen board_modify" style="cursor:pointer" onclick="board_modify(${list.bno},${list.mno},${session_mno})"></div>
+                                <div class="glyphicon glyphicon-trash trash board_delete" style="cursor:pointer" onclick="board_delete(${list.bno},${list.mno},${session_mno})"></div>
                             </div>
                             
                             <div class="clear"></div>
@@ -78,18 +86,17 @@
                         
                         <div class="board_bottom">
                             <div class="bottom_left1">
-                                <div class="glyphicon glyphicon-thumbs-up"></div>
-                                <h6>${list.blikecount }</h6>
+                                <%-- <div class="glyphicon glyphicon-thumbs-up"></div>
+                                <h6>${list.blikecount }</h6> --%>
                             </div>
                             
-                            <div class="bottom_right1">
-                                <h6>${list.brecount }</h6>
+                            <div class="bottom_right1" style="cursor:pointer">
+                                <h6>댓글보기</h6>
                             </div>
                             
                             <div class="clear"></div>
                             
                             <div class="bottom_form">
-                                <form method="post" action="subadd.do" name="frm">
                                     <input type="hidden" name="no" value="1">
                                     <div class="row">
                                       <div class="no-padding col-md-11 row_area">
@@ -99,7 +106,6 @@
                                           <button type="button" class="btn btn-default form_submit" onclick="reply_send(this,${session_mno},${list.bno})">제출</button>
                                       </div>
                                     </div>
-                                </form>                                
                             </div>
                         </div>
                         
@@ -118,8 +124,8 @@
 	                                   </div>
 	                                   
 	                                   <div class="reply_right">
-	                                   	   <div class="glyphicon glyphicon-pencil pen" onclick="reply_modify(${replist.rno},${replist.mno},${session_mno})"></div>
-	                                       <div class="glyphicon glyphicon-remove" onclick="reply_delete(${replist.rno},${replist.mno},${session_mno})"></div>
+	                                   	   <div class="glyphicon glyphicon-pencil pen" style="cursor:pointer" onclick="reply_modify(${replist.rno},${replist.mno},${session_mno})"></div>
+	                                       <div class="glyphicon glyphicon-remove" style="cursor:pointer" onclick="reply_delete(${replist.rno},${replist.mno},${session_mno})"></div>
 	                                   </div>
 	                                   <div class="clear"></div>
 	                                </div>
@@ -170,6 +176,10 @@ function reply_send(th,mno,bno)
 		location.href="memberLogin.do";
 	  }
 }
+function memberLogin()
+{
+	location.href="memberLogin.do";
+}
 
 function write_send()
 {
@@ -218,11 +228,10 @@ function write_send()
 	  				let bno_temp = 0;
 	  				let result;
 	  				$.each(data,function(index,item){
-	  					if( bno_temp != item.bno)
+	  					console.log(bno_temp+','+item.bno+','+item.mno+','+mno);
+	  					if( (bno_temp != item.bno))
 	  					{
 	  					bno_temp = item.bno;
-	  					console.log("item.bno : " + item.bno);
-	  					console.log("item.bnick : " + item.bnick);
 	  					result+='<div class="board_content">                                                                                  ';
                         result+='<div class="board_top">                                                                                          ';
                         result+='   <div class="top_left">                                                                                        ';
@@ -235,41 +244,35 @@ function write_send()
                         result+='    </div>                                                                                                       ';
                         result+='                                                                                                                 ';
                         result+='    <div class="top_right">                                                                                      ';
-                        result+='        <div class="glyphicon glyphicon-pencil pen onclick="board_modify('+item.bno+','+item.mno+','+mno+')"></div>                                                       ';
-                        result+='        <div class="glyphicon glyphicon-trash trash onclick="board_delete('+item.bno+','+item.mno+','+mno+')"></div>                                                      ';
+                        result+='        <div class="glyphicon glyphicon-pencil pen" style="cursor:pointer" onclick="board_modify('+item.bno+','+item.mno+','+mno+')"></div>                                                       ';
+                        result+='        <div class="glyphicon glyphicon-trash trash" style="cursor:pointer" onclick="board_delete('+item.bno+','+item.mno+','+mno+')"></div>                                                      ';
                         result+='    </div>                                                                                                       ';
                         result+='                                                                                                                 ';
                         result+='    <div class="clear"></div>                                                                                    ';
                         result+='</div>                                                                                                           ';
                         result+='                                                                                                                 ';
                         result+='<div class="board_middle">                                                                                       ';
-                        result+='    <h5>'+item.bcontent+'</h5>                                                                                   ';
+                        result+='    '+item.bcontent+'                                                                                   ';
                         result+='</div>                                                                                                           ';
                         result+='                                                                                                                 ';
                         result+='<div class="board_bottom">                                                                                       ';
-                        result+='    <div class="bottom_left1">                                                                                   ';
-                        result+='        <div class="glyphicon glyphicon-thumbs-up"></div>                                                        ';
-                        result+='        <h6>'+item.blikecount+'</h6>                                                                             ';
-                        result+='    </div>                                                                                                       ';
                         result+='                                                                                                                 ';
-                        result+='    <div class="bottom_right1">                                                                                  ';
-                        result+='        <h6>'+item.brecount+'</h6>                                                                               ';
+                        result+='    <div class="bottom_right1" style="cursor:pointer">                                                                                  ';
+                        result+='        <h6>댓글보기</h6>                                                                               ';
                         result+='    </div>                                                                                                       ';
                         result+='                                                                                                                 ';
                         result+='    <div class="clear"></div>                                                                                    ';
                         result+='                                                                                                                 ';
                         result+='    <div class="bottom_form">                                                                                    ';
-                        result+='        <form method="post" action="subadd.do" name="frm">                                                       ';
                         result+='            <input type="hidden" name="no" value="1">                                                            ';
                         result+='            <div class="row">                                                                                    ';
                         result+='              <div class="no-padding col-md-11 row_area">                                                        ';
                         result+='                  <textarea name="textarea" id="textarea" class="form-control form_area" rows="1" ></textarea>   ';
                         result+='              </div>                                                                                             ';
                         result+='              <div class="no-padding col-md-1 row_submit">                                                       ';
-                        result+='                  <button type="submit" class="btn btn-default form_submit" onclick="send()">제출</button>         ';
+                        result+='                  <button type="submit" class="btn btn-default form_submit" onclick="reply_send(this,'+mno+','+item.bno+')">제출</button>         ';
                         result+='              </div>                                                                                             ';
                         result+='            </div>                                                                                               ';
-                        result+='        </form>                                                                                                  ';
                         result+='    </div>                                                                                                       ';
                         result+='</div>                                                                                                           ';
                         result+='                                                                                                                 ';
@@ -291,8 +294,8 @@ function write_send()
 	                    result+='               </div>                                                                                            ';
 	                    result+='                                                                                                                 ';
 	                    result+='               <div class="reply_right">                                                                         ';
-	                    result+='               	   <div class="glyphicon glyphicon-pencil pen"></div>                                         ';
-	                    result+='                   <div class="glyphicon glyphicon-remove"></div>                                                ';
+	                    result+='               	   <div class="glyphicon glyphicon-pencil pen" onclick="reply_modify('+item.rno+','+item.mno+','+mno+')"></div>                                         ';
+	                    result+='                   <div class="glyphicon glyphicon-remove onclick="reply_delete('+item.rno+','+item.mno+','+mno+')"></div>                                                ';
 	                    result+='               </div>                                                                                            ';
 	                    result+='               <div class="clear"></div>                                                                         ';
 	                    result+='            </div>                                                                                               ';

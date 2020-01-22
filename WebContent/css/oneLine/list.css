@@ -4,6 +4,24 @@
     border-bottom: 1px solid silver;
     padding-bottom: 30px;
 }
+/*글쓰기 부분*/
+.btns_list{
+	float: right;
+	width:68px;
+}
+
+.board_modify:hover
+{
+	cursor:pointer;
+}
+.board_delete:hover
+{
+	cursor:pointer;
+}
+.brecount:hover
+{
+	cursor:pointer;
+}
 /*top 부분*/
 .board_top
 {

@@ -50,6 +50,9 @@ public class BoardListResultController extends HttpServlet {
 	}
 	
 	public void doReq(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		response.setContentType("application/json;charset=utf-8");
+		
 		int currpage = Integer.parseInt(request.getParameter("currpage"));
 		int totalcount = Integer.parseInt(request.getParameter("totalcount"));
 		int pageperSize = Integer.parseInt(request.getParameter("pageperSize"));
@@ -65,51 +68,52 @@ public class BoardListResultController extends HttpServlet {
 		System.out.println("oneLineListResult startrow : " + startrow);
 		System.out.println("oneLineListResult endrow : " + endrow);
 		
+		
 		PrintWriter out = response.getWriter();
-		
-		//service object create
-		OneLineService service = OneLineService.getService();
-		
-		//board list
-		List<TableReplyMemberDTO> list= service.boardscrollList(startrow,endrow);
-		
-		System.out.println("BoardListResultController : list=>" + list.toString());
 		
 		JSONArray arr = new JSONArray();
 		
-		for(TableReplyMemberDTO dto : list)
-		{
-			JSONObject ob = new JSONObject();
+		if(totalcount != endrow)
+		{	
+			//service object create
+			OneLineService service = OneLineService.getService();
 			
-			ob.put("bno",dto.getBno());                 
-			ob.put("bctg",dto.getBctg());          
-			ob.put("btitle",dto.getBtitle());        
-			ob.put("bcontent",dto.getBcontent());      
-			ob.put("bwrdate",dto.getBwrdate());       
-			ob.put("bviewcount",dto.getBviewcount());       
-			ob.put("btag",dto.getBtag());          
-			ob.put("brecount",dto.getBrecount());         
-			ob.put("blikecount",dto.getBlikecount());       
-			ob.put("bimg",dto.getBimg());          
-			ob.put("bnick",dto.getBnick());         
-			ob.put("rno",dto.getRno());              
-			ob.put("rcontent",dto.getRcontent());      
-			ob.put("rwrdate",dto.getRwrdate());       
-			ob.put("rnick",dto.getRnick());
+			//board list
+			List<TableReplyMemberDTO> list= service.boardscrollList(startrow,endrow);
 			
-			arr.add(ob);
-		}			      
-					          
-		out.print(arr);       
+			System.out.println("BoardListResultController : list=>" + list.toString());
+			
+			
+			
+			for(TableReplyMemberDTO dto : list)
+			{
+				JSONObject ob = new JSONObject();
+				
+				ob.put("bno",dto.getBno());                 
+				ob.put("bctg",dto.getBctg());          
+				ob.put("btitle",dto.getBtitle());        
+				ob.put("bcontent",dto.getBcontent());      
+				ob.put("bwrdate",dto.getBwrdate());       
+				ob.put("bviewcount",dto.getBviewcount());       
+				ob.put("btag",dto.getBtag());          
+				ob.put("brecount",dto.getBrecount());         
+				ob.put("blikecount",dto.getBlikecount());       
+				ob.put("bimg",dto.getBimg());          
+				ob.put("bnick",dto.getBnick());
+				ob.put("mno", dto.getMno());
+				ob.put("rno",dto.getRno());              
+				ob.put("rcontent",dto.getRcontent());      
+				ob.put("rwrdate",dto.getRwrdate());       
+				ob.put("rnick",dto.getRnick());
+				
+				arr.add(ob);
+			}			      
+						          
+			   
+		}
+		
+		out.print(arr);    
 	}
-
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
