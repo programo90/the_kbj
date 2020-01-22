@@ -14,7 +14,15 @@ public class TableDTO {
 	private String bimg;
 	private String mnick;
 	private int mscore;
+	private String mimg;
 	
+	
+	public String getMimg() {
+		return mimg;
+	}
+	public void setMimg(String mimg) {
+		this.mimg = mimg;
+	}
 	public String getMnick() {
 		return mnick;
 	}
@@ -97,8 +105,11 @@ public class TableDTO {
 	public String toString() {
 		return "TableDTO [bno=" + bno + ", mno=" + mno + ", bctg=" + bctg + ", btitle=" + btitle + ", bcontent="
 				+ bcontent + ", bwrdate=" + bwrdate + ", bviewcount=" + bviewcount + ", btag=" + btag + ", brecount="
-				+ brecount + ", blikecount=" + blikecount + ", bimg=" + bimg + ", mnick=" + mnick + "]";
+				+ brecount + ", blikecount=" + blikecount + ", bimg=" + bimg + ", mnick=" + mnick + ", mscore=" + mscore
+				+ ", mimg=" + mimg + "]";
 	}
+	
+	
 
 	
 }
