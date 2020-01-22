@@ -146,10 +146,10 @@ public class BoardDAO {
 		List<ReplyDTO> list = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
 
-		sql.append(" select rno, bno, rcontent, rwrdate, m.mnick	");
-		sql.append(" from it_reply r inner join it_member m			");
-		sql.append(" on r.mno = m.mno								");
-		sql.append(" where bno = ?									");
+		sql.append(" select rno, bno, rcontent, rwrdate, m.mnick, m.mno	");
+		sql.append(" from it_reply r inner join it_member m				");
+		sql.append(" on r.mno = m.mno									");
+		sql.append(" where bno = ?										");
 
 
 		ResultSet rs = null;
@@ -167,6 +167,7 @@ public class BoardDAO {
 				dto.setRwrdate(rs.getString("rwrdate"));
 				dto.setRcontent(rs.getString("rcontent"));
 				dto.setMnick(rs.getString("mnick"));
+				dto.setMno(rs.getInt("mno"));
 
 				list.add(dto);
 			}
@@ -211,7 +212,7 @@ public class BoardDAO {
 		// TODO Auto-generated method stub
 		StringBuilder sql = new StringBuilder();
 		sql.append(" update it_board					");
-		sql.append(" set brecount = brecount+1		");
+		sql.append(" set brecount = brecount+1			");
 		sql.append(" where bno = ?						");
 
 		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());
@@ -254,8 +255,16 @@ public class BoardDAO {
 	public void boardInsertData(Connection conn, TableDTO dto) throws SQLException{
 		// TODO Auto-generated method stub
 		StringBuilder sql = new StringBuilder();
-		sql.append(" insert into it_board(bctg, btitle, bcontent, bwrdate, bviewcount, btag, brecount, blikecount, bimg, mno)	");
-		sql.append(" values( ?, ?, ?, now(), 0, ?, 0, 0, ?, ?) 																	");
+		
+		if("".equals(dto.getBimg())) {
+			sql.append(" insert into it_board(bctg, btitle, bcontent, bwrdate, bviewcount, btag, brecount, blikecount, mno)	");
+			sql.append(" values( ?, ?, ?, now(), 0, ?, 0, 0, ?) 																	");
+			
+		} else {
+			sql.append(" insert into it_board(bctg, btitle, bcontent, bwrdate, bviewcount, btag, brecount, blikecount, bimg, mno)	");
+			sql.append(" values( ?, ?, ?, now(), 0, ?, 0, 0, ?, ?) 																	");
+			
+		}
 		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString()); 
 				) {
 
@@ -263,8 +272,12 @@ public class BoardDAO {
 			pstmt.setString(2, dto.getBtitle());
 			pstmt.setString(3, dto.getBcontent());
 			pstmt.setString(4, dto.getBtag());
-			pstmt.setString(5, dto.getBimg());
-			pstmt.setInt(6, dto.getMno());
+			if("".equals(dto.getBimg())) { 
+				pstmt.setInt(5, dto.getMno());
+			} else {
+				pstmt.setString(5, dto.getBimg());
+				pstmt.setInt(6, dto.getMno());				
+			}
 
 			pstmt.executeUpdate();
 		}
@@ -370,11 +383,63 @@ public class BoardDAO {
 			if(rs.next()) {
 				blikecount = rs.getInt(1);
 			}
+		} finally {
+			if(rs!=null) try {rs.close();} catch(SQLException e) {e.printStackTrace();}
 		}
 		
 		return blikecount;
 	}
-	
-	
+
+	public boolean searchLike(Connection conn, int bno, int mno) throws SQLException{
+		// TODO Auto-generated method stub
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select count(*)				");
+		sql.append(" from it_like					");
+		sql.append(" where bno = ?	and mno =?		");
+
+		boolean tf = true;
+		ResultSet rs = null;
+		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString()); 
+					) {
+			pstmt.setInt(1, bno);
+			pstmt.setInt(2, mno);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				if(rs.getInt(1)!=0)
+				tf = false;
+			}
+		} finally {
+			if(rs!=null) try {rs.close();} catch(SQLException e) {e.printStackTrace();}
+		}
+		return tf;
+	}
+
+	public void likeInsertData(Connection conn, int bno, int mno) throws SQLException{
+		// TODO Auto-generated method stub
+		StringBuilder sql = new StringBuilder();
+		sql.append(" insert into it_like(bno, mno)	");
+		sql.append(" values( ? , ? )				");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+				) {
+			pstmt.setInt(1, bno);
+			pstmt.setInt(2, mno);
+			pstmt.executeUpdate();
+		}
+	}
+
+	public void increaseMscore(Connection conn, int mno) throws SQLException {
+		// TODO Auto-generated method stub
+		StringBuilder sql = new StringBuilder();
+		sql.append(" update it_member					");
+		sql.append(" set mscore = mscore+1			");
+		sql.append(" where mno = ?						");
+
+		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+				) {
+			pstmt.setInt(1, mno);
+			pstmt.executeUpdate();
+		}
+	}
 
 }

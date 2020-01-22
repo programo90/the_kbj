@@ -122,6 +122,7 @@ public class ItService {
 			BoardDAO dao = BoardDAO.getInstance();
 			dao.boardRecountIncrease(conn, dto);
 			dao.repInsertData(conn, dto);
+			dao.increaseMscore(conn, dto.getMno());
 			
 			conn.commit();
 		} catch (SQLException | NamingException e) {
@@ -177,6 +178,8 @@ public class ItService {
 			
 			BoardDAO dao = BoardDAO.getInstance();
 			dao.boardInsertData(conn,dto);
+			dao.increaseMscore(conn, dto.getMno());;
+			
 			
 			conn.commit();
 		} catch (SQLException | NamingException e) {
@@ -266,7 +269,7 @@ public class ItService {
 		}
 		
 	}
-	public int boardLike(int bno) {
+	public int boardLike(int bno, int mno) {
 		// TODO Auto-generated method stub
 		DBConnection db = DBConnection.getinstance();
 		Connection conn = null;
@@ -276,8 +279,12 @@ public class ItService {
 			 conn.setAutoCommit(false);
 			 
 			BoardDAO dao = BoardDAO.getInstance();
-			dao.increseLikecount(conn,bno);
-			blikecount = dao.getLikecount(conn,bno);
+			boolean tf = dao.searchLike(conn,bno,mno);
+			if(tf) {
+				dao.likeInsertData(conn,bno,mno);
+				dao.increseLikecount(conn,bno);
+				blikecount = dao.getLikecount(conn,bno);
+			}
 			
 
 			conn.commit();
