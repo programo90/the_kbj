@@ -47,7 +47,7 @@
 						<li class="board_menu_li"><a href="">조회순</a></li>
 						<li class="board_menu_li"><a href="">추천순</a></li>
 					</ul>
-					<input type="button" value="글쓰기" class="btn_write">
+					<input type="button" value="글쓰기" class="btn_write" onclick="write_send()">
 				</div>
 				<div class="board_box">
 					<!--내용작성 start -->
@@ -169,6 +169,20 @@ function reply_send(th,mno,bno)
 		location.href="memberLogin.do";
 	  }
 }
+
+function write_send()
+{
+	  if(mno != null)
+	  {
+		location.href="oneLineInsert.do";
+	  }
+	  else
+	  {
+		alert("로그인 해주세요!");
+		location.href="memberLogin.do";
+	  }
+}
+
 
 	$(document).ready(function(){
 	  
