@@ -16,7 +16,8 @@ public class BoardModifyAction implements Action {
 	@Override
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String n=request.getParameter("num");
+		String n=request.getParameter("bno");
+		System.out.println(n);
 		int boardnum=1;
 		if(n!=null && !n.equals(""))
 		{
@@ -24,11 +25,11 @@ public class BoardModifyAction implements Action {
 		}
 		SportsService service=SportsService.getService();
 		TableDTO dto= service.boardDetail(boardnum);
+		System.out.println(dto);
 		request.setAttribute("dto", dto);
 		ForwardAction forward=new ForwardAction();
 		forward.setForward(true);
 		forward.setUrl("/WEB-INF/sports/modify.jsp");
-		System.out.println(forward.isForward()+"!!! for");
 		return forward;
 	}
 }

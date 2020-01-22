@@ -19,14 +19,14 @@ import com.thekbj.service.SportsService;
 /**
  * Servlet implementation class RepListController
  */
-@WebServlet("/sportsRepList.do")
-public class RepListController extends HttpServlet {
+@WebServlet("/repsportsdetail.do")
+public class RepSportsListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RepListController() {
+    public RepSportsListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,24 +48,26 @@ public class RepListController extends HttpServlet {
 	}
 	private void doreq(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException
 	{
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("application/json;charset=utf-8");
+		response.setContentType("application/json; charset=utf-8"); 
 		PrintWriter out=response.getWriter();
 		int bno=Integer.parseInt(request.getParameter("bno"));
 		SportsService service=SportsService.getService();
-		List<ReplyDTO> list= service.repList(bno);
-		
+		List<ReplyDTO> replyList=service.repList(bno);
+		System.err.println(replyList);
+		System.out.println("size : "+replyList.size());
 		JSONArray arr=new JSONArray();
-		for(ReplyDTO dto:list)
-		{
-			JSONObject o=new JSONObject();
-			o.put("rno", dto.getRno());
-			o.put("bno", dto.getBno());
-			o.put("rcontent", dto.getRcontent());
-			o.put("rwdate", dto.getRwdate());
-			arr.add(o);
+		for(ReplyDTO repdto:replyList) {
+			JSONObject jsonobject=new JSONObject();
+			jsonobject.put("rno", repdto.getRno());
+			jsonobject.put("rcontent", repdto.getRcontent());
+			jsonobject.put("rwrdate", repdto.getRwrdate());
+			jsonobject.put("mnick", repdto.getMnick());
+			jsonobject.put("bno", repdto.getBno());
+			jsonobject.put("mno", repdto.getMno());
+			arr.add(jsonobject);
 		}
 		out.print(arr);
 	}
+
 
 }

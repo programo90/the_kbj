@@ -19,7 +19,7 @@ public class SportsService {
 	{
 		return service;
 	}
-	public List<TableDTO> boardList() {
+	public List<TableDTO> boardList(String bview, int startrow, int pagepercount, String search, String txtsearch) {
 		// TODO Auto-generated method stub
 		DBConnection db=DBConnection.getinstance();
 		Connection conn=null;
@@ -28,7 +28,7 @@ public class SportsService {
 			conn=db.getConnection();
 			conn.setAutoCommit(false);
 			BoardDAO dao=BoardDAO.getDAO();
-			list=dao.boardListData(conn);
+			list=dao.boardListData(bview,conn, startrow, pagepercount, search, txtsearch);
 			conn.commit();
 		}catch(NamingException| SQLException e)
 		{
@@ -66,6 +66,7 @@ public class SportsService {
 			conn=db.getConnection();
 			conn.setAutoCommit(false);
 			BoardDAO dao=BoardDAO.getDAO();
+			dao.recount(conn, boardnum);
 			dto=dao.boardDetailData(conn, boardnum);
 			conn.commit();
 		}catch(NamingException | SQLException e)
@@ -128,5 +129,70 @@ public class SportsService {
 			if(conn!=null)try {conn.close();}catch(SQLException e) {}
 		}
 		return list;
+	}
+	public int getTotalCount(String search, String txtsearch) {
+		// TODO Auto-generated method stub
+		Connection conn=null;
+		int count=0;
+		
+		try {
+			DBConnection db=DBConnection.getinstance();
+			conn=db.getConnection();
+			conn.setAutoCommit(false);
+			BoardDAO dao=BoardDAO.getDAO();
+			count=dao.getTotalCountData(conn, search, txtsearch);
+			
+			conn.commit();
+		}catch(NamingException|SQLException e) {
+			System.out.println(e);
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+		return count;
+	}
+	public void repInsert(ReplyDTO dto) {
+		DBConnection db=DBConnection.getinstance();
+		Connection conn=null;
+		try {
+			conn=db.getConnection();
+			conn.setAutoCommit(false);
+			BoardDAO dao=BoardDAO.getDAO();
+			dao.boardRecountIncrease(conn, dto);
+			dao.repInsertData(conn, dto);
+			conn.commit();
+		}catch(NamingException | SQLException e)
+		{
+			System.out.println(e);
+			try {conn.rollback();}catch(Exception e2) {}
+		}finally {
+			if(conn!=null)try {conn.close();}catch(SQLException e) {}
+		}
+	}
+	public void repRemove(int rno, int mno, int bno) {
+		DBConnection db = DBConnection.getinstance();
+		Connection conn = null;
+		
+		try {
+			conn=db.getConnection();
+			conn.setAutoCommit(false);
+			
+			BoardDAO dao = BoardDAO.getDAO();
+			dao.boardRecountDecrease(conn, bno);
+			dao.repRemoveData(conn, rno);
+			
+			conn.commit();
+		} catch (SQLException | NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {e.printStackTrace();}
+		}
+		
 	}
 }

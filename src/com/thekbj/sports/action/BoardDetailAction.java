@@ -16,20 +16,18 @@ public class BoardDetailAction implements Action {
 	@Override
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String n=request.getParameter("num");
+		String n=request.getParameter("bno");
 		int boardnum=1;
 		if(n!=null && !n.equals(""))
 		{
 			boardnum=Integer.parseInt(n);
 		}
-		System.out.println(boardnum);
 		SportsService service=SportsService.getService();
 		TableDTO dto= service.boardDetail(boardnum);
 		request.setAttribute("dto", dto);
 		ForwardAction forward=new ForwardAction();
 		forward.setForward(true);
 		forward.setUrl("/WEB-INF/sports/detail.jsp");
-	    System.out.println(boardnum+"!!!");
 		return forward;
 	}
 }
