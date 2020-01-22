@@ -50,6 +50,7 @@ public class RepDetailAction extends HttpServlet {
 	
 	private void doReq(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
+		
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("application/json;charset=utf-8");
 
