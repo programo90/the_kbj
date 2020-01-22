@@ -21,7 +21,7 @@ public class BoardDAO {
 		List<TableDTO> list = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
 
-		sql.append(" select bno, btitle, bwrdate, bviewcount, btag, brecount, blikecount, bimg, mnick	");
+		sql.append(" select bno, btitle, bwrdate, bviewcount, btag, brecount, blikecount, bimg, m.mnick	");
 		sql.append(" from it_board b inner join it_member m												");
 		sql.append(" on	b.mno = m.mno																	");
 		sql.append(" where bctg = ?																		");
@@ -109,7 +109,7 @@ public class BoardDAO {
 		// TODO Auto-generated method stub
 		StringBuilder sql = new StringBuilder();
 
-		sql.append(" select bno, btitle, bcontent, bwrdate, btag, bviewcount, brecount, blikecount, bimg, mnick, mscore, m.mno  ");
+		sql.append(" select bno, btitle, bcontent, bwrdate, btag, bviewcount, brecount, blikecount, bimg, m.mnick, mscore, m.mno  ");
 		sql.append(" from it_board b inner join it_member m																		");
 		sql.append(" on b.mno = m.mno																							");
 		sql.append(" where bno = ?																								");
@@ -197,7 +197,7 @@ public class BoardDAO {
 		// TODO Auto-generated method stub
 		StringBuilder sql = new StringBuilder();
 		sql.append(" insert into it_reply( bno, rcontent, rwrdate, mno)		");
-		sql.append(" value( ?, ?, now(), ?);								");
+		sql.append(" value( ?, ?, now(), ?)									");
 
 		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString()); 
 				) {
@@ -300,7 +300,7 @@ public class BoardDAO {
 		// TODO Auto-generated method stub
 		StringBuilder sql = new StringBuilder();
 
-		sql.append(" select bno, btitle, bcontent, bwrdate, btag, bviewcount, brecount, blikecount, bimg, mnick, mscore, m.mno  ");
+		sql.append(" select bno, btitle, bcontent, bwrdate, btag, bviewcount, brecount, blikecount, bimg, m.mnick, mscore, m.mno  ");
 		sql.append(" from it_board b inner join it_member m																		");
 		sql.append(" on b.mno = m.mno																							");
 		sql.append(" where bno = ?																								");
@@ -440,6 +440,41 @@ public class BoardDAO {
 			pstmt.setInt(1, mno);
 			pstmt.executeUpdate();
 		}
+	}
+
+	public List<TableDTO> allListData(Connection conn) throws SQLException{
+		// TODO Auto-generated method stub
+		List<TableDTO> list = new ArrayList<>();
+		StringBuilder sql = new StringBuilder();
+
+		sql.append(" select bno, btitle, bwrdate, bviewcount, btag, brecount, blikecount, bimg, mnick	");
+		sql.append(" from allboard																		");
+		sql.append(" order by bwrdate desc																");
+		sql.append(" limit 1,10;																		");
+
+
+		ResultSet rs = null;
+		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
+			rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				TableDTO dto = new TableDTO();
+				dto.setBno(rs.getInt("bno"));
+				dto.setBtitle(rs.getString("btitle"));
+				dto.setBwrdate(rs.getString("bwrdate"));
+				dto.setBviewcount(rs.getInt("bviewcount"));
+				dto.setBtag(rs.getString("btag"));
+				dto.setBrecount(rs.getInt("brecount"));
+				dto.setBlikecount(rs.getInt("blikecount"));
+				dto.setBimg(rs.getString("bimg"));
+				dto.setMnick(rs.getString("mnick"));
+				list.add(dto);
+			}
+		} finally {
+			if(rs!=null) try {rs.close();} catch(SQLException e) {e.printStackTrace();}
+		}
+
+		return list;
 	}
 
 }
