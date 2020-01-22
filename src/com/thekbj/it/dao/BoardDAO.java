@@ -447,7 +447,7 @@ public class BoardDAO {
 		List<TableDTO> list = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
 
-		sql.append(" select bno, btitle, bwrdate, bviewcount, btag, brecount, blikecount, bimg, mnick	");
+		sql.append(" select bctg, bno, btitle, bwrdate, bviewcount, btag, brecount, blikecount, bimg, mnick	");
 		sql.append(" from allboard																		");
 		sql.append(" order by bwrdate desc																");
 		sql.append(" limit 1,10;																		");
@@ -468,6 +468,7 @@ public class BoardDAO {
 				dto.setBlikecount(rs.getInt("blikecount"));
 				dto.setBimg(rs.getString("bimg"));
 				dto.setMnick(rs.getString("mnick"));
+				dto.setBctg(rs.getString("bctg"));
 				list.add(dto);
 			}
 		} finally {
