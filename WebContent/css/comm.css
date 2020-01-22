@@ -31,6 +31,14 @@ body{
 .logo{
     color: white;
     font-weight: 700;
+    text-align: center;
+}
+.logoA{
+	color: white;
+}
+.logoA:hover{
+	color:white;
+	text-decoration:none;
 }
 .right{
     position: relative;
@@ -50,9 +58,14 @@ body{
 .menuTop_btn_a{
     text-decoration: none;
     padding: 5px;
+    color: white;
 }
 .menuTop_btn_a:hover, .menuTop_btn_a:focus{
     text-decoration: none;
+    color: white;
+}
+.menu{
+	
 }
 .content_top{
     width: 997px;
@@ -66,7 +79,7 @@ body{
 }
 .searchbox{
     float: right;
-    width: 250px;
+    width: 330px;
 }
 .search{
     width: 250px;

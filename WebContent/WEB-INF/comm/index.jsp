@@ -15,26 +15,66 @@
 </head>
 <body>
 <div id="wrap">
+		<c:set var="list" value="${requestScope.list}"></c:set>
 		<jsp:include page="header.jsp"></jsp:include>
 	<div class="right">
 		<section class="content_box">
            <div class="content_top">
                <p class="sponsor"><a href="#"><span class="glyphicon glyphicon-bell"></span>개인후원</a></p>
                <div class="searchbox">
-                   <input type="text" value="search" class="search">
-               </div>
+					<!-- <input type="text" value="search" class="search"> -->
+					<form method="get" action="enterList.do">
+						<select name="search" class="form-control topsearch">
+							<option value="title">제목</option>
+							<option value="content">내용</option>
+							<option value="tag">태그</option>
+							<!-- <option value="writer">작성자</option> -->
+						</select>
+						<input type="text" name="txtsearch" class="form-control toptxt">
+						<input type="submit" value="검색" class="btn btn-info searchBtn">
+					</form>
+				</div>
            </div>                
            <div class="content">
                <div class="con_box">
                    <p class="">최신글</p>
-                   <div class="con_board">
-                       
+                   <div class="main_board">
+                   	<c:forEach items="${list}" var="item">
+                   		${item.bctg}
+                   		<div class="main">
+							<div class="main_bctg">${item.bctg }</div>
+							<div class="main_title">
+                           	<c:choose>
+                           		<c:when test="${item.bctg=='it'}">
+                           			<a href="itDetail.do?bno=${item.bno}">${item.btitle}</a>
+                           		</c:when>
+                           		<c:when test="${item.bctg=='연예'}">
+                           			<a href="enterDetail.do?bno=${item.bno}">${item.btitle}</a>
+                           		</c:when>
+                           		<c:when test="${item.bctg=='one'}">
+                           			<a href="oneLineDetail.do?bno=${item.bno}">${item.btitle}</a>
+                           		</c:when>
+                           		<c:when test="${item.bctg=='op'}">
+                           			<a href="opinionDetail.do?bno=${item.bno}">${item.btitle}</a>
+                           		</c:when>
+                           		<c:when test="${item.bctg=='[스포츠]'}">
+                           			<a href="sportsDetail.do?bno=${item.bno}">${item.btitle}</a>
+                           		</c:when>
+                           		<c:when test="${item.bctg=='경제'}">
+                           			<a href="economyDetail.do?bno=${item.bno}">${item.btitle}</a>
+                           		</c:when>
+                           	</c:choose>
+                           	</div>
+                           <div class="main_view"><span class="glyphicon glyphicon-eye-open"></span>${item.bwrdate}</div>
+                           <div class="main_date">${item.bwrdate}</div>
+		                 </div>
+                   	</c:forEach>
                    </div>
                </div>
-               <div class="con_box">
+               <!-- <div class="con_box">
                    <p>조회수</p>
                    <div class="con_board"></div>
-               </div>
+               </div> -->
            </div>
        </section>
 	</div>

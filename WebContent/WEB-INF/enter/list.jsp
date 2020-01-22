@@ -43,6 +43,7 @@
 	<c:set var="totalpage" value="${requestScope.totalpage}"></c:set>
 	<c:set var="search" value="${requestScope.search}"></c:set>
 	<c:set var="txtsearch" value="${requestScope.txtsearch}"></c:set>
+	<c:set var="bview" value="${requestScope.bview }"/>
 	<jsp:include page="../comm/header.jsp"></jsp:include>
 	<div class="right">
 		<section class="content_box">
@@ -53,13 +54,14 @@
 				<div class="searchbox">
 					<!-- <input type="text" value="search" class="search"> -->
 					<form method="get" action="enterList.do">
-						<select name="search">
+						<select name="search" class="form-control topsearch">
 							<option value="title">제목</option>
 							<option value="content">내용</option>
+							<option value="tag">태그</option>
 							<!-- <option value="writer">작성자</option> -->
 						</select>
-						<input type="text" name="txtsearch" class="form-control input-sm">
-						<input type="submit" value="검색" class="btn btn-default btn-sm">
+						<input type="text" name="txtsearch" class="form-control toptxt">
+						<input type="submit" value="검색" class="btn btn-info searchBtn">
 					</form>
 				</div>
 			</div>
@@ -67,10 +69,15 @@
 				<h2 class="con_title">연예</h2><!-- 각자카테고리명 텍스트만 바꿔주세요 -->
 				<div class="board_menu_box">
 					<ul class="board_menu">
-						<li class="board_menu_li"><button type="button" class="btn btn-link">최신순</button></li>
+						<!-- <li class="board_menu_li"><button type="button" class="btn btn-link">최신순</button></li>
 						<li class="board_menu_li"><button type="button" class="btn btn-link">댓글순</button></li>
 						<li class="board_menu_li"><button type="button" class="btn btn-link">조회순</button></li>
-						<li class="board_menu_li"><button type="button" class="btn btn-link">추천순</button></li>
+						<li class="board_menu_li"><button type="button" class="btn btn-link">추천순</button></li>  -->
+						
+						<li class="board_menu_li"><a href="enterList.do?search=${search}&txtsearch=${txtsearch}&bview=date">최신순</a></li>
+						<li class="board_menu_li"><a href="enterList.do?search=${search}&txtsearch=${txtsearch}&bview=view">조회순</a></li>
+						<li class="board_menu_li"><a href="enterList.do?search=${search}&txtsearch=${txtsearch}&bview=reply">댓글순</a></li>
+						
 					</ul>
 					<div class="btns_list">
 						<%-- <c:if test="${sessionScope.mno != null}">
@@ -78,10 +85,10 @@
 						</c:if> --%>
 						<c:choose>
 						<c:when test="${sessionScope.dto.mnick != null }">
-							<input type="button" value="글쓰기" class="btn_write" id="btn_write" onclick="enterInsert()">
+							<input type="button" value="글쓰기" class="btn btn-info btn_write" id="btn_write" onclick="enterInsert()">
 						</c:when>
 						<c:when test="${sessionScope.dto.mnick == null }">
-							<input type="button" value="글쓰기" class="btn_write" id="btn_write" onclick="memberLogin()">
+							<input type="button" value="글쓰기" class="btn btn-info btn_write" id="btn_write" onclick="memberLogin()">
 						</c:when>
 					</c:choose>
 					</div>
@@ -89,7 +96,6 @@
 				</div>
 				<div class="board_box">
 					<!--내용작성 start -->
-					
 					<div>
 						<!--if(list==null||list.size()==0) 이면 해당자료가 없습니다 추가하기  -->
 						<c:if test=""></c:if>
@@ -97,16 +103,25 @@
 						<c:forEach var="list" items="${requestScope.list}">
 							<div class="list_one">
 								<c:set var="number" value="${number+1}"></c:set>
-								<span class="listnumber"><c:out value="${number}"></c:out></span>
-								<span class="listtitle"><a href="enterDetail.do?bno=${list.bno}"><c:out value="${list.btitle}"></c:out></a></span>
-								<span><c:out value="${list.bcontent}"></c:out></span>
-								<span><c:out value="${list.bviewcount}"></c:out></span>
-								<span><c:out value="${list.btag}"></c:out></span>
-								<span><c:out value="${list.brecount}"></c:out></span>
-								<span><c:out value="${list.blikecount}"></c:out></span>
-								<span><c:out value="${list.bimg}"></c:out></span>
-								<%-- <span><img src="img/${ }" alt=""/></span> --%>
-								<span><c:out value="${list.mnick}"></c:out></span>
+								<div class="list_one">
+		                            <div class="listnumber"><c:out value="${number}"></c:out></div>
+		                            <div class="listimg"><img style="width:100%; height:100%" alt="imgurl" src="${list.bimg }"></div>
+		                            <div class="listtag"><c:out value="${list.btag}"></c:out></div>
+		                            <div class="listtitle"><a href="enterDetail.do?bno=${list.bno}"><c:out value="${list.btitle}"></c:out></a></div>
+		                            <div class="listview"><span class="glyphicon glyphicon-eye-open"></span> <c:out value="${list.bviewcount}"></c:out></div>
+		                            <div class="listre"><span class="glyphicon glyphicon-comment"></span> <c:out value="${list.brecount}"></c:out></div>
+		                            <%-- <div class="listlike"><span class="glyphicon glyphicon-heart-empty"></span> <c:out value="${list.blikecount}"></c:out></div> --%>
+		                            <div class="listmnick"><c:out value="${list.mnick}"></c:out></div>
+		                        </div>
+								<%-- <p class="listnumber"><c:out value="${number}"></c:out></p>
+								<p class="listimg"><c:out value="${list.bimg}"></c:out></span>
+								<p class="listtitle"><a href="enterDetail.do?bno=${list.bno}"><c:out value="${list.btitle}"></c:out></a></p>
+								<p class="listcontent"><c:out value="${list.bcontent}"></c:out></p>
+								<p class="listview"><span class="glyphicon glyphicon-eye-open"><c:out value="${list.bviewcount}"></c:out></p>
+								<p class="listtag"><c:out value="${list.btag}"></c:out></p>
+								<p class="listre"><span class="glyphicon glyphicon-comment"></span><c:out value="${list.brecount}"></c:out></p>
+								<p class="listlike"><span class="glyphicon glyphicon-heart-empty"><c:out value="${list.blikecount}"></c:out></p>
+								<p class="listmnick"><c:out value="${list.mnick}"></c:out></p> --%>
 							</div>
 						</c:forEach>
 					</div>
@@ -122,7 +137,7 @@
 								<c:out value="${i}"></c:out>
 							</c:if>
 							<c:if test="${currpage!=i}">
-								<a href="enterList.do?curr=${i}&search=${search}&txtsearch=${txtsearch}">${i}</a>
+								<a href="enterList.do?curr=${i}&search=${search}&txtsearch=${txtsearch}&bview=${bview}">${i}</a>
 							</c:if>
 						</c:forEach>
 						<c:if test="${currpage!=totalpage}">

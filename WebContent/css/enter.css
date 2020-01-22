@@ -6,22 +6,115 @@
     color: #7da8b3;
 }
 .ent_tag{
-	
+	background-color: #84b37d;
+    width: 65px;
+    border-radius: 5px;
+    padding: 0px 5px;
+    color: white;
+    text-align: center;
+    margin: 0px;
+}
+.form-control.topsearch{
+	display:inline-block;
+	width: 95px;
+}
+.form-control.toptxt{
+	display: inline-block;
+    width: 170px;
+}
+.btn.searchBtn{
+	background-image: linear-gradient(to bottom,#49afca 0,#49afca 100%);
+    border-color: #49afca;
+    color: white;
+}
+.btn.searchBtn:hover{
+    background-color: #49afca;
+    border-color: #49afca;
 }
 /*글리스트*/
+.btn.btn_write{
+    background-image: linear-gradient(to bottom,#7da8b3 0,#7da8b3 100%) !important;
+    border-color: #7da8b3 !important;
+}
+.btn.btn_write:hover{
+	background-image: linear-gradient(to bottom,#7da8b3 0,#7da8b3 100%) !important;
+}
 .btns_list{
 	float: right;
 	width:68px;
 }
 .list_one{
-	height: 80px;
+    height: 80px;
     line-height: 80px;
+    background-color: white;
+    border-bottom: 0.5px solid #efefef;
+    
+    margin-bottom: -1px;
+    clear: both
 }
 .listnumber{
-	width:20px;
+    width: 86px;
+    height: 78px;
+    float: left;
+    text-align: center;
+    border-left: 5px solid #7DA8B3;
 }
+.listimg{
+    width: 150px;
+    height: 70px;
+    line-height: 70px;
+    float: left;
+    border: 1px solid #dadada;
+   	margin-top: 4px;
+}
+.listtitle{
+    width: 290px;
+    height: 78px;
+    float: left;
+    margin: 0 142px 0 14px;
+    text-align:left;
+	overflow: hidden;
+  	text-overflow: ellipsis;
+  	white-space: nowrap;
+}
+.listtag{
+    width: 60px;
+    float: left;
+    margin: 29px 0 0 26px;
+    background-color: #84b37d;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+}
+.listview{
+    width: 50px;
+    float: left;
+    text-align: center;
+    color: #8c8c8c;
+}
+.listre{
+    width: 50px;
+    float: left;
+    text-align: center;
+    color: #8c8c8c;
+}
+.listlike{
+    width: 50px;
+    float: left;
+    text-align: center;
+    color: #8c8c8c;
+}
+.listmnick{
+    width: 75px;
+    float: left;
+    text-align: center;
+}
+
+
 .listtitle a{
-	font-size: 25px;
+	font-size: 15px;
 	color:black;
 }
 .listtitle a:hover{
@@ -39,8 +132,9 @@
 	border: 1px solid #ddd;
 	background-color:white;
 }
-.boardUl{
-	padding:20px;
+.board_write_detail{
+	padding:0px;
+	border-bottom: 1px solid #ddd;
 }
 .btns_detail{
 	float: right;
@@ -49,13 +143,34 @@
 .board_title{
 	font-size: 30px;
 	color: #484848;
+ 	border-bottom: 1px solid #ddd;
+ 	margin-bottom: 20px;
+ 	padding: 20px 0px;
 }
 .detail_line{
-	border-bottom: 1px solid #ddd;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
     margin-top: -7px;
     color: #afafaf;
+}
+.date{
+	color: #ccc;
+    font-size: 12px;
+}
+.write_info{
+	display: inline-block;
+	padding: 20px 0 0 20px;
+}
+.detail_count{
+	display: inline-block;
+    float: right;
+    padding: 50px 20px 0 0;
+    color: #888;
+}
+.reply_title{
+	display: inline-block;
+	margin-right: 6px;
+}
+.detailcontent{
+	font-size:15px;
 }
 /* 글쓰기 부분 */
 .enterboard_insert{
@@ -64,20 +179,58 @@
 	padding: 20px;
 }
 .enterboard_insertul{
-	padding:0px;
+	padding:20px;
 }
-
+.board_content{
+	padding: 20px;
+	clear:both;
+}
+.boardTitle{
+	margin: 20px 0;
+}
+.boardFile{
+	margin:20px 0;
+}
+.board_btn{
+	text-align: center;
+    margin: 40px 0px 0px 0px;
+}
 /*댓글부분*/
 .replyBox{
-	height: 135px;
-	border-bottom: 1px solid #eaeaea;
-	margin-bottom: 10px;
+	height: 110px;
+    border: 1px solid #eaeaea;
+    margin-bottom: 0px;
+    background: white;
+    padding: 20px;
 }
-
+.form-control.reptext{
+	width: 939px;
+    display: inline-block;
+}
+.btn-info.replyaddbtn{
+	margin: -66px 0 0 0;
+    height: 74px;
+    background-image: linear-gradient(to bottom,#7da8b3 0,#7da8b3 100%) !important;
+    border-color: #7da8b3 !important;
+}
+.btn-info.replyaddbtn:focus, .btn-info.replyaddbtn:hover {
+    background-color: #7da8b3;
+}
 .replymnick{
-	font-weight:bold;
+	font-weight: 600;
+    font-size: 16px;
+    color: #7da8b3;
 }
 .replydate{
 	color: #ccc;
     font-size: 12px;
+}
+.replycontent{
+	display: inline-block;
+    width: 900px;
+    padding: 5px 20px 0 20px;
+    font-size: 15px;
+}
+.replybtn{
+	float:right;
 }

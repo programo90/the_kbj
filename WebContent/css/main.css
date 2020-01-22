@@ -2,8 +2,54 @@
 .con_box{
     display: inline-block;
 }
-.con_board{
-    width: 400px;
-    height: 200px;
+.main_board{
+    width: 992px;
+    height: 500px;
     border: 1px solid #dadada;
+    background-color: white;
+    padding: 20px;
+    padding: 0px;
+}
+.form-control.topsearch{
+	display:inline-block;
+	width: 95px;
+}
+.form-control.toptxt{
+	display: inline-block;
+    width: 170px;
+}
+.btn.searchBtn{
+	background-image: linear-gradient(to bottom,#49afca 0,#49afca 100%);
+    border-color: #49afca;
+    color: white;
+}
+.btn.searchBtn:hover{
+    background-color: #49afca;
+    border-color: #49afca;
+}
+.main{
+	border-left: 3px solid #7DA8B3;
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #efefef;
+}
+.main_bctg{
+	float: left;
+    width: 130px;
+    padding: 0px 20px 0px 20px;
+}
+.main_view{
+	float:left;
+	width: 100px;
+	text-align: center;
+	
+}
+.main_title{
+	float:left;
+	width: 500px;
+}
+.main_date{
+	float:left;
+	width: 110px;
+	text-align: center;
 }

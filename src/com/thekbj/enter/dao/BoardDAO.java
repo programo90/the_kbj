@@ -17,7 +17,7 @@ public class BoardDAO {
 	public static BoardDAO getBoardDAO() {
 		return dao;
 	}
-	public List<TableDTO> boardListData(Connection conn, int startrow, int pagepercount, String search, String txtsearch) throws SQLException{
+	public List<TableDTO> boardListData(Connection conn, int startrow, int pagepercount, String search, String txtsearch, String bview) throws SQLException{
 		StringBuilder sql=new StringBuilder();
 		/*sql.append(" select bno, bctg ,btitle, bcontent	");
 		sql.append("  , bviewcount ,btag ,brecount, blikecount, bimg ");
@@ -25,18 +25,37 @@ public class BoardDAO {
 		
 //		sql.append(" select @rownum:=@rownum+1 as rnum, b.*			");
 //		sql.append(" from (											");
-		sql.append(" 		select bno, bctg, btitle, bcontent, bviewcount,btag, brecount, blikecount, bimg, mnick		");
-		sql.append("		from ent_board							");
+		sql.append(" 	select bno, bctg, btitle, bcontent, bviewcount,btag, brecount, blikecount, bimg, mnick, bwrdate		");
+		sql.append("	from ent_board							");
 		
 		if(!search.equals("") && !txtsearch.equals("")) {
 			if(search.equals("title")) {
 				sql.append(" where btitle like ? ");
 			}else if(search.equals("content")) {
 				sql.append(" where bcontent like ? ");
+			}else if(search.equals("tag")) {
+				sql.append(" where btag like ? ");
 			}
 		}
 		
-		sql.append(" 		order by bno 							");
+		System.out.println("boardListData bview: "+bview);
+		
+		if("".equals(bview)) {
+			sql.append("	order by bwrdate desc	");
+		}
+		else if(bview.equals("reply")) {
+	         sql.append("  order   by   brecount desc	 ");
+	      }else if(bview.equals("view")) {
+	         sql.append("  order   by   bviewcount    desc ");   
+	      }else if(bview.equals("like")) {
+	         sql.append("  order   by   blikecount    desc ");
+	      }else if(bview.equals("date")){
+	    	 sql.append(" 		order by bwrdate desc		");
+	      }else if(bview.equals("")) {
+	    	  sql.append(" 		order by bwrdate desc		");
+	      }
+		
+		/*sql.append(" 		order by bwrdate desc					");*/
 //		sql.append(" )b												");
 //		sql.append(" where @rownum:=?								");
 		sql.append(" limit ?,?										");
@@ -69,6 +88,7 @@ public class BoardDAO {
 					dto.setBlikecount(rs.getInt("blikecount"));
 					dto.setBimg(rs.getString("bimg"));
 					dto.setMnick(rs.getString("mnick"));
+					dto.setBwrdate(rs.getString("bwrdate"));
 					list.add(dto);
 				}
 		}catch(Exception e) {
@@ -84,7 +104,7 @@ public class BoardDAO {
 		sql.append(" insert into ent_board(	");
 		sql.append(" bctg, btitle, bcontent, bwrdate, bviewcount, btag, brecount, blikecount, bimg, mno, mnick) ");
 		sql.append(" values( ?, ?, ?, sysdate(), 0, ?, 0, 0, ?, ?,?) 		");
-		
+		System.out.println("sql=" + sql.toString());
 		try (
 				PreparedStatement psmt=conn.prepareStatement(sql.toString());
 			){
@@ -95,6 +115,8 @@ public class BoardDAO {
 			psmt.setString(5, dto.getBimg());
 			psmt.setInt(6, dto.getMno());
 			psmt.setString(7, dto.getMnick());
+			
+			System.out.println("dto =" +dto);
 			
 			psmt.executeUpdate();
 
@@ -136,7 +158,7 @@ public class BoardDAO {
 		// TODO Auto-generated method stub
 		StringBuilder sql=new StringBuilder();
 		sql.append(" update ent_board 					");
-		sql.append(" set bctg=?, btitle=?, 	bcontent=?, btag=?	");
+		sql.append(" set bctg=?, btitle=?, 	bcontent=?, btag=? , bimg=?	");
 		sql.append(" where bno=?						");
 		
 		int modifyresult=0;
@@ -145,7 +167,8 @@ public class BoardDAO {
 			psmt.setString(2, dto.getBtitle());
 			psmt.setString(3, dto.getBcontent());
 			psmt.setString(4, dto.getBtag());
-			psmt.setInt(5, dto.getBno());
+			psmt.setString(5, dto.getBimg());
+			psmt.setInt(6, dto.getBno());
 			modifyresult=psmt.executeUpdate();
 		}
 		return modifyresult;
@@ -175,6 +198,8 @@ public class BoardDAO {
 				sql.append(" where btitle like ?		");
 			}else if(search.equals("bcontent")) {
 				sql.append(" where bcontent like ?	");
+			}else if(search.equals("tag")) {
+				sql.append(" where btag like ? ");
 			}
 		}
 		ResultSet rs=null;
@@ -267,6 +292,19 @@ public class BoardDAO {
 				psmt.setInt(1, rno);
 				psmt.executeUpdate();
 		}
+	}
+	public void replyTotalcount(Connection conn, int boardnum) throws SQLException {
+		// TODO Auto-generated method stub
+		StringBuilder sql=new StringBuilder();
+		sql.append(" select count(*) from ent_reply	");
+		sql.append(" where bno=?					");
+		
+		try (PreparedStatement psmt=conn.prepareStatement(sql.toString())
+			){
+				psmt.setInt(1, boardnum);
+				psmt.executeQuery();
+		}
+		
 	}
 
 }

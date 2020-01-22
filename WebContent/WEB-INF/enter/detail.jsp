@@ -24,8 +24,8 @@
        location.href="memberLogin.do";
     };
 
-	function repEnterrmove(rno, mno){
-		location.href="enterRepdel.do?rno="+rno+"&mno="+mno;
+	function repEnterrmove(rno, bno, mno){
+		location.href="enterRepdel.do?rno="+rno+"&bno="+bno+"&mno="+mno;
 	}
 	$(document).ready(function(){
 		let bno=${dto.bno};
@@ -35,7 +35,7 @@
  		let	mno= <%=session.getAttribute("mno") %>;
  		<%-- let	mnick=<%=session.getAttribute("mnick") %>; --%>
 
- 		
+ 		let rec = 0;
         console.log('bno', bno);
         $.ajax({
 			url:'repEnterdetail.do'
@@ -44,25 +44,27 @@
 			, method:'post'
 			, success:function(data){
 				
-				
 				$.each(data, function(index,item){
 					console.log("여기22222");
 					let result="<div class='replyBox'>";
-					result+="<div>"+item.rno+"</div>";
+					/* result+="<div>"+item.rno+"</div>"; */
 					result+="<div class='replymnick'>"+item.mnick+"</div>";
 					result+="<div class='replydate'>"+item.rwrdate+"</div>";
-					result+="<div>"+item.rcontent+"</div>";
+					result+="<div class='replycontent'>"+item.rcontent+"</div>";
 					if(item.mno = mno){
-						result+="<input type='button' value='삭제' class='replybtn' onclick='repEnterrmove("+item.rno+","+item.mno+")'>";
+						result+="<input type='button' value='삭제' class='replybtn' onclick='repEnterrmove("+item.rno+","+${dto.bno}+","+item.mno+")'>";
 					}
 					result+="</div>";
 					$('#replyResult').append(result);
+					rec = rec + 1;
 				}); 
+				$("#brecount").append(rec);
 			}
 			, error:function(data,errcode){
 				console.log('error', data);
 				console.log('errcode', errcode);
 			}
+			
 		});
 	});
 </script>
@@ -93,64 +95,61 @@
 				<div class="board_box">
 					<!--내용작성 start -->
 					<div class="board">
-						<ul class="boardUl">
-							<li>
-								<label for="mnick" class="mnick"> ${sessionScope.mnick} </label>
+						<div class="board_write_detail">
+							<div class="write_info">
+								<label for="mnick" class="mnick">${dto.mnick} </label>
 								<input type="hidden" class="form-control" id="mnick" name="mnick"value="${sessionScope.mnick}" />
-							</li>
-							<li class="detail_line">
-								<label  class="titlehidden">작성일</label>
-								<c:out value="${dto.bwrdate}"></c:out>
-							</li>
+								<p class="date"><c:out value="${dto.bwrdate}"></c:out></p>
+							</div>
+							<div class="detail_count">
+								<span class="glyphicon glyphicon-eye-open"></span>
+								<c:out value="${dto.bviewcount}"></c:out>
+								<span class="glyphicon glyphicon-heart-empty" id="like_result"></span>
+								<c:out value="${dto.blikecount}"></c:out>
+							</div>
+						</div>
+						<ul class="board_content">
+							<%-- <li>
+								<label class="titlehidden">카테고리</label>
+								<c:out value="${dto.bctg}"></c:out>
+							</li> --%>
 							<li class="ent_tag">
 								<label class="titlehidden">태그</label>
 								<c:out value="${dto.btag}"></c:out>
 							</li>
 							<li class="board_title">
 								<label class="titlehidden">제목</label>
-								<c:out value="${dto.btitle}" ></c:out>
+								<c:out value="${dto.btitle}"></c:out>
 							</li>
 							<li>
 								<label class="titlehidden">글번호</label>
 								<input type="hidden" name="bno" id="bno" value="${dto.bno}"> 
 							</li>
 							<li>
-								<label class="titlehidden">카테고리</label>
-								<input type="text" name="bctg" id="bctg" class="form-control" value="${dto.bctg}" readonly="readonly"> 
-							</li>
-							
-							<li>
 								<label class="titlehidden">내용</label>
-								<c:out value="${dto.bcontent}"></c:out>
+								
+								<p>${dto.bcontent}</p>
+								
 							</li>
-							<li>
-								<label>조회수</label>
-								<c:out value="${dto.bviewcount}"></c:out>
-							</li>
-							<li>
-								<label>추천수</label>
-								<c:out value="${dto.blikecount}"></c:out>
-							</li>
-							
 							<%-- <li>
 								<label>작성자</label>
 								<c:out value="${dto.mnick}"></c:out>
 							</li> --%>
 						</ul>
 					</div>
-					<h3 class="reply_title">댓글</h3> <span>댓글수</span><span>${dto.brecount}</span>
+					<h3 class="reply_title">댓글</h3><span id="brecount"></span>
 					<form method="post" action="enterRepinsert.do" name="replyform">
 						<input type="hidden" class="form-control" id="bno" name="bno" value="${requestScope.dto.bno }"/>
 						<input type="hidden" class="form-control" id="mno" name="mno" value="${sessionScope.mno}" />
 						<input type="hidden" class="form-control" id="mnick" name="mnick" value="${sessionScope.mnick}" />
-						<textarea rows="3" cols="20" name="rcontent" class="form-control"></textarea>
+						<textarea rows="3" cols="20" name="rcontent" class="form-control reptext"></textarea>
 						<!-- <input type="button" onclick="replysend()" value="추가">  -->
 						<c:choose>
 		                  <c:when test="${sessionScope.mno != null }">
-		                     <input type="button" value="추가" class="btn btn-info" id="btn_write" onclick="replysend()">
+		                     <input type="button" value="추가" class="btn btn-info replyaddbtn" id="btn_write" onclick="replysend()">
 		                  </c:when>
 		                  <c:when test="${sessionScope.mno == null }">
-		                     <input type="button" value="추가" class="btn btn-info" id="btn_write" onclick="loginBoard()">
+		                     <input type="button" value="추가" class="btn btn-info replyaddbtn" id="btn_write" onclick="loginBoard()">
 		                  </c:when>
 		               </c:choose>
 					</form>
