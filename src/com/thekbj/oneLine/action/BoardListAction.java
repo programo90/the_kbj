@@ -50,6 +50,7 @@ public class BoardListAction implements Action {
 				
 		//request setting
 		request.setAttribute("list", list);
+		//System.out.println(list.get(1).getMimg());
 		request.setAttribute("replist", replist);
 		
 		request.setAttribute("currpage", currpage);

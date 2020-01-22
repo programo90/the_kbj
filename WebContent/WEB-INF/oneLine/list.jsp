@@ -55,7 +55,8 @@
 					<div class="board_content">
                         <div class="board_top">
                            <div class="top_left">
-                                <p><img src="img/oneLine/01.png" alt="#"></p>
+                           		<c:set var="img" value="${list.mimg }"/>
+                                <p><img src="img/member/"+${img}+".png" alt=""></p>
                                 <div class="profile">
                                     <h6>${list.mnick }</h6>
                                     <h6>${list.bwrdate }</h6>
@@ -185,7 +186,7 @@ function write_send()
 
 
 	$(document).ready(function(){
-	  
+	  console.log(${img});
 	  /* 댓글 토글 기능 */
 	  $(".bottom_right1").click(function(){
 	    $(this).parent().next().slideToggle();

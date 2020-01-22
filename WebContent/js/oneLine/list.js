@@ -10,7 +10,8 @@ function board_modify(select_bno,select_mno,session_mno)
 	{
 		if(select_mno == session_mno)
 		{
-			console.log("수정 페이지로 이동합니다.");
+			
+			location.href="oneLineModify.do?bno="+select_bno;
 		}
 		else
 		{
@@ -39,7 +40,7 @@ function board_delete(select_bno,select_mno,session_mno)
 					,data:{'bno':select_bno}
 					,success:function(data)
 					{
-						console.log("board_delete 성공");
+						alert("게시글을 삭제 하였습니다.");
 						location.href="oneLineList.do";
 					}
 					,error:function(data)
@@ -68,7 +69,7 @@ function reply_modify(select_rno,select_mno,session_mno)
 	{
 		if(select_mno == session_mno)
 		{
-			console.log("리플 수정 페이지로 이동합니다.");
+			location.href="oneLineRepModify.do?rno="+select_rno;
 		}
 		else
 		{
@@ -97,7 +98,7 @@ function reply_delete(select_rno,select_mno,session_mno)
 					,data:{'rno':select_rno}
 					,success:function(data)
 					{
-						console.log("reply_delete 성공");
+						alert("리플을 삭제 하였습니다.");
 						location.href="oneLineList.do";
 					}
 					,error:function(data)

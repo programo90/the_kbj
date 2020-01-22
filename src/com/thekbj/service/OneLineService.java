@@ -224,6 +224,151 @@ public class OneLineService {
 		}
 		return result;
 	}
+
+	public int boardInsertResult(TableDTO dto) {
+		System.out.println("OneLineService boardInsertResult oneLine Service start");
+		
+		Connection conn = null;
+		
+		int result = 0;
+		
+		try 
+		{
+			DBConnection dbconn = DBConnection.getinstance();
+			conn = dbconn.getConnection();
+			conn.setAutoCommit(false);
+			
+			BoardDAO dao = BoardDAO.getBoardDAO();
+			result = dao.boardInsertData(conn, dto);
+			
+			conn.commit();
+		}
+		catch(SQLException | NamingException e)
+		{
+			try { conn.close(); }catch(SQLException e2) {}
+			System.out.println("OneLineService boardInsertResult : "+ e);
+		}finally {
+			if(conn!=null) try { conn.close(); }catch(SQLException e2) {}
+			System.out.println("OneLineService boardInsertResult oneLine Service end");
+		}
+		return result;
+		
+	}
+
+	public TableDTO boardModify(int bno) {
+		System.out.println("OneLineService boardModify oneLine Service start");
+		
+		Connection conn = null;
+		
+		TableDTO dto = null;
+		
+		try 
+		{
+			DBConnection dbconn = DBConnection.getinstance();
+			conn = dbconn.getConnection();
+			conn.setAutoCommit(false);
+			
+			BoardDAO dao = BoardDAO.getBoardDAO();
+			dto = dao.boardModifyData(conn, bno);
+			
+			conn.commit();
+		}
+		catch(SQLException | NamingException e)
+		{
+			try { conn.close(); }catch(SQLException e2) {}
+			System.out.println("OneLineService boardModify : "+ e);
+		}finally {
+			if(conn!=null) try { conn.close(); }catch(SQLException e2) {}
+			System.out.println("OneLineService boardModify oneLine Service end");
+		}
+		return dto;
+	}
+
+	public int boardModifyResult(TableDTO dto) {
+		System.out.println("OneLineService boardInsertResult oneLine Service start");
+		
+		Connection conn = null;
+		
+		int result = 0;
+		
+		try 
+		{
+			DBConnection dbconn = DBConnection.getinstance();
+			conn = dbconn.getConnection();
+			conn.setAutoCommit(false);
+			
+			BoardDAO dao = BoardDAO.getBoardDAO();
+			result = dao.boardModifyResultData(conn, dto);
+			
+			conn.commit();
+		}
+		catch(SQLException | NamingException e)
+		{
+			try { conn.close(); }catch(SQLException e2) {}
+			System.out.println("OneLineService boardInsertResult : "+ e);
+		}finally {
+			if(conn!=null) try { conn.close(); }catch(SQLException e2) {}
+			System.out.println("OneLineService boardInsertResult oneLine Service end");
+		}
+		return result;
+	}
+
+public ReplyDTO replyModify(int rno) {
+		System.out.println("OneLineService replyModify oneLine Service start");
+		Connection conn = null;
+		
+		ReplyDTO dto = null;
+		
+		try 
+		{
+			DBConnection dbconn = DBConnection.getinstance();
+			conn = dbconn.getConnection();
+			conn.setAutoCommit(false);
+			
+			BoardDAO dao = BoardDAO.getBoardDAO();
+			dto = dao.replyModifyData(conn, rno);
+			
+			conn.commit();
+		}
+		catch(SQLException | NamingException e)
+		{
+			try { conn.close(); }catch(SQLException e2) {}
+			System.out.println("OneLineService replyModify : "+ e);
+		}finally {
+			if(conn!=null) try { conn.close(); }catch(SQLException e2) {}
+			System.out.println("OneLineService replyModify oneLine Service end");
+		}
+		return dto;
+	}
+
+public int repModifyResult(ReplyDTO dto) {
+	System.out.println("OneLineService repModifyResult oneLine Service start");
+	
+	Connection conn = null;
+	
+	int result = 0;
+	
+	try 
+	{
+		DBConnection dbconn = DBConnection.getinstance();
+		conn = dbconn.getConnection();
+		conn.setAutoCommit(false);
+		
+		BoardDAO dao = BoardDAO.getBoardDAO();
+		result = dao.repModifyResultData(conn, dto);
+		
+		conn.commit();
+	}
+	catch(SQLException | NamingException e)
+	{
+		try { conn.close(); }catch(SQLException e2) {}
+		System.out.println("OneLineService repModifyResult : "+ e);
+	}finally {
+		if(conn!=null) try { conn.close(); }catch(SQLException e2) {}
+		System.out.println("OneLineService repModifyResult oneLine Service end");
+	}
+	return result;
+}
 	
 	
 }
