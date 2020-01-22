@@ -45,7 +45,7 @@ public class BoardListAction implements Action {
 			currPage = Integer.parseInt(curr);
 		}
 		
-		int rowPerPage = 10;
+		int rowPerPage = 6;
 		int totalRow = service.getTotalCount();
 		int startRow = (currPage-1)*rowPerPage+1;
 		int endRow = startRow+rowPerPage-1;
@@ -53,7 +53,7 @@ public class BoardListAction implements Action {
 			endRow = totalRow;
 		}
 		
-		int pagePerBlock = 10;
+		int pagePerBlock = 5;
 		int totalPage = (int)Math.ceil((double)totalRow/pagePerBlock);
 		int startPage = ((currPage-1)/pagePerBlock)*pagePerBlock+1;
 		int endPage = startPage+pagePerBlock-1;

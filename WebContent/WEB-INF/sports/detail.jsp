@@ -8,13 +8,16 @@
 <title>Insert title here</title>
 <!-- 공통 css 입니다. -->
 <link rel="stylesheet" href="css/comm.css">
+<link rel="stylesheet" href="css/enter.css">
 <!-- 각자 css는 여기다 추가해주시면 됩니다. -->
-
+<link rel="stylesheet" href="css/sports.css">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 </head>
+
 <body>
 	<jsp:include page="../comm/header.jsp"></jsp:include>
 	<div class="right">
@@ -26,45 +29,118 @@
 				<div class="searchbox">
 					<input type="text" value="search" class="search">
 				</div>
+				<c:set var="dto" value="${requestScope.dto}"></c:set>
 			</div>
+
 			<div class="content">
 				<h2 class="con_title">스포츠</h2><!-- 각자카테고리명 텍스트만 바꿔주세요 -->
-				<div class="board_menu_box">
-					<ul class="board_menu">
-						<li class="board_menu_li"><a href="">최신순</a></li>
-						<li class="board_menu_li"><a href="">댓글순</a></li>
-						<li class="board_menu_li"><a href="">조회순</a></li>
-						<li class="board_menu_li"><a href="">추천순</a></li>
-					</ul>
-					<a href="sportsInsert.do">글쓰기</a>
-				</div>
 				<div class="board_box">
 					<!--내용작성 start -->
 				<c:set var="dto" value="${requestScope.dto}"></c:set>
-				<table>
-				<tr><td>번호</td><td>${dto.bno}</td></tr>
-				<tr><td>태그</td><td>${dto.bctg}</td></tr>
-				<tr><td>제목</td><td>${dto.btitle}</td></tr>
-				</table>
-				<a href="sportsList.do">목록</a>
-				<a href="sportsDel.do?no=${dto.bno}">삭제</a>
-				<a href="sportsModify.do?num=${dto.bno}">수정</a>
-				<form method="post" action="sportsRepList.do" name="frm">
-					<input type="hidden" name="bno" value="${dto.bno}">
-					<textarea rows="2" cols="20" name="rcontent"></textarea><br>
-					<input type="datetime" name="rwdate"><br>
-					
-					
-					
-					
-					<input type="button" onclick="send()" value="추가">
-				</form>
-<table id="result">
+		<div class="board_menu_box">
+					<div class="btns_detail">
+			<c:if test="${sessionScope.mnick == requestScope.dto.mnick}">
+					<a href="sportsModify.do?bno=${dto.bno}" class="btn btn-warning"><span> 수정</span></a>
+					<a href="sportsDel.do?no=${dto.bno}" class="btn btn-danger"><span> 삭제</span></a>
+			</c:if>
+			<a href="sportsList.do" class="btn btn-default">목록으로</a>
+					</div>
+				</div>
+
+
+				    <div id="sportsget">
+                        <div id="sportnicname">
+                            <div id="sprname"><span class="glyphicon glyphicon-eye-open"></span> <span>${dto.bviewcount}</span>
+                             <span class="glyphicon glyphicon-comment"></span> <span>${dto.brecount}</span></div>
+                              <p>${dto.mnick}</p>
+                               <span class='replydate' >${dto.bwrdate}</span>
+                            	</div>
+                            <div id="sportstitle">
+                            <span>no.${dto.bno}</span>　<span class="label label-primary">${dto.bctg}</span> <span class="label label-info">#${dto.btag}</span>
+                            <h3>${dto.btitle}</h3>
+                            </div>
+                            <div id="spcontent">
+                                <p>${dto.bcontent}</p>
+                            </div>
+                        </div>
+                        <div id="sportsget">
+                       <h3 class="reply_title">댓글</h3> <span>댓글수</span><span>${dto.brecount}</span>
+					<form method="post" action="sportsRepinsert.do" name="replyform">
+						<input type="hidden" class="form-control" id="bno" name="bno" value="${requestScope.dto.bno }"/>
+						<input type="hidden" class="form-control" id="mno" name="mno" value="${sessionScope.mno}" />
+						<input type="hidden" class="form-control" id="mnick" name="mnick" value="${sessionScope.mnick}" />
+						<textarea rows="3" cols="101" name="rcontent"></textarea>
+						<!-- <input type="button" onclick="replysend()" value="추가">  -->
+						<div class="spbut">
+						<c:choose>
+		                  <c:when test="${sessionScope.mno != null }">
+		                     <input' type="button" value="추가" class="btn btn-info" id="btn_write" onclick="replysend()">
+		                  </c:when>
+		                  <c:when test="${sessionScope.mno == null }">
+		                     <input type="button" value="추가" class="btn btn-info" id="btn_write" onclick="loginBoard()">
+		                  </c:when>
+		               </c:choose>
+		               </div>
+					</form>
+					<div class="reply" id="replyResult"></div>
+					</div>
 					<!--내용작성 end -->
 				</div>
 			</div>
 		</section>
 	</div>
 	<jsp:include page="../comm/footer.jsp"></jsp:include>
+	<script>
+	function replysend(){
+		if(document.replyform.rcontent.value!=""){
+			document.replyform.submit();
+		}
+	}
+    function loginBoard() {
+       location.href="memberLogin.do";
+    };
+
+	function repsportsrmove(rno, mno, ds){
+		console.log(rno+ds+mno);
+		location.href="sportsRepdel.do?rno="+rno+"&mno="+mno+"&bno="+ds;
+		
+	}
+	$(document).ready(function(){
+		let bno=${dto.bno};
+ 		/* let Membermno=${sessionScope.dto.mno};	//로그인한mno */
+
+
+ 		let	mno= <%=session.getAttribute("mno") %>;
+ 		<%-- let	mnick=<%=session.getAttribute("mnick") %>; --%>
+
+ 		
+        console.log('bno', bno);
+        $.ajax({
+			url:'repsportsdetail.do'
+			, data:{'bno':bno}
+			, dataType:'json'
+			, method:'post'
+			, success:function(data){
+				
+				
+				$.each(data, function(index,item){
+					let result="<div class='spreplyBox'>";
+					result+="<div class='replymnick'>"+item.mnick+"</div>";
+					result+="<div class='spreplydate'>"+item.rwrdate+"</div>";
+					result+="<div>"+item.rcontent+"</div>";
+					if(item.mno = mno){
+						result+="<input #new type='button' value='삭제' class='replybtn' onclick='repsportsrmove("+item.rno+","+item.mno+","+${dto.bno}+")'>";
+					}
+					result+="</div>";
+					$('#replyResult').append(result);
+				}); 
+			}
+			, error:function(data,errcode){
+				console.log('error', data);
+				console.log('errcode', errcode);
+			}
+		});
+	});
+</script>
 </body>
 </html>

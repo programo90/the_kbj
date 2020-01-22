@@ -304,4 +304,25 @@ public class ItService {
 		
 		return blikecount;
 	}
+	public List<TableDTO> allList() {
+		// TODO Auto-generated method stub
+		List<TableDTO> list = null;
+		DBConnection db = DBConnection.getinstance();
+		Connection conn = null;
+		
+		try {
+			conn = db.getConnection();
+			BoardDAO dao = BoardDAO.getInstance();
+			
+			list = dao.allListData(conn);
+			
+			
+		} catch (SQLException | NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {e.printStackTrace();}
+		}
+		return list;
+	}
 }

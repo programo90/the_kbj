@@ -1,0 +1,128 @@
+@charset "utf-8";
+.new{
+    width: 100%;
+    height: 600px;
+    border:1px solid #6aa2b1;
+    padding-top: 5%;
+}
+.ca{
+    text-align: center;
+    width: 10%;
+    padding-right: 800px;
+    margin-bottom: 20px;
+}
+
+.newca{
+    width: 800px;
+    height: 40px;
+}
+#spall{
+    width: 997px;
+    height: 80px;
+    border-bottom: 1px solid silver;
+}
+
+#sp1{
+    text-align: center;
+    width: 60px;
+    height: 80px;
+    display: inline-block;
+    position:relative;
+	top:-30px;
+}
+#sp1 p{
+    margin-top: 20px;
+}
+#sp2{
+	width: 130px;
+    height: 80px;
+    text-align: center;
+    display: inline-block;
+    position:relative;
+    top:-31px;
+}
+#sp2 img{
+	width: 100%;
+    height:100%;
+}
+#sp3{
+    width: 639px;
+    height: 80px;
+    padding-left:2%;
+    display: inline-block;
+    position:relative;
+	top:1px;
+}
+#sp3 h4{
+   	color: black;
+}
+#sp4{
+    text-align: center;
+    width: 75px;
+    height: 80px;
+    display: inline-block;
+    position:relative;
+	top:-30px;
+}#sp5{
+    text-align: center;
+    width: 70px;
+    height: 80px;
+    display: inline-block;
+    position:relative;
+	top:-30px;
+}
+#sptoptopline{
+    border-top: 1px solid silver;
+}
+#sportsget{
+    width: 800px;
+    height: auto ;
+    border: 1px solid silver;
+
+}
+#sportnicname{
+    border-bottom:  1px solid silver;
+    padding: 15px;
+
+}
+#sprname{
+    display: inline-block;
+    float: right;
+}
+#sportstitle{
+        border-bottom:  1px solid silver;
+    padding: 15px;
+}
+#spcontent{
+    padding: 15px;
+}
+#new{
+	float: right;
+}
+.board_spmenu_box{
+    width: 997px;
+    height: 47px;
+        padding-bottom: 20px;
+}
+.spsearch{
+	text-align: center;
+}
+.spreplydate{
+	color: #ccc;
+    font-size: 12px;
+    border-bottom:  1px solid #eaeaea;
+    margin-bottom: 10px;
+}
+.spbut{
+	width: 54px;
+	height: 34px;
+	float: right;
+	position: relative;
+	top: 15px;
+	margin-right: 7px; 
+}
+.spreplyBox{
+	height: 90px;
+	border-bottom: 1px solid #eaeaea;
+	margin-bottom: 10px;
+}

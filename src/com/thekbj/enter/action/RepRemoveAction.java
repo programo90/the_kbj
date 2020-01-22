@@ -19,7 +19,7 @@ public class RepRemoveAction implements Action {
 		
 		int rno=Integer.parseInt(request.getParameter("rno"));
 		int mno=Integer.parseInt(request.getParameter("mno"));
-
+		int bno=Integer.parseInt(request.getParameter("bno"));
 		EnterService service=EnterService.geEnterService();
 
 		
@@ -29,7 +29,7 @@ public class RepRemoveAction implements Action {
 		service.repRemove(rno,mno);
 		ForwardAction forward = new ForwardAction();
 		forward.setForward(false);
-		forward.setUrl("enterDetail.do?rno="+rno);
+		forward.setUrl("enterDetail.do?bno="+bno);
 		
 		return forward;
 	}

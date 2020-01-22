@@ -42,20 +42,21 @@
 				<p class="sponsor">
 					<a href="#"><span class="glyphicon glyphicon-bell"></span>개인후원</a>
 				</p>
-				<div class="searchbox">
+				<!-- <div class="searchbox">
 					<input type="text" value="search" class="search">
-				</div>
+				</div> -->
 			</div>
 			<div class="content">
-				<h2 class="con_title">IT 과학</h2>
+				<h2 class="con_title"><a href="itList.do">IT 과학</a></h2>
 				<!-- 각자카테고리명 텍스트만 바꿔주세요 -->
 				<div class="board_menu_box">
 					<ul class="board_menu">
-						<li class="board_menu_li"><a href="itList.do">전체보기</a></li>
-						<li class="board_menu_li"><a href="itList.do?btag=pc">PC</a></li>
-						<li class="board_menu_li"><a href="itList.do?btag=mobile">Mobile</a></li>
-						<li class="board_menu_li"><a href="itList.do?btag=etc">It etc.</a></li>
+						<li class="board_menu_li"><a href="itList.do?searchType=${searchType}&searchtxt=${searchtxt}">전체보기</a></li>
+						<li class="board_menu_li"><a href="itList.do?btag=pc&searchType=${searchType}&searchtxt=${searchtxt}">PC</a></li>
+						<li class="board_menu_li"><a href="itList.do?btag=mobile&searchType=${searchType}&searchtxt=${searchtxt}">Mobile</a></li>
+						<li class="board_menu_li"><a href="itList.do?btag=etc&searchType=${searchType}&searchtxt=${searchtxt}">It etc.</a></li>
 					</ul>
+					<div style="float:right">
 					<c:choose>
 						<c:when test="${sessionScope.dto.mnick != null }">
 							<input type="button" value="글쓰기" class="btn_write" id="btn_write" onclick="insertBoard()">
@@ -64,6 +65,7 @@
 							<input type="button" value="글쓰기" class="btn_write" id="btn_write" onclick="loginBoard()">
 						</c:when>
 					</c:choose>
+					</div>
 				</div>
 				<div class="board_box">
 					<!--내용작성 start -->
