@@ -20,6 +20,7 @@ public class RepInsertAction implements Action {
 		String content = request.getParameter("content");
 		int mno = Integer.parseInt(request.getParameter("mno"));
 		int bno = Integer.parseInt(request.getParameter("bno"));
+		System.out.println("RepInsertAction mno : " + mno );
 		
 		OneLineService service = OneLineService.getService(); 
 		int result = service.repInsert(content,mno, bno);

@@ -13,17 +13,21 @@
        <div class="joinBox">
             <p class="loginLogo"><a href="main.do">THE - KBJ</a></p>
             <div class="join_inputBox">
+            	<img src="img/member/01.png" alt="img" id="imgProfile">
                 <form class="join_inputInner" name="join" method="post" action="memberJoinResult.do">
                    <ul>
                    
                        <li>
                           <label for="join_image" >프로필 이미지</label>
-                          <select id="join_image" class="join_select" name="join_image">
-                              <option selected>이미지</option>
-                              <option value="1">image1</option>
-                              <option value="2">image2</option>
-                              <option value="3">image3</option>
-                              <option value="4">image4</option>
+                          <select id="join_image" class="join_select" name="join_image" onchange="image_change()">
+                              <option value="img/member/01.png" selected>프로필 사진1</option>
+                              <option value="img/member/02.png">프로필 사진2</option>
+                              <option value="img/member/03.png">프로필 사진3</option>
+                              <option value="img/member/04.png">프로필 사진4</option>
+                              <option value="img/member/05.png">프로필 사진5</option>
+                              <option value="img/member/06.png">프로필 사진6</option>
+                              <option value="img/member/07.png">프로필 사진7</option>
+                              <option value="img/member/08.png">프로필 사진8</option> 
                           </select>
                        </li>
                        <li>
@@ -114,5 +118,17 @@
         </div>
     </div>
     <script src="js/join.js"></script>
+    <script>
+    	function image_change()
+    	{
+    		var langSelect = document.getElementById("join_image");
+   	     
+    	    // select element에서 선택된 option의 value가 저장된다.
+    	    var selectValue = langSelect.options[langSelect.selectedIndex].value;
+    	      
+    	    //src 변환
+            $("#imgProfile").attr("src", selectValue);
+    	}
+    </script>
 </body>
 </html>

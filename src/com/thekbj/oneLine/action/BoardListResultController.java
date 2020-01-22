@@ -101,6 +101,7 @@ public class BoardListResultController extends HttpServlet {
 				ob.put("bimg",dto.getBimg());          
 				ob.put("bnick",dto.getBnick());
 				ob.put("mno", dto.getMno());
+				ob.put("mimg", dto.getMimg());
 				ob.put("rno",dto.getRno());              
 				ob.put("rcontent",dto.getRcontent());      
 				ob.put("rwrdate",dto.getRwrdate());       

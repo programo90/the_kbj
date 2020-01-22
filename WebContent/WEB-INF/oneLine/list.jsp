@@ -64,7 +64,7 @@
                         <div class="board_top">
                            <div class="top_left">
                            		<c:set var="img" value="${list.mimg }"/>
-                                <p><img src="img/oneLine/01.png" alt=""></p>
+                                <p><img src="${list.mimg}" alt=""></p>
                                 <div class="profile">
                                     <h6>${list.mnick }</h6>
                                     <h6>${list.bwrdate }</h6>
@@ -210,7 +210,7 @@ function write_send()
 			  					result+='<div class="board_content">                                                                                  ';
 		                        result+='<div class="board_top">                                                                                          ';
 		                        result+='   <div class="top_left">                                                                                        ';
-		                        result+='        <p><img src="img/oneLine/01.png" alt="#"></p>                                                            ';
+		                        result+='        <p><img src="'+item.mimg+'" alt="#"></p>                                                            ';
 		                        result+='        <div class="profile">                                                                                    ';
 		                        result+='            <h6>'+item.bnick+'</h6>                                                                              ';
 		                        result+='            <h6>'+item.bwrdate+'</h6>                                                                            ';
@@ -245,7 +245,7 @@ function write_send()
 		                        result+='                  <textarea name="textarea" id="textarea" class="form-control form_area" rows="1" ></textarea>   ';
 		                        result+='              </div>                                                                                             ';
 		                        result+='              <div class="no-padding col-md-1 row_submit">                                                       ';
-		                        result+='                  <button type="submit" class="btn btn-default form_submit" onclick="reply_send(this,'+mno+','+item.bno+')">제출</button>         ';
+		                        result+='                  <button type="submit" class="btn btn-default form_submit" onclick="reply_send(this,'+item.bno+','+mno+')">제출</button>         ';
 		                        result+='              </div>                                                                                             ';
 		                        result+='            </div>                                                                                               ';
 		                        result+='    </div>                                                                                                       ';
@@ -269,8 +269,8 @@ function write_send()
 			                    result+='               </div>                                                                                            ';
 			                    result+='                                                                                                                 ';
 			                    result+='               <div class="reply_right">                                                                         ';
-			                    result+='               	   <div class="glyphicon glyphicon-pencil pen" onclick="reply_modify('+item.rno+','+item.mno+','+mno+')"></div>                                         ';
-			                    result+='                   <div class="glyphicon glyphicon-remove onclick="reply_delete('+item.rno+','+item.mno+','+mno+')"></div>                                                ';
+			                    result+='               	   <div class="glyphicon glyphicon-pencil pen" style="cursor:pointer" onclick="reply_modify('+item.rno+','+item.mno+','+mno+')"></div>                                         ';
+			                    result+='                   <div class="glyphicon glyphicon-remove" style="cursor:pointer" onclick="reply_delete('+item.rno+','+item.mno+','+mno+')"></div>                                                ';
 			                    result+='               </div>                                                                                            ';
 			                    result+='               <div class="clear"></div>                                                                         ';
 			                    result+='            </div>                                                                                               ';

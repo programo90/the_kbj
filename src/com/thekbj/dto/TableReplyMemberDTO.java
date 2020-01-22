@@ -3,6 +3,7 @@ package com.thekbj.dto;
 public class TableReplyMemberDTO {
 	private int bno;
 	private int mno;
+	private String mimg;
 	private String bctg;
 	private String btitle;
 	private String bcontent;
@@ -18,6 +19,12 @@ public class TableReplyMemberDTO {
 	private String rwrdate;
 	private String rnick;
 	
+	public String getMimg() {
+		return mimg;
+	}
+	public void setMimg(String mimg) {
+		this.mimg = mimg;
+	}
 	public int getBno() {
 		return bno;
 	}
@@ -116,11 +123,10 @@ public class TableReplyMemberDTO {
 	}
 	@Override
 	public String toString() {
-		return "TableRelpyDTO [bno=" + bno + ", mno=" + mno + ", bctg=" + bctg + ", btitle=" + btitle + ", bcontent="
-				+ bcontent + ", bwrdate=" + bwrdate + ", bviewcount=" + bviewcount + ", btag=" + btag + ", brecount="
-				+ brecount + ", blikecount=" + blikecount + ", bimg=" + bimg + ", bnick=" + bnick + ", rno=" + rno
-				+ ", rcontent=" + rcontent + ", rwrdate=" + rwrdate + ", rnick=" + rnick + "]";
+		return "TableReplyMemberDTO [bno=" + bno + ", mno=" + mno + ", mimg=" + mimg + ", bctg=" + bctg + ", btitle="
+				+ btitle + ", bcontent=" + bcontent + ", bwrdate=" + bwrdate + ", bviewcount=" + bviewcount + ", btag="
+				+ btag + ", brecount=" + brecount + ", blikecount=" + blikecount + ", bimg=" + bimg + ", bnick=" + bnick
+				+ ", rno=" + rno + ", rcontent=" + rcontent + ", rwrdate=" + rwrdate + ", rnick=" + rnick + "]";
 	}
-	
 	
 }
