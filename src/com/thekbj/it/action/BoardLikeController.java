@@ -2,6 +2,9 @@ package com.thekbj.it.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -51,17 +54,37 @@ public class BoardLikeController extends HttpServlet {
 	protected void doReq(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("application/json;charset=utf-8");
+		
+		
 		PrintWriter out = response.getWriter();
 		
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		int mno = Integer.parseInt(request.getParameter("mno"));
 				
 		ItService service = ItService.getInstance();
-		int blikecount = service.boardLike(bno);
+		int blikecount = service.boardLike(bno,mno);
 		JSONObject jobj = new JSONObject();
 		jobj.put("blikecount", blikecount);
 		
 		out.print(jobj);
+		
+		
+		/*
+		HttpSession session = request.getSession();
+		if(session.getAttribute("likelist")==null) {
+			System.out.println("insert liketable");
+			List<Integer> likelist = new ArrayList<Integer>();
+			session.setAttribute("likelist", likelist);
+			likelist.add(bno);
+			System.out.println(bno);
+		} else {
+			System.out.println("get likelist");
+			System.out.println(bno);
+			List<Integer> likelist = (List<Integer>)session.getAttribute("likelist");
+			likelist.add(bno);
+		}*/
+		
+		
 		
 	}
 }

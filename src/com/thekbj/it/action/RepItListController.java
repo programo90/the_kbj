@@ -63,6 +63,7 @@ public class RepItListController extends HttpServlet {
 			jobj.put("mnick", dto.getMnick());
 			jobj.put("rwrdate", dto.getRwrdate());
 			jobj.put("bno", dto.getBno());
+			jobj.put("mno", dto.getMno());
 			
 			arr.add(jobj);
 		}

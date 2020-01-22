@@ -24,19 +24,40 @@
 	};
 	
 	function blike(like_bno, like_mno) {
-		$.ajax({
-			url:'itLikeCount.do'
-			,data : {'bno':like_bno,'mno':like_mno}
-			,dataType: 'json'
-			,method : 'post'
-			,success : function(data) {
-				alert("like!");
-				$('#like_result').html(data.blikecount);
-			}
-			,error : function(data) {
-				console.log(data);
-			}
-		});
+/* 		if(tf) {
+			$.ajax({
+				url:'itLikeCount.do'
+				,data : {'bno':like_bno,'mno':like_mno}
+				,dataType: 'json'
+				,method : 'post'
+				,success : function(data) {
+					alert("like!");
+					$('#like_result').html(data.blikecount);
+				}
+				,error : function(data) {
+					console.log(data);
+				}
+			});	
+		} else {
+			alert("already done");
+		} */
+			$.ajax({
+				url:'itLikeCount.do'
+				,data : {'bno':like_bno,'mno':like_mno}
+				,dataType: 'json'
+				,method : 'post'
+				,success : function(data) {
+					if(data.blikecount==0) {
+						alert("already done");	
+					} else {
+						alert("like!");
+						$('#like_result').html(data.blikecount);	
+					}
+				}
+				,error : function(data) {
+					console.log(data);
+				}
+			});	
 	};
 	
 	$(document).ready(function() {
@@ -52,10 +73,11 @@
 									let result = '<div class="reply-con-box">';
 									result += '<div class="row">';
 									result += '<div class="col-md-12">';
-									result += '<div class="row"><div class="col-md-12">'+ item.mnick + '</div></div>';
+									result += '<div class="row"><div class="col-md-12">'+ item.mnick;
+									result += '</div></div>';
 									result += '<div class="row"><div class="col-md-12">' + item.rwrdate + '</div></div>';
-									if(${sessionScope.dto.mnick == requestScope.bdto.mnick}) {
-										result += '<a href="itRepdel.do?rno=' + item.rno + '&bno=' + ${bdto.bno } +'">삭제</a>'; 
+									if(${sessionScope.mno}==item.mno) {
+										result += '<a style="float:right" href="itRepdel.do?rno=' + item.rno + '&bno=' + ${bdto.bno } +'">삭제</a>'; 
 									}
 									result += '</div>';
 									result += '<div class="col-md-12">' + item.rcontent + '</div>';
@@ -157,20 +179,46 @@
 													</div>
 												</div> --%>
 												<p>${bdto.bcontent }</p>
+												
+												<!------------------- like ----------------------->
 												<div class="row">
 													<div class="col-md-12" id="like-box">
+													<c:set var="done_like" value="0"/>
+													<%-- <c:forEach var="list" items="${sessionScope.likelist }">
+														<c:if test="${list == bdto.bno }">
+															<c:set var="done_like" value="1"/>		
+														</c:if>
+													</c:forEach> --%>
 														<c:if test="${sessionScope.dto.mnick != null }">
 															<form action="updateLike.do" method="post" id="ftm_like" onclick="blike(${bdto.bno },${sessionScope.dto.mno })">
 																<input type="hidden" name="bno" id="like_bno" value="${bdto.bno }">
 																<input type="hidden" name="mno" id='like_mno' value="${sessionScope.dto.mno }">
 																<span class="glyphicon glyphicon-heart-empty" id="like_result">${bdto.blikecount}</span>
 															</form>
+															<%-- <c:choose>
+																<c:when test="${done_like==1}">
+																	<form action="updateLike.do" method="post" id="ftm_like" onclick="blike(${bdto.bno },${sessionScope.dto.mno },${false})">
+																		<input type="hidden" name="bno" id="like_bno" value="${bdto.bno }">
+																		<input type="hidden" name="mno" id='like_mno' value="${sessionScope.dto.mno }">
+																	<span class="glyphicon glyphicon-heart-empty" id="like_result">${bdto.blikecount}</span>
+																	</form>
+																</c:when>
+																<c:when test="${done_like==0}">
+																	<form action="updateLike.do" method="post" id="ftm_like" onclick="blike(${bdto.bno },${sessionScope.dto.mno },${true})">
+																		<input type="hidden" name="bno" id="like_bno" value="${bdto.bno }">
+																		<input type="hidden" name="mno" id='like_mno' value="${sessionScope.dto.mno }">
+																	<span class="glyphicon glyphicon-heart-empty" id="like_result">${bdto.blikecount}</span>
+															</form>
+																</c:when>
+															</c:choose> --%>
 														</c:if>
 														<c:if test="${sessionScope.dto.mnick == null }">
-															<span class="glyphicon glyphicon-heart-empty" id="like_result">${bdto.blikecount}</span>
+															<span class="glyphicon glyphicon-heart-empty" id="like_result" onclick="needlike()">${bdto.blikecount}</span>
 														</c:if>
 													</div>
 												</div>
+												<!------------------- like ----------------------->
+												<!-------------------  delete, modify------------- -->
 												<c:if test="${sessionScope.dto.mnick == requestScope.bdto.mnick}">
 													<div class="row">
 													<div class="col-md-12" id="modify-box">
@@ -185,6 +233,7 @@
 													</div>
 												</div>
 												</c:if>
+												<!-------------------  delete, modify end------------- -->
 											</div>
 										</div>
 									</div>
@@ -237,5 +286,10 @@
 		</section>
 	</div>
 	<jsp:include page="../comm/footer.jsp"></jsp:include>
+	<script>
+	function needlike() {
+		alert("need login");
+	};
+	</script>
 </body>
 </html>
