@@ -24,10 +24,8 @@
 		<section class="content_box">
 			<div class="content_top">
 				<p class="sponsor">
-					<a href="#"><span class="glyphicon glyphicon-bell"></span>개인후원</a>
 				</p>
 				<div class="searchbox">
-					<input type="text" value="search" class="search">
 				</div>
 				<c:set var="dto" value="${requestScope.dto}"></c:set>
 			</div>
@@ -74,10 +72,10 @@
 						<div class="spbut">
 						<c:choose>
 		                  <c:when test="${sessionScope.mno != null }">
-		                     <input' type="button" value="추가" class="btn btn-info" id="btn_write" onclick="replysend()">
+		                     <input' type="button" value="추가" id="btn_write" onclick="replysend()">
 		                  </c:when>
 		                  <c:when test="${sessionScope.mno == null }">
-		                     <input type="button" value="추가" class="btn btn-info" id="btn_write" onclick="loginBoard()">
+		                     <input type="button" value="추가" id="btn_write" onclick="loginBoard()">
 		                  </c:when>
 		               </c:choose>
 		               </div>
