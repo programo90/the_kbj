@@ -37,11 +37,11 @@
 		  
 		  var target = document.getElementById("btag");
 		 
-		  if(ele.value == "[it]") var option_list = it_option;
-		  else if(ele.value == "[경제]") var option_list = eco_option;
-		  else if(ele.value == "[연예]") var option_list = ent_option;
-		  else if(ele.value == "[스포츠]") var option_list = spo_option;
-		  else if(ele.value == "[오피니언]") var option_list = op_option;
+		  if(ele.value == "it") var option_list = it_option;
+		  else if(ele.value == "경제") var option_list = eco_option;
+		  else if(ele.value == "연예") var option_list = ent_option;
+		  else if(ele.value == "스포츠") var option_list = spo_option;
+		  else if(ele.value == "오피니언") var option_list = op_option;
 		 
 		  target.options.length = 0;
 		 
@@ -82,11 +82,11 @@
 											<div class="form-group">
 												<label for="bctg">카테고리</label> <br>
 												 <select id="bctg" name="bctg" onchange="select_tag_sel(this)">
-													<option value="[it]" selected="selected">IT/과학</option>
-													<option value="[경제]">경제</option>
-													<option value="[연예]">연예</option>
-													<option value="[스포츠]">스포츠</option>
-													<option value="[오피니언]">오피니언</option>
+													<option value="it" selected="selected">IT/과학</option>
+													<option value="경제">경제</option>
+													<option value="연예">연예</option>
+													<option value="스포츠">스포츠</option>
+													<option value="오피니언">오피니언</option>
 												</select>
 											</div>
 											<div class="form-group">
