@@ -16,6 +16,8 @@
 <!-- 부가적인 테마 -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script>
 	function insertBoard() {
 		location.href = "opinioninsert.do";
@@ -62,13 +64,6 @@
 				<div class="board_box">
 					<!--내용작성 start -->
 					
-					
-					
-					
-					
-
-
-
 					<c:set var="startPage" value="${requestScope.startPage }" />
 					<c:set var="endPage" value="${requestScope.endPage }" />
 					<c:set var="totalPage" value="${requestScope.totalPage }" />
@@ -82,6 +77,11 @@
 
 
 					<div class="container-fluid">
+					
+					
+					
+					
+					
 						<div class="row">
 							<div class="col-md-12">
 								<c:forEach var="item" items="${requestScope.list }">
@@ -125,11 +125,13 @@
 								</div>
 							</div>
 						</div>
+						
+						
+						
+						
+						
+						
 					</div>
-
-
-
-
 
 
 
