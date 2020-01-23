@@ -30,12 +30,12 @@
 	<div class="right">
 		<section class="content_box">
 			<div class="content_top">
-				<p class="sponsor">
+				<!-- <p class="sponsor">
 					<a href="#"><span class="glyphicon glyphicon-bell"></span>개인후원</a>
 				</p>
 				<div class="searchbox">
 					<input type="text" value="search" class="search">
-				</div>
+				</div> -->
 			</div>
 			<div class="content">
 				<h2 class="con_title">한줄 게시판</h2><!-- 각자카테고리명 텍스트만 바꿔주세요 -->
@@ -113,7 +113,7 @@
 	                      <c:forEach var="replist" items="${requestScope.replist}">
                         	<c:if test="${list.bno == replist.bno }">
 	                            <div class="reply_profile">
-	                                <p><img src="img/oneLine/01.png" alt="#"></p>
+	                                <p><img src="${replist.rimg }" alt="#"></p>
 	                            </div>
 	                            <div class="reply">
 	                                <div class="reply_title">

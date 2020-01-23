@@ -127,11 +127,11 @@ public class BoardDAO {
 		// TODO Auto-generated method stub
 		System.out.println("BoardDAO repListData DAO start");
 		StringBuilder sql = new StringBuilder();	
-		sql.append(" 		select 	rno, bno, rcontent, rwrdate, me.mnick, ore.mno	 ");
-		sql.append(" 		from 	oneLine_reply as ore	 			 		 	 ");
-		sql.append(" 		join 	member as me			 	     				 ");
-		sql.append(" 		on 	    ore.mno = me.mno			 			 		 ");
-		sql.append(" 		order   by bno desc, rwrdate desc		 		 		 ");
+		sql.append(" 		select 	rno, bno, rcontent, rwrdate, me.mnick as mnick, me.mimg as mimg ,ore.mno	 ");
+		sql.append(" 		from 	oneLine_reply as ore	 			 		 	 		 					 ");
+		sql.append(" 		join 	member as me			 	     				 							 ");
+		sql.append(" 		on 	    ore.mno = me.mno			 			 									 ");
+		sql.append(" 		order   by bno desc, rwrdate desc		 		 				 					 ");
 
 		ResultSet rs = null;
 		
@@ -152,6 +152,7 @@ public class BoardDAO {
 				String rcontent = rs.getString("rcontent");
 				String rwrdate = rs.getString("rwrdate");
 				String mnick = rs.getString("mnick");
+				String rimg = rs.getString("mimg");
 				
 				dto.setRno(rno);       
 				dto.setBno(bno);
@@ -159,6 +160,7 @@ public class BoardDAO {
 				dto.setRcontent(rcontent);  
 				dto.setRwrdate(rwrdate);
 				dto.setMnick(mnick);
+				dto.setRimg(rimg);
 				
 			    list.add(dto);
 			}

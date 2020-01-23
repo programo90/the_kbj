@@ -78,7 +78,7 @@
 											<hr>
 											<div class="form-group">
 												<label for="ctg-sel">카테고리</label> <br>
-												 <select id="ctg-sel" name="ctg-sel" onchange="select_tag_sel(this)">
+												 <select id="ctg-sel" name="ctg-sel" onchange="select_tag_sel(this)" class="form-control" >
 													<option value="it">IT/과학</option>
 													<option value="one" selected="selected">한줄게시판</option>
 													<option value="eco">경제</option>
@@ -89,7 +89,7 @@
 											</div>
 											<div class="form-group">
 												<label for="tag-sel">태그</label> <br> 
-												<select id="tag-sel" name="tag-sel">
+												<select id="tag-sel" name="tag-sel" class="form-control">
 													<option value="eco" selected="selected">경제</option>
 													<option value="com">기업</option>
 													<option value="land">부동산</option>
