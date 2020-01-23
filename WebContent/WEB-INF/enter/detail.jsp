@@ -77,9 +77,9 @@
 	<div class="right">
 		<section class="content_box">
 			<div class="content_top">
-				<p class="sponsor">
+				<!-- <p class="sponsor">
 					<a href="#"><span class="glyphicon glyphicon-bell"></span>개인후원</a>
-				</p>
+				</p> -->
 			</div>
 			<div class="content">
 				<h2 class="con_title">글상세</h2><!-- 각자카테고리명 텍스트만 바꿔주세요 -->

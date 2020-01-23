@@ -29,12 +29,12 @@
 	<div class="right">
 		<section class="content_box">
 			<div class="content_top">
-				<p class="sponsor">
+				<!-- <p class="sponsor">
 					<a href="#"><span class="glyphicon glyphicon-bell"></span>개인후원</a>
 				</p>
 				<div class="searchbox">
-					<!-- <input type="text" value="search" class="search"> -->
-				</div>
+					<input type="text" value="search" class="search">
+				</div> -->
 			</div>
 			<div class="content">
 				<h2 class="con_title">글쓰기</h2><!-- 각자카테고리명 텍스트만 바꿔주세요 -->
@@ -132,7 +132,7 @@ nhn.husky.EZCreator.createInIFrame({
 });
 
 function pasteHTML(filepath) {
-	var sHTML = "<span><img style='width:100%' src='http://localhost:8080/thekbj/upLoadFolder/"+filepath+"' alt='imgurl'><\/span>";
+	var sHTML = "<span><img style='width:60%' src='http://localhost:8080/thekbj/upLoadFolder/"+filepath+"' alt='imgurl'><\/span>";
 	var bimg = "http://localhost:8080/thekbj/upLoadFolder/"+filepath;
 	document.getElementById('bimg').value = bimg;
 

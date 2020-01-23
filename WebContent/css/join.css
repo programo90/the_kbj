@@ -6,6 +6,14 @@
     text-align: center;
 
 }
+.loginLogoA{
+	font-size: 55px;
+    color: #7DA8B3;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.loginLogoA:hover{
+	text-decoration:none;
+}
 .loginLogoImg{
     width: 350px;
 }
@@ -54,8 +62,8 @@
     width: 400px;
     margin: 0 0 14px;
     padding: 17px 35px 17px 35px;
-    border: solid 1px #dadada;
-    background: #232323;
+    border: solid 1px #7DA8B3;
+    background: #7DA8B3;
     cursor: pointer;
     color: white;
 }

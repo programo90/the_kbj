@@ -5,7 +5,13 @@
 }
 .loginLogo{
     text-align: center;
-
+}
+.loginLogoA{
+	font-size: 55px;
+    color: #7DA8B3;
+}
+.loginLogoA:hover{
+	text-decoration:none;
 }
 .loginLogoImg{
     width: 350px;
@@ -23,11 +29,11 @@
 .login_inputBox label.login_keep_chek{
    display: inline-block;
    font-size: 12px;
-    color: #222;
+    color: #797979;
 }
 .login_input{
-    width: 347px;
-    height: 29px;
+    width: 400px;
+    height: 50px;
     margin: 0 0 14px;
     padding: 10px 35px 10px 15px;
     border: solid 1px #dadada;
@@ -37,12 +43,14 @@
     width: 400px;
     margin: 0 0 14px;
     padding: 17px 35px 17px 35px;
-    border: solid 1px #dadada;
-    background: #232323;
+    border: solid 1px #7DA8B3;
+    background: #7DA8B3;
     cursor: pointer;
     color: white;
 }
-
+.login_ul{
+	padding:0px;
+}
 
 .login_footer{
     text-align: center;

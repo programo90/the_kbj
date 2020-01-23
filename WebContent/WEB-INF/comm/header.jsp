@@ -16,12 +16,12 @@
             </div>
             <nav>
                 <ul>
-                    <li class="menuli"><a href="oneLineList.do" class="menulia"><span class="glyphicon glyphicon-random"></span> 한줄게시판</a></li>
-                    <li class="menuli"><a href="economyList.do" class="menulia"><span class="glyphicon glyphicon-random"></span> 경제</a></li>
-                    <li class="menuli"><a href="enterList.do" class="menulia"><span class="glyphicon glyphicon-random"></span> 연예</a></li>
-                    <li class="menuli"><a href="sportsList.do" class="menulia"><span class="glyphicon glyphicon-random"></span> 스포츠</a></li>
-                    <li class="menuli"><a href="itList.do" class="menulia"><span class="glyphicon glyphicon-random"></span> IT/과학</a></li>
-                    <li class="menuli"><a href="opinionlist.do" class="menulia"><span class="glyphicon glyphicon-random"></span> 오피니언</a></li>
+                    <li class="menuli"><a href="oneLineList.do" class="menulia"><span class="glyphicon glyphicon-pencil"></span> 한줄게시판</a></li>
+                    <li class="menuli"><a href="economyList.do" class="menulia"><span class="glyphicon glyphicon-globe"></span> 경제</a></li>
+                    <li class="menuli"><a href="enterList.do" class="menulia"><span class="glyphicon glyphicon-film"></span> 연예</a></li>
+                    <li class="menuli"><a href="sportsList.do" class="menulia"><span class="glyphicon glyphicon-tower"></span> 스포츠</a></li>
+                    <li class="menuli"><a href="itList.do" class="menulia"><span class="glyphicon glyphicon-phone"></span> IT/과학</a></li>
+                    <li class="menuli"><a href="opinionlist.do" class="menulia"><span class="glyphicon glyphicon-comment"></span> 오피니언</a></li>
                 </ul>
             </nav>
         </header>

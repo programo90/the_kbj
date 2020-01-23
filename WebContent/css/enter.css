@@ -38,6 +38,7 @@
 }
 .btn.btn_write:hover{
 	background-image: linear-gradient(to bottom,#7da8b3 0,#7da8b3 100%) !important;
+	border-color: #7da8b3 !important;
 }
 .btns_list{
 	float: right;
