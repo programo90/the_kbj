@@ -20,6 +20,23 @@
 <!-- 부가적인 테마 -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	<script>
+	$(document).ready(function(){
+			let mno;
+			let mnick;
+			if(mno!=null){
+				mno= <%=session.getAttribute("mno") %>
+				mnick=<%=session.getAttribute("mnick") %>
+			}
+	});
+	function memberLogin() {
+		alert("로그인 후 작성가능합니다.");
+		location.href="memberLogin.do";
+	};
+	function economyInsert() {
+		location.href="economyRepinsert.do";
+	};
+</script>
 </head>
 
 <body>
@@ -28,13 +45,13 @@
 	<div class="right">
 		<section class="content_box">
 			<div class="content_top">
-				<p class="sponsor">
+				<!-- <p class="sponsor">
 					<a href="#"><span class="glyphicon glyphicon-bell"></span>개인후원</a>
 				</p>
 				<div class="searchbox">
 					<input type="text" value="search" class="search">
-				</div>
-			</div>
+				</div>-->
+			</div> 
 			<div class="content">
 				<h2 class="con_title">경제</h2>
 				<!-- 각자카테고리명 텍스트만 바꿔주세요 -->
@@ -56,6 +73,7 @@
 										<h2>
 										<%=dto.getBtitle()%>
 										</h2>
+										<hr>
 										</div>
 										<br><br><br>
 										<div align="center">
@@ -86,9 +104,20 @@
 										<input type="text" name="rcontent" placeholder="댓글을 작성해주세요.">
 									</div>
 									<div class="col-md-2">
-										<button type="button" onclick="document.getElementById('frm2').submit();" class="active btn-primary replAddBtn1">
-										댓글등록
-										</button>
+										<c:choose>
+											<c:when test="${sessionScope.dto.mnick != null }">
+												<button type="button" onclick="document.getElementById('frm2').submit();" 
+												class="active btn-primary replAddBtn1">
+												댓글등록
+												</button>
+											</c:when>
+											<c:when test="${sessionScope.dto.mnick == null }">
+											<button type="button" onclick="memberLogin()" 
+												class="active btn-primary replAddBtn1">
+												댓글등록
+												</button>
+											</c:when>	
+										</c:choose>
 									</div>
 								</div>
 						</form>

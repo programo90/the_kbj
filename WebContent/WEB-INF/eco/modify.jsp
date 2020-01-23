@@ -38,22 +38,22 @@ function cancel() {
 	<div class="right">
 		<section class="content_box">
 			<div class="content_top">
-				<p class="sponsor">
+				<!-- <p class="sponsor">
 					<a href="#"><span class="glyphicon glyphicon-bell"></span>개인후원</a>
 				</p>
 				<div class="searchbox">
 					<input type="text" value="search" class="search">
-				</div>
+				</div> -->
 			</div>
 			<div class="content">
 				<h2 class="con_title">경제</h2><!-- 각자카테고리명 텍스트만 바꿔주세요 -->
-				<div class="board_menu_box">
+				<!-- <div class="board_menu_box">
 					<ul class="board_menu">
 						<li class="board_menu_li"><a href="">최신순</a></li>
 						<li class="board_menu_li"><a href="">댓글순</a></li>
 						<li class="board_menu_li"><a href="">조회순</a></li>
 						<li class="board_menu_li"><a href="">추천순</a></li>
-					</ul>
+					</ul> -->
 				</div>
 				<!--내용작성 start -->
 

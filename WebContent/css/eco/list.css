@@ -2,21 +2,22 @@
 	display:block;
 	text-align:center;
 }
-
 .pagination-sm> li > a{
 	float:none;
 	margin-left: -5px; 
 }
-
 .col-md-1 .bctg{
+	padding-bottom: 50px;
 	padding : 5px;
+	display:block;
 }
 .row .imgstyle{
 	height: 30px;
 	width: 30px;
 }
-.row .listsize{
+.row .list{
 	height:100px;
+	border:1px soild silver;
 }
 .board_menu_box{
 	width:1000px;

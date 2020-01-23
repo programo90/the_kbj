@@ -16,22 +16,28 @@ public class BoardDAO {
 		return dao;
 	}
 	private BoardDAO() {}
-	public List<TableDTO> boardListData(Connection conn,int startrow,int pagepercount, String search, String txtsearch) throws SQLException {
+	public List<TableDTO> boardListData(String bview,Connection conn,int startrow,int pagepercount, String search, String txtsearch) throws SQLException {
 		
 		StringBuilder sql=new StringBuilder();
 		
-		sql.append(" 		select bno, bctg, btitle, bcontent, bviewcount		");
-		sql.append("		from eco_board							");
+		sql.append(" 		select bno, bctg, btitle, bcontent, bviewcount, bimg, brecount,bwrdate	");
+		sql.append("		from eco_board 															");
 		if(!search.equals("") && !txtsearch.equals("")) {
-			if(search.equals("btitle")) {
-				sql.append(" where btitle like ? ");
-			}else if(search.equals("bcontent")) {
+			if(search.equals("title")) {
+				sql.append(" where btitle like ?   ");
+			}else if(search.equals("content")) {
 				sql.append(" where bcontent like ? ");
 			}
 		}
-		sql.append(" 		order by bno 							");
+		if(bview.equals("view")) {
+	         sql.append("  order   by   bviewcount desc ");
+	      }else if(bview.equals("reply")) {
+	    	  sql.append(" order by brecount desc");
+	      }
+		else {
+	    	  sql.append(" 		order by bno  desc		");
+	      }
 		sql.append(" limit ?,?										");
-		
 		List<TableDTO> list = new ArrayList<>();
 		ResultSet rs=null;
 		try (PreparedStatement psmt=conn.prepareStatement(sql.toString())
@@ -53,6 +59,9 @@ public class BoardDAO {
 					dto.setBtitle(rs.getString("btitle"));
 					dto.setBcontent(rs.getString("bcontent"));
 					dto.setBviewcount(rs.getInt("bviewcount"));
+					dto.setBimg(rs.getString("bimg"));
+					dto.setBwrdate(rs.getString("bwrdate"));
+					dto.setBwrdate(rs.getString("brecount"));
 					list.add(dto);
 				}
 		}catch(Exception e) {
@@ -206,81 +215,5 @@ public class BoardDAO {
 		}catch(Exception e) {
 			System.out.println(e);
 		}
-	}
-	/*
-	public void repInsertData(Connection conn, ReplyDTO rdto) throws SQLException {
-		StringBuilder sql=new StringBuilder();
-		sql.append("insert into eco_reply(                ");
-		sql.append("                      rno          ");
-		sql.append("                     ,rcontent       ");
-		sql.append("                     ,rwrdate         ");
-		sql.append("                     ,bno  )     ");
-		sql.append(" values( eco_reply_seq.nextval,?,?,?) ");
-		PreparedStatement pstmt=null;
-		try{
-			pstmt=conn.prepareStatement(sql.toString());
-			pstmt.setString(1, rdto.getRcontent());
-			pstmt.setString(2, rdto.getRwrdate());
-			pstmt.setInt(3, rdto.getBno());
-			pstmt.executeUpdate();
-		}finally {
-			if(pstmt!=null)try {pstmt.close();}catch(SQLException e) {};
-		}
-	}
-	
-	public List<ReplyDTO> repListData(Connection conn, int no) throws SQLException {
-		StringBuilder sql=new StringBuilder();
-		sql.append(" select rno      ");
-		sql.append("        ,rcontent  ");
-		sql.append("        ,rwrdate ");
-		sql.append("        ,bno   ");
-		sql.append(" from   eco_reply   ");
-		sql.append(" where  bno=?  ");
-		ResultSet rs=null;
-		ArrayList<ReplyDTO> arr=new ArrayList<>();
-		try(PreparedStatement pstmt=conn.prepareStatement(sql.toString())) {
-			pstmt.setInt(1, no);
-			rs=pstmt.executeQuery();
-			while(rs.next())
-			{
-				ReplyDTO dto=new ReplyDTO();
-				dto.setRno(rs.getInt("rno"));
-				dto.setRcontent(rs.getString("rcontent"));
-				dto.setRwrdate(rs.getString("rwrdate"));
-				dto.setBno(rs.getInt("bno"));
-				arr.add(dto);
-			}
-		}finally {
-			if(rs!=null)try {rs.close();}catch(SQLException e) {}
-		}
-		return arr;
-	}
-	
-	public void repRemoveData(Connection conn, int rno) throws SQLException {
-		StringBuilder sql=new StringBuilder();
-		sql.append(" delete from eco_reply ");
-		sql.append(" where rno=?        ");
-		
-		try(PreparedStatement pstmt=conn.prepareStatement(sql.toString());
-				){
-			pstmt.setInt(1, rno);
-			pstmt.executeUpdate();
-		}
-	}
-	
-	/*public List<TableDTO> boardSearchData(Connection conn, TableDTO dto) throws SQLException{
-		StringBuilder sql=new StringBuilder();
-		sql.append(" select *                  ");
-		sql.append(" from eco_board            ");
-		sql.append(" where bcontent like '%?%' ");
-		ResultSet rs=null;
-		try(PreparedStatement pstmt=conn.prepareStatement(sql.toString());
-				)
-		{
-			pstmt.setString(1, dto.getBcontent());
-			rs=pstmt.executeQuery();
-		}
-		return ;
-	}*/
-	
+	}	
 }

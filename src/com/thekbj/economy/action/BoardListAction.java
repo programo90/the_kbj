@@ -18,10 +18,15 @@ public class BoardListAction implements Action{
 	@Override
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String bview= request.getParameter("bview");
 		int currpage=1;
 		String curr=request.getParameter("curr");
 		if(curr!=null) {
 			currpage=Integer.parseInt(curr);
+		}
+		
+		if(bview==null) {
+			bview="";
 		}
 		
 		//�˻�
@@ -49,7 +54,7 @@ public class BoardListAction implements Action{
 			endblock=totalpage;
 		}
 		
-		List<TableDTO> list =service.boardList(startrow, pagepercount, search, txtsearch);
+		List<TableDTO> list =service.boardList(bview,startrow, pagepercount, search, txtsearch);
 		request.setAttribute("list", list);
 		request.setAttribute("currpage", currpage);
 		request.setAttribute("startblock", startblock);
@@ -57,6 +62,7 @@ public class BoardListAction implements Action{
 		request.setAttribute("totalpage", totalpage);
 		request.setAttribute("search", search);
 		request.setAttribute("txtsearch", txtsearch);
+		request.setAttribute("bview", bview);
 		request.setAttribute("pagepercount", pagepercount);
 	
 		

@@ -21,7 +21,7 @@ public class EconomyService {
 		return service;
 	}
 	
-	public List<TableDTO> boardList(int startrow, int pagepercount, String search, String txtsearch) {
+	public List<TableDTO> boardList(String bview,int startrow, int pagepercount, String search, String txtsearch) {
 		Connection conn=null;
 		List<TableDTO> list=null;
 		try {
@@ -29,8 +29,10 @@ public class EconomyService {
 			conn=db.getConnection();
 			conn.setAutoCommit(false);
 			BoardDAO dao=BoardDAO.getDAO();
-			list=dao.boardListData(conn, startrow, pagepercount, search, txtsearch);
+			list=dao.boardListData(bview,conn, startrow, pagepercount, search, txtsearch);
+			conn.commit();
 		}catch(NamingException | SQLException e) {
+			
 			try {conn.rollback();} catch(Exception e2) {}
 		}finally {
 			if(conn!=null) try {conn.close();} catch(SQLException e) {}

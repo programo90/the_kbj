@@ -54,26 +54,28 @@ document.close();
 	<c:set var="totalpage" value="${requestScope.totalpage}"></c:set>
 	<c:set var="search" value="${requestScope.search}"></c:set>
 	<c:set var="txtsearch" value="${requestScope.txtsearch}"></c:set>
+	<c:set var="bview" value="${requestScope.bview }"></c:set>
+	<c:set var="bimg" value="${requestScope.bimg }"></c:set>
 	<jsp:include page="../comm/header.jsp"></jsp:include>
 	<div class="right">
 		<section class="content_box">
 			<div class="content_top">
-				<p class="sponsor">
+				<!-- <p class="sponsor">
 					<a href="#"><span class="glyphicon glyphicon-bell"></span>개인후원</a>
 				</p>
 				<div class="searchbox">
 					<input type="text" value="search" class="search">
-				</div>
+				</div> -->
 			</div>
+			
 			<div class="content">
 				<h2 class="con_title">경제</h2>
 				<!-- 각자카테고리명 텍스트만 바꿔주세요 -->
 				<div class="board_menu_box">
 					<ul class="board_menu">
-						<li class="board_menu_li"><a href="">최신순</a></li>
-						<li class="board_menu_li"><a href="">댓글순</a></li>
-						<li class="board_menu_li"><a href="">조회순</a></li>
-						<li class="board_menu_li"><a href="">추천순</a></li>
+						<li class="board_menu_li"><a href="economyList.do">최신순</a></li>
+						<li class="board_menu_li"><a href="economyList.do?&search=${search}&txtsearch=${txtsearch}&bview=view">조회순</a></li>
+						<li class="board_menu_li"><a href="economyList.do?&search=${search}&txtsearch=${txtsearch}&bview=reply">댓글순</a></li>
 					</ul>
 				<div class="writer" align="right" >
 				<c:choose>
@@ -91,9 +93,9 @@ document.close();
 				</div>
 				<div class="board_box">
 					<!--내용작성 start -->
-					<div class="container-fulid">
+					<div class="container-fulid" >
 						<c:forEach var="list" items="${requestScope.list}">
-						<div class="row  listsize" style="border-style: groove;">
+						<div class="row  list" style="border-style: groove;">
 							<div class="col-md-1 bctg"><br><br>
 								<h4><span class="label label-primary">${list.bctg}</span></h4>
 								<!-- <span><c:out value="${list.bno}"></c:out></span> 게시번호 -->
@@ -105,9 +107,9 @@ document.close();
 								<h3>
 									<a href="economyDetail.do?num=${list.bno}"><c:out value="${list.btitle}"></c:out></a>
 								</h3>
-								<p>
+								<!-- <p>
 								   <span><c:out value="${list.bcontent}"></c:out></span>
-								</p>
+								</p> -->
 							</div>
 							<div class="col-md-1"><br><br>
 								<span class="glyphicon glyphicon-eye-open"></span>
@@ -163,6 +165,16 @@ document.close();
 						</div>
 					</div>
 					<!--내용작성 end -->
+					<div class="spsearch" align="center">
+					<form method="get" action="economyList.do">
+						<select name="search">
+							<option value="title">제목</option>
+							<option value="bcontent">내용</option>
+						</select>
+						<input type="text" name="txtsearch" >
+						<input class="btn btn-primary" type="submit" value="검색">
+					</form>
+					</div>
 				</div>
 			</div>
 		</section>
