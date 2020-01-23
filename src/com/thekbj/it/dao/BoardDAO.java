@@ -89,18 +89,31 @@ public class BoardDAO {
 		return list;
 	}
 
-	public int getTotalCountData(Connection conn) throws SQLException{
+	public int getTotalCountData(Connection conn, String btag) throws SQLException{
 		// TODO Auto-generated method stub
 		StringBuilder sql = new StringBuilder();
+		
 		sql.append(" select count(*)	");
 		sql.append(" from it_board		");
-
+		
+		if(!btag.equals("")) {
+			sql.append(" where btag = ? 	");
+		}
+		
 		int totalCount = 0;
+		ResultSet rs = null;	
 		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString()); 
-				ResultSet rs = pstmt.executeQuery();	) {
+				) {
+			
+			if(!btag.equals("")) {
+				pstmt.setString(1, btag);
+			}
+			rs = pstmt.executeQuery();	
 			if(rs.next()) {
 				totalCount = rs.getInt(1);
 			}
+		} finally {
+			if(rs!=null) try {rs.close();} catch(SQLException e) {e.printStackTrace();}
 		}
 		return totalCount;
 	}

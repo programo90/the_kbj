@@ -33,7 +33,7 @@
 				<!-- 각자카테고리명 텍스트만 바꿔주세요 -->
 				<div class="board_box">
 					<!--내용작성 start -->
-					<div class="container-fluid">
+					<div class="container-fluid" style="background-color: white">
 						<div class="row">
 							<div class="col-md-12" id="con-row">
 								<div class="row">
@@ -56,7 +56,7 @@
 											<hr>
 											<div class="form-group">
 												<label for="ctg-sel">카테고리</label> <br> <select
-													id="ctg-sel" name="ctg-sel">
+													id="ctg-sel" name="ctg-sel" class="form-control">
 													<option value="it" selected="selected">IT/과학</option>
 													<option value="one">한줄게시판</option>
 													<option value="eco">경제</option>
@@ -67,7 +67,7 @@
 											</div>
 											<div class="form-group">
 												<label for="tag-sel">태그</label> <br> <select
-													id="tag-sel" name="tag-sel">
+													id="tag-sel" name="tag-sel" class="form-control">
 													<c:choose>
 														<c:when test="${requestScope.dto.btag == 'pc'}">
 															<option value="pc" selected="selected">PC</option>

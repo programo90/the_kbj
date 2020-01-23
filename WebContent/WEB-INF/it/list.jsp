@@ -40,7 +40,7 @@
 		<section class="content_box">
 			<div class="content_top">
 				<p class="sponsor">
-					<a href="#"><span class="glyphicon glyphicon-bell"></span>개인후원</a>
+					<!-- <a href="#"><span class="glyphicon glyphicon-bell"></span>개인후원</a> -->
 				</p>
 				<!-- <div class="searchbox">
 					<input type="text" value="search" class="search">
@@ -85,7 +85,7 @@
 														</div>
 														<div class="col-md-9">
 															<p>#${item.bno }</p>
-															<h3><a href="itDetail.do?bno=${item.bno}">${item.btitle }</a></h3>
+															<h4><a href="itDetail.do?bno=${item.bno}">${item.btitle }</a></h4>
 															<p>${item.mnick }</p>
 															<p>${item.bwrdate }</p>
 														</div>

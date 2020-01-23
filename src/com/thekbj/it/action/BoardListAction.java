@@ -46,7 +46,7 @@ public class BoardListAction implements Action {
 		}
 		
 		int rowPerPage = 6;
-		int totalRow = service.getTotalCount();
+		int totalRow = service.getTotalCount(btag);
 		int startRow = (currPage-1)*rowPerPage+1;
 		int endRow = startRow+rowPerPage-1;
 		if(endRow>totalRow) {
