@@ -39,9 +39,9 @@
 	<div class="right">
 		<section class="content_box">
 			<div class="content_top">
-				<p class="sponsor">
-					<!-- <a href="#"><span class="glyphicon glyphicon-bell"></span>개인후원</a> -->
-				</p>
+				<!-- <p class="sponsor">
+					<a href="#"><span class="glyphicon glyphicon-bell"></span>개인후원</a>
+				</p> -->
 				<!-- <div class="searchbox">
 					<input type="text" value="search" class="search">
 				</div> -->

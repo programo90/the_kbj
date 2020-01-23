@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.thekbj.comm.Action;
 import com.thekbj.comm.ForwardAction;
@@ -29,6 +30,15 @@ public class BoardDetailAction implements Action {
 		
 		TableDTO dto = null;
 		dto = service.boardDetail(bno);
+		
+		HttpSession session = request.getSession();
+		int mno=0;
+		
+		if(session.getAttribute("mno")!=null) {
+			mno = (int)session.getAttribute("mno");
+		}
+		
+		request.setAttribute("mmno", mno);
 		request.setAttribute("bdto", dto);
 		
 		

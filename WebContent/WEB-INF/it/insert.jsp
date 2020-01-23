@@ -27,9 +27,9 @@
 		  var it_option = ["pc", "mobile", "etc"];
 		  var one_option = [];					
 		  var eco_option = [];
-		  var ent_option = [];
-		  var spo_option = [];
-		  var op_option = [];
+		  var ent_option = ["TV","영화","스타"];
+		  var spo_option = ["축구","해외축구","야구","해외야구","국내야구"];
+		  var op_option = ["eco", "ent", "spo"];
 		  
 		  var target = document.getElementById("tag-sel");
 		 
