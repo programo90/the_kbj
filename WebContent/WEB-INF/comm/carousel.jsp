@@ -16,7 +16,7 @@
 </head> --%>
 <carousel>
 
-<div class="container">
+<div class="container" style="padding:0px 10px 15px 15px;">
 <div class="col-md-1"></div>
 <div class="col-md-8">
   <h4> columnlist</h4>
@@ -32,34 +32,28 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <div class="item active">
-       <a href="aa.com"> <img src="http://localhost:9080/thekbj/img/opinion/cl1.png" alt="Los Angeles" style="width:32%; display:inline-block;"></a>
-        <img src="http://localhost:9080/thekbj/img/opinion/cl2.png" alt="Chicago" style="width:32%; display:inline-block;">
-        <img src="http://localhost:9080/thekbj/img/opinion/cl3.png" alt="Los Angeles" style="width:32%; display:inline-block;">
+       <a href="opinionlist.do?btag=eco" class="crs"> <img src="http://localhost:9080/thekbj/img/opinion/cl1.png" alt="Los Angeles" style="width:32.5%; display:inline-block;"></a>
+       <a href="opinionlist.do?btag=spo" class="crs"> <img src="http://localhost:9080/thekbj/img/opinion/cl2.png" alt="Chicago" style="width:32.5%; display:inline-block;"></a>
+        <a href="opinionlist.do?btag=ent" class="crs"><img src="http://localhost:9080/thekbj/img/opinion/cl3.png" alt="Los Angeles" style="width:32.5%; display:inline-block;"></a>
         
       </div>
 
       <div class="item">
-        <img src="http://localhost:9080/thekbj/img/opinion/cl4.png" alt="Los Angeles" style="width:32%; display:inline-block;">
-        <img src="http://localhost:9080/thekbj/img/opinion/cl5.png" alt="Chicago" style="width:32%; display:inline-block;">
-        <img src="http://localhost:9080/thekbj/img/opinion/cl6.png" alt="Los Angeles" style="width:32%; display:inline-block;">
+        <a href="opinionlist.do?btag=eco" class="crs"><img src="http://localhost:9080/thekbj/img/opinion/cl4.png" alt="Los Angeles" style="width:32%; display:inline-block;"></a>
+        <a href="opinionlist.do?btag=spo" class="crs"><img src="http://localhost:9080/thekbj/img/opinion/cl5.png" alt="Chicago" style="width:32%; display:inline-block;"></a>
+        <a href="opinionlist.do?btag=ent" class="crs"><img src="http://localhost:9080/thekbj/img/opinion/cl6.png" alt="Los Angeles" style="width:32%; display:inline-block;"></a>
       </div>
     
       <div class="item">
-        <img src="http://localhost:9080/thekbj/img/opinion/cl7.png" alt="Los Angeles" style="width:32%; display:inline-block;">
-        <img src="http://localhost:9080/thekbj/img/opinion/cl8.png" alt="Chicago" style="width:32%; display:inline-block;">
-        <img src="http://localhost:9080/thekbj/img/opinion/cl9.png" alt="Los Angeles" style="width:32%; display:inline-block;">
+        <a href="opinionlist.do?btag=eco" class="crs"><img src="http://localhost:9080/thekbj/img/opinion/cl7.png" alt="Los Angeles" style="width:32%; display:inline-block;"></a>
+        <a href="opinionlist.do?btag=ent" class="crs"><img src="http://localhost:9080/thekbj/img/opinion/cl8.png" alt="Chicago" style="width:32%; display:inline-block;"></a>
+       <a href="opinionlist.do?btag=spo" class="crs"> <img src="http://localhost:9080/thekbj/img/opinion/cl9.png" alt="Los Angeles" style="width:32%; display:inline-block;"></a>
       </div>
     </div>
 
     <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right"></span>
-      <span class="sr-only">Next</span>
-    </a>
+    
+    
   </div>
   </div>
   <div class="col-md-2"></div>

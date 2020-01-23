@@ -47,10 +47,10 @@
 				<div class="board_menu_box">
 					<ul class="board_menu">
 					
-						<li class="board_menu_li"><a href="opinionlist.do?btag=eco">최신순</a></li>
-						<li class="board_menu_li"><a href="">댓글순</a></li>
-						<li class="board_menu_li"><a href="">조회순</a></li>
-						<li class="board_menu_li"><a href="">추천순</a></li>
+						<li class="board_menu_li"><a href="opinionlist.do?btag=eco"></a></li>
+						<li class="board_menu_li"><a href=""></a></li>
+						<li class="board_menu_li"><a href=""></a></li>
+						<li class="board_menu_li"><a href=""></a></li>
 					</ul>
 					<c:choose>
 						<c:when test="${sessionScope.dto.mnick != null }">
@@ -96,7 +96,7 @@
 											<a href="opiniondetail.do?bno=${item.bno}"><c:out value="${item.btitle}" /></a>
 										</h2>
 										<p>
-											<a href="opiniondetail.do?bno=${item.bno}"><c:out value="${item.bcontent}" /></a>
+											<c:out value="${item.bcontent}" />
 										</p>
 											
 									</div>
