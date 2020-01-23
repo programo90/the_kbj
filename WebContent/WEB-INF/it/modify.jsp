@@ -56,7 +56,7 @@
 											<hr>
 											<div class="form-group">
 												<label for="ctg-sel">카테고리</label> <br> <select
-													id="ctg-sel" name="ctg-sel">
+													id="ctg-sel" name="ctg-sel" class="form-control">
 													<option value="it" selected="selected">IT/과학</option>
 													<option value="one">한줄게시판</option>
 													<option value="eco">경제</option>
@@ -67,7 +67,7 @@
 											</div>
 											<div class="form-group">
 												<label for="tag-sel">태그</label> <br> <select
-													id="tag-sel" name="tag-sel">
+													id="tag-sel" name="tag-sel" class="form-control">
 													<c:choose>
 														<c:when test="${requestScope.dto.btag == 'pc'}">
 															<option value="pc" selected="selected">PC</option>
