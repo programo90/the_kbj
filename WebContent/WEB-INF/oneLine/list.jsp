@@ -142,7 +142,8 @@
 			</section>
         </div>
         <!--내용작성 end -->
-
+<div class="script_append"></div>
+<jsp:include page="../comm/footer.jsp"></jsp:include>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="js/oneLine/list.js"></script>
 <script>
@@ -177,16 +178,17 @@ function write_send()
 	  <%-- let mno = <%= session.getAttribute("mno") %> --%>
 	
 
-	  let currpage = ${currpage};
+	  let currpage = ${currpage}; 
 	  let totalcount = ${totalcount};
 	  let pageperSize = ${pageperSize};
+	  let script_bool = 0;
 	  
 	  $(document).scroll(function(){
 		  let a = $(document).height();
 		  let b =  $(window).height(); 
 		  let c = $(window).scrollTop();
-		  		  
-	  	  if(a == b+c)
+		  console.log(a,Math.floor(b+c));
+	  	  if(a == Math.floor(b+c))
 	  	  {
 	  		alert('게시글을 업데이트 하였습니다!');	  
 	  		 /* 게시글 가져오기 */
@@ -201,11 +203,12 @@ function write_send()
 	  				if(data!="")
 	  				{
 		  				let bno_temp = 0;
-		  				let result = "";
-		  				$.each(data,function(index,item){
 		  				
+		  				$.each(data,function(index,item){
+		  						let result = "";
 			  					if( (bno_temp != item.bno))
 			  					{
+			  					
 			  					bno_temp = item.bno;
 			  					result+='<div class="board_content">                                                                                  ';
 		                        result+='<div class="board_top">                                                                                          ';
@@ -284,14 +287,22 @@ function write_send()
 			  					{
 			  						result+='</div>';	
 			  					}
+			  					$('.board_box').append(result);
 		  					});
-		  				result += '<script>';
-		  				result += '		$(".bottom_right3").click(function(){';
-		  				result += '			$(this).parent().next().slideToggle();';
-		  				result += '		});		';
-		  				result += '<\/script>';                                                                                                                        
-	  				
-		  				$('.board_content:last').append(result);
+		  				
+		  				if(script_bool == 0)
+		  				{
+		  					result2 = "";
+			  				result2 += '<script>';
+			  				result2 += '		$(".bottom_right3").click(function(){';
+			  				result2 += '			$(this).parent().next().slideToggle();';
+			  				result2 += '		});		';
+			  				result2 += '<\/script>';                                                                                                                        
+			  				
+			  				$('.script_append').append(result2);
+			  				script_bool = 1;
+		  				}
+		  				
 		  				currpage=currpage+1;
 	  				} 
 	  				
