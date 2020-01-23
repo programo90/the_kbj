@@ -36,9 +36,10 @@ public class MemberService {
 			
 			conn.commit();
 		}catch(SQLException | NamingException e) {
-			if(conn!=null) try {conn.close();}catch(Exception e2) {}
+			try {conn.close();}catch(Exception e2) {}
 			System.out.println(e);
 		}finally {
+			if(conn!=null) try {conn.close();}catch(Exception e2) {}
 			System.out.println("MemberLoginSessionAction LoginComfirm service end");
 		}
 		
@@ -60,9 +61,10 @@ public class MemberService {
 			
 			conn.commit();
 		}catch(SQLException | NamingException e) {
-			if(conn!=null) try {conn.close();}catch(Exception e2) {}
+			try {conn.close();}catch(Exception e2) {}
 			System.out.println("MemberJoinResultAction Exception : "+e);
 		}finally {
+			if(conn!=null) try {conn.close();}catch(Exception e2) {}
 			System.out.println("MemberJoinResultAction memberJoin service end");
 		}
 			
