@@ -33,7 +33,7 @@
 				<!-- 각자카테고리명 텍스트만 바꿔주세요 -->
 				<div class="board_box">
 					<!--내용작성 start -->
-					<div class="container-fluid">
+					<div class="container-fluid" style="background-color: white">
 						<div class="row">
 							<div class="col-md-12" id="con-row">
 								<div class="row">

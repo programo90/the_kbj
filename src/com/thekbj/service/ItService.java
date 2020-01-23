@@ -39,7 +39,7 @@ public class ItService {
 	}//end boardlist
 	
 	
-	public int getTotalCount() {
+	public int getTotalCount(String btag) {
 		// TODO Auto-generated method stub
 		DBConnection db = DBConnection.getinstance();
 		Connection conn = null;
@@ -48,7 +48,7 @@ public class ItService {
 			conn = db.getConnection();
 			BoardDAO dao = BoardDAO.getInstance();
 			
-			totalCount = dao.getTotalCountData(conn);
+			totalCount = dao.getTotalCountData(conn,btag);
 			
 		} catch (SQLException | NamingException e) {
 			// TODO Auto-generated catch block
