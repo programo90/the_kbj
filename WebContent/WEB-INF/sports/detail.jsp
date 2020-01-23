@@ -62,20 +62,20 @@
                             </div>
                         </div>
                         <div id="sportsget">
-                       <h3 class="reply_title">댓글</h3> <span>댓글수</span><span>${dto.brecount}</span>
+                       <h3 class="reply_title">댓글 ${dto.brecount}</h3>
 					<form method="post" action="sportsRepinsert.do" name="replyform">
 						<input type="hidden" class="form-control" id="bno" name="bno" value="${requestScope.dto.bno }"/>
 						<input type="hidden" class="form-control" id="mno" name="mno" value="${sessionScope.mno}" />
 						<input type="hidden" class="form-control" id="mnick" name="mnick" value="${sessionScope.mnick}" />
-						<textarea rows="3" cols="101" name="rcontent"></textarea>
+						<textarea rows="3" cols="100" name="rcontent"></textarea>
 						<!-- <input type="button" onclick="replysend()" value="추가">  -->
 						<div class="spbut">
 						<c:choose>
 		                  <c:when test="${sessionScope.mno != null }">
-		                     <input' type="button" value="추가" id="btn_write" onclick="replysend()">
+		                     <input type="button" value="추가" class="btn btn-info replyaddbtn"  onclick="replysend()">
 		                  </c:when>
 		                  <c:when test="${sessionScope.mno == null }">
-		                     <input type="button" value="추가" id="btn_write" onclick="loginBoard()">
+		                     <input type="button" value="추가" class="btn btn-info replyaddbtn"  onclick="loginBoard()">
 		                  </c:when>
 		               </c:choose>
 		               </div>

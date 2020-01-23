@@ -61,7 +61,10 @@
 	};
 	
 	$(document).ready(function() {
-		let no = ${requestScope.bdto.bno };
+		let no = 0
+		no = ${requestScope.bdto.bno };
+		let mmno = 0;
+		mmno = ${requestScope.mmno};
 		var brecount = 0;
 		$.ajax({
 					url : 'itReplyList.do',
@@ -73,18 +76,20 @@
 									let result = '<div class="reply-con-box">';
 									result += '<div class="row">';
 									result += '<div class="col-md-12">';
-									result += '<div class="row"><div class="col-md-12">'+ item.mnick;
+									result += '<div class="row"><div style="top:8px" class="col-md-12">'+ item.mnick;
 									result += '</div></div>';
-									result += '<div class="row"><div class="col-md-12">' + item.rwrdate + '</div></div>';
-									if(${sessionScope.mno}==item.mno) {
+									result += '<div class="row"><div style="top:8px" class="col-md-12">' + item.rwrdate + '</div></div>';
+									if(mmno==item.mno) {
 										result += '<a style="float:right" href="itRepdel.do?rno=' + item.rno + '&bno=' + ${bdto.bno } +'">삭제</a>'; 
+									} else {
+										result += '<p></p>';
 									}
 									result += '</div>';
 									result += '<div class="col-md-12">' + item.rcontent + '</div>';
 									result += '</div>';
 									result += '</div>'; 
 									$('#view-reply').append(result);
-										brecount += 1;
+									brecount += 1;
 									});
 									$('#brecount').append(brecount);
 									$('#boardrecount').append(brecount);
@@ -103,12 +108,12 @@
 	<div class="right">
 		<section class="content_box">
 			<div class="content_top">
-				<p class="sponsor">
+				<!-- <p class="sponsor">
 					<a href="#"><span class="glyphicon glyphicon-bell"></span>개인후원</a>
 				</p>
 				<div class="searchbox">
 					<input type="text" value="search" class="search">
-				</div>
+				</div> -->
 			</div>
 			<div class="content">
 				<div class="board_box">
@@ -247,9 +252,10 @@
 									<div id="view-reply">
 										<!-- 추가되는 reply  -->
 										<!-- 추가되는 reply 끝 -->
-
 									</div>
-									<div class="reply-login">login mnick</div>
+									
+										<div class="reply-login">${sessionScope.mnick }</div>
+									
 									<form action="itRepinsert.do" method="post" name="frm"
 										class="reply-frm">
 										<c:choose>

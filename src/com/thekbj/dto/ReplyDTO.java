@@ -7,7 +7,15 @@ public class ReplyDTO {
 	private String rwrdate;
 	private String mnick;
 	private int mno;
+	private String rimg;
 	
+	
+	public String getRimg() {
+		return rimg;
+	}
+	public void setRimg(String rimg) {
+		this.rimg = rimg;
+	}
 	public int getMno() {
 		return mno;
 	}
@@ -47,9 +55,7 @@ public class ReplyDTO {
 	@Override
 	public String toString() {
 		return "ReplyDTO [rno=" + rno + ", bno=" + bno + ", rcontent=" + rcontent + ", rwrdate=" + rwrdate + ", mnick="
-				+ mnick + ", mno=" + mno + "]";
+				+ mnick + ", mno=" + mno + ", rimg=" + rimg + "]";
 	}
-	
-	
 	
 }

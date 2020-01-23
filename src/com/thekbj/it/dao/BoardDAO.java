@@ -89,15 +89,26 @@ public class BoardDAO {
 		return list;
 	}
 
-	public int getTotalCountData(Connection conn, String btag) throws SQLException{
+	public int getTotalCountData(Connection conn, String btag, String searchType, String searchtxt) throws SQLException{
 		// TODO Auto-generated method stub
 		StringBuilder sql = new StringBuilder();
 		
 		sql.append(" select count(*)	");
 		sql.append(" from it_board		");
+		sql.append(" where bctg='it'	");
 		
 		if(!btag.equals("")) {
-			sql.append(" where btag = ? 	");
+			sql.append(" and btag= ? 	");
+		}
+		
+		if((!searchType.equals(""))&&(!searchtxt.equals(""))) {
+			if(searchType.equals("btitle")) {
+				sql.append("		and btitle like ? 													");
+			} else if(searchType.equals("bcontent")) {
+				sql.append("		and bcontent like ?													");
+			} else if(searchType.equals("mnick")) {
+				sql.append("			and mnick like ?												");
+			} 
 		}
 		
 		int totalCount = 0;
@@ -107,11 +118,20 @@ public class BoardDAO {
 			
 			if(!btag.equals("")) {
 				pstmt.setString(1, btag);
+				if((!searchType.equals(""))&&(!searchtxt.equals(""))) {
+					pstmt.setString(2, "%"+searchtxt+"%");
+				}
+			} else {
+				if((!searchType.equals(""))&&(!searchtxt.equals(""))) {
+					pstmt.setString(1, "%"+searchtxt+"%");
+				} 
 			}
+
 			rs = pstmt.executeQuery();	
 			if(rs.next()) {
 				totalCount = rs.getInt(1);
 			}
+			
 		} finally {
 			if(rs!=null) try {rs.close();} catch(SQLException e) {e.printStackTrace();}
 		}

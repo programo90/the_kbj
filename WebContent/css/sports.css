@@ -78,6 +78,7 @@
     width: 800px;
     height: auto ;
     border: 1px solid silver;
+    background-color: white;
 
 }
 #sportnicname{
@@ -118,7 +119,7 @@
 	height: 34px;
 	float: right;
 	position: relative;
-	top: 15px;
+	top: 54px;
 	margin-right: 7px; 
 }
 .spreplyBox{

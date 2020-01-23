@@ -9,6 +9,7 @@
 <!-- 공통 css 입니다. -->
 <link rel="stylesheet" href="css/comm.css">
 <!-- 각자 css는 여기다 추가해주시면 됩니다. -->
+<link rel="stylesheet" href="css/enter.css">
 <link rel="stylesheet" href="css/it/it.insert.css">
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
